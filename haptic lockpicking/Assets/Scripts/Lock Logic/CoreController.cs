@@ -9,7 +9,7 @@ public class CoreController : MonoBehaviour
 
     private bool _lockFinished = false;
 
-    private float _rotateSpeed = 0.25f;
+    private float _rotateSpeed = 1f;
 
     public void Update()
     {
