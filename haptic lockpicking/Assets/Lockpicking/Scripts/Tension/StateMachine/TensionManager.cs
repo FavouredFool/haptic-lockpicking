@@ -17,11 +17,29 @@ public class TensionManager : StateMachine
     [SerializeField]
     private Transform _indexFingerEndpointTransform;
 
-    [SerializeField]
+    [SerializeField, Range(-1, 1)]
     private float _linePositionAlongX = 0.1f;
 
-    [SerializeField]
+    [SerializeField, Range(0, 1)]
     private float _lineOffsetBidirectional = 0.1f;
+
+    [Header("States")]
+    
+
+
+    [Header("TensionState")]
+    [SerializeField, Range(0, 100)]
+    private int _amountOfSkippedFrames = 1;
+
+    [SerializeField, Range(0, 1)]
+    private float _stateTransitionOverflowTensionToLoose = 0.1f;
+
+    [Header("LockState")]
+    [SerializeField, Range(0, 1)]
+    private float _lockedResetTime = 0.1f;
+
+    [SerializeField, Range(0, 1)]
+    private float _stateTransitionOverflowLockToTension = 0.1f;
 
     private Vector3 _fingerPosition = Vector3.zero;
 
@@ -112,6 +130,26 @@ public class TensionManager : StateMachine
         return _fingerPosition.x;
     }
 
-    
+    public float GetLockedResetTime()
+    {
+        return _lockedResetTime;
+    }
+
+    public int GetAmountOfSkippedFrames()
+    {
+        return _amountOfSkippedFrames;
+    }
+
+    public float GetStateTransitionOverflowTensionToLoose()
+    {
+        return _stateTransitionOverflowTensionToLoose;
+    }
+
+    public float GetStateTransitionOverflowLockToTension()
+    {
+        return _stateTransitionOverflowLockToTension;
+    }
+
+
 
 }

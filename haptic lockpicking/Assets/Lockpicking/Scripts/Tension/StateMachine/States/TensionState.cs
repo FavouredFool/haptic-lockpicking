@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TensionState : State
 {
+    int _skipFrameRemainingAmount = 0;
+
     public TensionState(TensionManager tensionManager) : base(tensionManager)
     {
     }
@@ -16,12 +18,25 @@ public class TensionState : State
 
     public override void UpdateState()
     {
-        _tensionManager.SetHapticActive(true);
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            _skipFrameRemainingAmount = _tensionManager.GetAmountOfSkippedFrames();
+        }
 
         // Has a Driverpin just been set?
         // -> No tension, waittime
+        if (_skipFrameRemainingAmount > 0)
+        {
+            _skipFrameRemainingAmount -= 1;
+            Debug.Log("skip");
+            return;
+        }
 
-        if (_tensionManager.GetFingerPositionX() > _tensionManager.GetLineNearerBound())
+
+        _tensionManager.SetHapticActive(true);
+        
+        if (_tensionManager.GetFingerPositionX() > _tensionManager.GetLineNearerBound() + _tensionManager.GetStateTransitionOverflowTensionToLoose())
         {
             _tensionManager.SetState(new LooseState(_tensionManager));
         }

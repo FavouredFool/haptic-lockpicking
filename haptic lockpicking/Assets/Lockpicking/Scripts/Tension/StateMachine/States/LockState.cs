@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LockState : State
 {
-    float _waitTime = 0.25f;
     float _startTime = float.PositiveInfinity;
 
     public LockState(TensionManager tensionManager) : base(tensionManager)
@@ -21,7 +20,7 @@ public class LockState : State
     {
         if (_startTime < Time.time)
         {
-            if (Time.time - _startTime > _waitTime)
+            if (Time.time - _startTime > _tensionManager.GetLockedResetTime())
             {
                 _tensionManager.SetState(new TensionState(_tensionManager));
             }
@@ -29,7 +28,7 @@ public class LockState : State
             return;
         }
 
-        if (_tensionManager.GetFingerPositionX() > _tensionManager.GetLineFurtherBound())
+        if (_tensionManager.GetFingerPositionX() > _tensionManager.GetLineFurtherBound() + _tensionManager.GetStateTransitionOverflowLockToTension())
         {
             _startTime = Time.time;
         }

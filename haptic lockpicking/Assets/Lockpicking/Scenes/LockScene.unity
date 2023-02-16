@@ -6435,7 +6435,12 @@ MonoBehaviour:
   _tensionGlove: {fileID: 271622097}
   _indexFingerLastJointTransform: {fileID: 1676640873}
   _indexFingerEndpointTransform: {fileID: 652894341}
-  _testEmpty: {fileID: 0}
+  _linePositionAlongX: 0.3
+  _lineOffsetBidirectional: 0.2
+  _amountOfSkippedFrames: 1
+  _stateTransitionOverflowTensionToLoose: 0.05
+  _lockedResetTime: 0.15
+  _stateTransitionOverflowLockToTension: 0.15
 --- !u!4 &549515374
 Transform:
   m_ObjectHideFlags: 0
