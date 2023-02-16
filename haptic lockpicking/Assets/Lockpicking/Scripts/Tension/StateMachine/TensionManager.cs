@@ -8,6 +8,7 @@ using SGCore.Nova;
 
 public class TensionManager : StateMachine
 {
+    [Header("Dependencies")]
     [SerializeField]
     private SG_HapticGlove _tensionGlove;
 
@@ -17,15 +18,12 @@ public class TensionManager : StateMachine
     [SerializeField]
     private Transform _indexFingerEndpointTransform;
 
+    [Header("TensionLine")]
     [SerializeField, Range(-1, 1)]
     private float _linePositionAlongX = 0.1f;
 
     [SerializeField, Range(0, 1)]
     private float _lineOffsetBidirectional = 0.1f;
-
-    [Header("States")]
-    
-
 
     [Header("TensionState")]
     [SerializeField, Range(0, 100)]
@@ -40,6 +38,13 @@ public class TensionManager : StateMachine
 
     [SerializeField, Range(0, 1)]
     private float _stateTransitionOverflowLockToTension = 0.1f;
+
+    [Header("TensionWrench Visual")]
+    [SerializeField]
+    private Transform _tensionWrench;
+
+    [SerializeField]
+    private Transform _touchPoint;
 
     private Vector3 _fingerPosition = Vector3.zero;
 
@@ -62,6 +67,8 @@ public class TensionManager : StateMachine
             return;
         }
 
+        _fingerPosition = _indexFingerLastJointTransform.position + (_indexFingerEndpointTransform.position - _indexFingerLastJointTransform.position) / 2;
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             SetState(new LooseState(this));
@@ -71,9 +78,25 @@ public class TensionManager : StateMachine
         {
             UpdateState(_state);
         }
-        
 
-        _fingerPosition = _indexFingerLastJointTransform.position + (_indexFingerEndpointTransform.position - _indexFingerLastJointTransform.position) / 2;
+        CalculateTensionWrenchVisual();
+        
+    }
+
+    public void CalculateTensionWrenchVisual()
+    {
+        Vector2 originPoint2D = new Vector2(_tensionWrench.position.x, _tensionWrench.position.y);
+        Vector2 touchPoint2D = new Vector2(_touchPoint.position.x, _touchPoint.position.y);
+        Vector2 fingerPoint2D = new Vector2(_fingerPosition.x, _fingerPosition.y);
+
+        Vector2 originToTouch = touchPoint2D - originPoint2D;
+        Vector2 originToFinger = fingerPoint2D - originPoint2D;
+
+        float angle = Vector2.SignedAngle(originToTouch, originToFinger);
+        if (angle < 0) angle = 0;
+
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        _tensionWrench.rotation = rotation;
     }
 
 
