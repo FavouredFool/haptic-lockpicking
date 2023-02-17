@@ -6,8 +6,10 @@ using UnityEngine;
 public class DriverPin : Pin
 {
     float _belowSheerHeight;
-    public void Start()
+
+    public override void Start()
     {
+        base.Start();
         _belowSheerHeight = PinController.SHEERLINE_HEIGHT - PinController.CONSTANT_DRIVER_OFFSET;
     }
 
@@ -17,7 +19,13 @@ public class DriverPin : Pin
 
     public override void LooseUpdate(PinController pinController)
     {
+        _rigidbody.AddForce(new Vector3(0, 1, 0), ForceMode.Force);
+        _rigidbody.AddForce(new Vector3(0, -0.1f, 0), ForceMode.Force);
 
+        if (transform.position.y < _belowSheerHeight)
+        {
+            pinController.ActivateDriverPinBlockade();
+        }
     }
 
     public override void MovableUpdate(PinController pinController)

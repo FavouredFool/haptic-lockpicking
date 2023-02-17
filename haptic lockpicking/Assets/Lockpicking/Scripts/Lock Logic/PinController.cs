@@ -11,6 +11,9 @@ public class PinController : MonoBehaviour
     private DriverPin _driverPin;
 
     [SerializeField]
+    private BoxCollider _driverPinBlockade;
+
+    [SerializeField]
     private Transform _screw;
 
     public static float CONSTANT_DRIVER_OFFSET = 0.53f;
@@ -25,10 +28,18 @@ public class PinController : MonoBehaviour
 
     private PinState _pinState = PinState.LOOSE;
 
+    public void Awake()
+    {
+        _driverPinBlockade.enabled = false;
+    }
+
 
 
     public void Update()
     {
+
+        SwitchPinState();
+
         // Check if Lock is openable
         _isOpen = _driverPin.IsBelowSheer() && _pinState == PinState.MOVABLE;
 
@@ -74,5 +85,10 @@ public class PinController : MonoBehaviour
     public float GetKeyPinHeight()
     {
         return _keyPin.transform.position.y;
+    }
+
+    public void ActivateDriverPinBlockade()
+    {
+        _driverPinBlockade.enabled = true;
     }
 }

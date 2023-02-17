@@ -5,15 +5,8 @@ using UnityEngine;
 
 public class KeyPin : Pin
 {
-    private Rigidbody _rigidbody;
-
-
     private bool _belowSheer = false;
 
-    void Start()
-    {
-        _rigidbody = GetComponent<Rigidbody>();
-    }
 
     public override void AnyStateUpdate(PinController pinController)
     {
@@ -22,12 +15,13 @@ public class KeyPin : Pin
 
     public override void LooseUpdate(PinController pinController)
     {
-        _rigidbody.AddForce(new Vector3(0, 1, 0), ForceMode.Force);
+        //_rigidbody.AddForce(new Vector3(0, 1, 0), ForceMode.Force);
+        _rigidbody.AddForce(new Vector3(0, -0.1f, 0), ForceMode.Force);
     }
 
     public override void MovableUpdate(PinController pinController)
     {
-        _rigidbody.AddForce(new Vector3(0, 1, 0), ForceMode.Force);
+        //_rigidbody.AddForce(new Vector3(0, 1, 0), ForceMode.Force);
     }
 
     public override void LockedUpdate(PinController pinController)
