@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class LockState : State
 {
     float _startTime = float.PositiveInfinity;

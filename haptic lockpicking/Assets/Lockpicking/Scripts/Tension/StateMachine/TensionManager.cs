@@ -5,6 +5,7 @@ using SGCore;
 using SGCore.Haptics;
 using SG;
 using SGCore.Nova;
+using System.Linq;
 
 public class TensionManager : StateMachine
 {
@@ -39,6 +40,10 @@ public class TensionManager : StateMachine
     [SerializeField, Range(0, 1)]
     private float _stateTransitionOverflowLockToTension = 0.1f;
 
+    [Header("Pins")]
+    [SerializeField]
+    private GameObject _pinParent;
+
     [Header("TensionWrench Visual")]
     [SerializeField]
     private Transform _tensionWrench;
@@ -53,10 +58,16 @@ public class TensionManager : StateMachine
 
     private SG_HandPose _latestPose;
 
+    private List<DriverPin> _driverPins;
+    private List<KeyPin> _keyPins;
+
     private void Start()
     {
         _noForce = new(Finger.Index, 0);
         _fullForce = new(Finger.Index, 100);
+
+        _driverPins = _pinParent.GetComponentsInChildren<DriverPin>().ToList();
+        _keyPins = _pinParent.GetComponentsInChildren<KeyPin>().ToList();
     }
 
     private void Update()

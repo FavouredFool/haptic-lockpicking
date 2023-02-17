@@ -29,7 +29,6 @@ public class TensionState : State
         if (_skipFrameRemainingAmount > 0)
         {
             _skipFrameRemainingAmount -= 1;
-            Debug.Log("skip");
             return;
         }
 
