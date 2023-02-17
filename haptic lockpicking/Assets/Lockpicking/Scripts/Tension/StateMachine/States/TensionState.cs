@@ -13,12 +13,13 @@ public class TensionState : State
     public override void StartState()
     {
         Debug.Log("entered TensionState");
-        Debug.Log("pins movable");
+
+        _tensionManager.SetPinState(PinController.PinState.MOVABLE);
     }
 
     public override void UpdateState()
     {
-
+        
         if (Input.GetKeyDown(KeyCode.E))
         {
             _skipFrameRemainingAmount = _tensionManager.GetAmountOfSkippedFrames();
@@ -34,7 +35,8 @@ public class TensionState : State
 
 
         _tensionManager.SetHapticActive(true);
-        
+
+
         if (_tensionManager.GetFingerPositionX() > _tensionManager.GetLineNearerBound() + _tensionManager.GetStateTransitionOverflowTensionToLoose())
         {
             _tensionManager.SetState(new LooseState(_tensionManager));

@@ -11,7 +11,8 @@ public class LooseState : State
     public override void StartState()
     {
         Debug.Log("entered LooseState");
-        Debug.Log("pins loose");
+
+        _tensionManager.SetPinState(PinController.PinState.LOOSE);
     }
 
     public override void UpdateState()

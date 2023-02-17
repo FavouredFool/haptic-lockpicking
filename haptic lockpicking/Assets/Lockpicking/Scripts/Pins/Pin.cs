@@ -4,6 +4,12 @@ using UnityEngine;
 
 public abstract class Pin : MonoBehaviour
 {
+    [SerializeField, Range(0, 100)]
+    float _gravityForce = 9.81f;
+
+    [SerializeField, Range(0, 100)]
+    float _springForce = 20f;
+
     protected Rigidbody _rigidbody;
 
     public virtual void Start()
@@ -11,22 +17,23 @@ public abstract class Pin : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    public void Update()
+    public void PhysicsUpdate()
     {
-        // Freeze local x and z, but not y
-        Vector3 localVelocity = transform.InverseTransformDirection(_rigidbody.velocity);
-        localVelocity.x = 0;
-        localVelocity.z = 0;
-        _rigidbody.velocity = transform.TransformDirection(localVelocity);
+        _rigidbody.isKinematic = false;
+        float force = _springForce + -_gravityForce;
+
+        Vector3 forceGlobalSpace = transform.TransformDirection(new Vector3(0, force, 0));
+        _rigidbody.AddForce(forceGlobalSpace, ForceMode.Force);
     }
 
-    public abstract void AnyStateUpdate(PinController pinController);
+    public void PhysicsStop()
+    {
+        _rigidbody.isKinematic = true;
+    }
 
-    public abstract void LooseUpdate(PinController pinController);
-
-    public abstract void MovableUpdate(PinController pinController);
-
-    public abstract void LockedUpdate(PinController pinController);
-
+    public Rigidbody GetRigidbody()
+    {
+        return _rigidbody;
+    }
 
 }

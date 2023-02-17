@@ -26,6 +26,10 @@ public class PinController : MonoBehaviour
 
     private bool _isOpen = false;
 
+    private bool _keyPinStop;
+
+    private bool _driverPinStop;
+
     private PinState _pinState = PinState.LOOSE;
 
     public void Awake()
@@ -33,17 +37,32 @@ public class PinController : MonoBehaviour
         _driverPinBlockade.enabled = false;
     }
 
+    public void FixedUpdate()
+    {
+        if (_keyPinStop)
+        {
+            return;
+        }
 
+        SwitchPinState();
+    }
 
     public void Update()
     {
-
-        SwitchPinState();
+        // This is still a bit wonky when it comes to coding
+        if (_driverPin.IsBelowSheer() && _pinState == PinState.MOVABLE)
+        {
+            DriverPinBlockadeActive(true);
+        }
+        else if (_pinState == PinState.LOOSE)
+        {
+            DriverPinBlockadeActive(false);
+        }
 
         // Check if Lock is openable
         _isOpen = _driverPin.IsBelowSheer() && _pinState == PinState.MOVABLE;
 
-       
+
         // Screw is always attached
         float offset = _driverPin.transform.position.y - _screw.transform.position.y;
         float diff = offset - CONSTANT_SCREW_OFFSET;
@@ -52,24 +71,23 @@ public class PinController : MonoBehaviour
 
     protected void SwitchPinState()
     {
-        _keyPin.AnyStateUpdate(this);
-        _driverPin.AnyStateUpdate(this);
-
         switch (_pinState)
         {
             case PinState.LOOSE:
-                _keyPin.LooseUpdate(this);
-                _driverPin.LooseUpdate(this);
-                break;
             case PinState.MOVABLE:
-                _keyPin.MovableUpdate(this);
-                _driverPin.MovableUpdate(this);
+                _keyPin.PhysicsUpdate();
+                _driverPin.PhysicsUpdate();
                 break;
             case PinState.LOCKED:
-                _keyPin.LockedUpdate(this);
-                _driverPin.LockedUpdate(this);
+                _keyPin.PhysicsStop();
+                _driverPin.PhysicsStop();
                 break;
         }
+    }
+
+    public void SetPinState(PinState pinState)
+    {
+        _pinState = pinState;
     }
 
     public bool GetIsOpen()
@@ -87,8 +105,18 @@ public class PinController : MonoBehaviour
         return _keyPin.transform.position.y;
     }
 
-    public void ActivateDriverPinBlockade()
+    public void DriverPinBlockadeActive(bool active)
     {
-        _driverPinBlockade.enabled = true;
+        _driverPinBlockade.enabled = active;
+    }
+
+    public void SetDriverPinStop(bool driverPinStop)
+    {
+        _driverPinStop = driverPinStop;
+    }
+
+    public void SetKeyPinStop(bool keyPinStop)
+    {
+        _keyPinStop = keyPinStop;
     }
 }

@@ -4,8 +4,7 @@ using UnityEngine;
 using SGCore;
 using SGCore.Haptics;
 using SG;
-using SGCore.Nova;
-using System.Linq;
+using static PinController;
 
 public class TensionManager : StateMachine
 {
@@ -42,7 +41,7 @@ public class TensionManager : StateMachine
 
     [Header("Pins")]
     [SerializeField]
-    private GameObject _pinParent;
+    private List<PinController> _pinControllerList;
 
     [Header("TensionWrench Visual")]
     [SerializeField]
@@ -58,16 +57,10 @@ public class TensionManager : StateMachine
 
     private SG_HandPose _latestPose;
 
-    private List<DriverPin> _driverPins;
-    private List<KeyPin> _keyPins;
-
     private void Start()
     {
         _noForce = new(Finger.Index, 0);
         _fullForce = new(Finger.Index, 100);
-
-        _driverPins = _pinParent.GetComponentsInChildren<DriverPin>().ToList();
-        _keyPins = _pinParent.GetComponentsInChildren<KeyPin>().ToList();
     }
 
     private void Update()
@@ -142,6 +135,14 @@ public class TensionManager : StateMachine
 
 
         Gizmos.DrawWireSphere(center, 1f);
+    }
+
+    public void SetPinState(PinState pinState)
+    {
+        foreach (PinController pinController in _pinControllerList)
+        {
+            pinController.SetPinState(pinState);
+        }
     }
 
     public void SetHapticActive(bool active)
