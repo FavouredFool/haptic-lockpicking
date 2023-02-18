@@ -12,7 +12,7 @@ public class LooseState : State
     {
         Debug.Log("entered LooseState");
 
-        _tensionManager.SetPinState(PinController.PinState.LOOSE);
+        _tensionManager.SetPinState(PinController.TensionState.LOOSE);
     }
 
     public override void UpdateState()

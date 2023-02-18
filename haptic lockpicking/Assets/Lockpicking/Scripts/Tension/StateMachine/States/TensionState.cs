@@ -14,7 +14,7 @@ public class TensionState : State
     {
         Debug.Log("entered TensionState");
 
-        _tensionManager.SetPinState(PinController.PinState.MOVABLE);
+        _tensionManager.SetPinState(PinController.TensionState.MOVABLE);
     }
 
     public override void UpdateState()

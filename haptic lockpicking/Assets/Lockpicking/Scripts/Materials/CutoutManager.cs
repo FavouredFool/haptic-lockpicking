@@ -25,7 +25,7 @@ public class CutoutManager : MonoBehaviour
 
     public void Start()
     {
-        SetPreset1();
+        SetPreset3();
     }
 
     public void SetPreset1()

@@ -36,4 +36,9 @@ public abstract class Pin : MonoBehaviour
         return _rigidbody;
     }
 
+    public float GetVelocity()
+    {
+        return _rigidbody.velocity.y;
+    }
+
 }

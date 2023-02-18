@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class PinController : MonoBehaviour
 {
-    public enum PinState { LOOSE, MOVABLE, LOCKED };
+    public enum TensionState { LOOSE, MOVABLE, LOCKED };
+
+    public enum PinState { MOVING, STATIC }
 
     [SerializeField]
     private KeyPin _keyPin;
@@ -16,6 +18,9 @@ public class PinController : MonoBehaviour
     [SerializeField]
     private Transform _screw;
 
+    [SerializeField, Range(0, 1)]
+    private float _maxVelocityForSet = 0.25f;
+
     public static float CONSTANT_DRIVER_OFFSET = 0.53f;
 
     public static float CONSTANT_SCREW_OFFSET = 1.448f;
@@ -26,11 +31,7 @@ public class PinController : MonoBehaviour
 
     private bool _isOpen = false;
 
-    private bool _keyPinStop;
-
-    private bool _driverPinStop;
-
-    private PinState _pinState = PinState.LOOSE;
+    private TensionState _tensionState = TensionState.LOOSE;
 
     public void Awake()
     {
@@ -39,28 +40,18 @@ public class PinController : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (_keyPinStop)
-        {
-            return;
-        }
-
+        
         SwitchPinState();
+        UpdateDriverPinBlockade();
+
     }
 
     public void Update()
     {
-        // This is still a bit wonky when it comes to coding
-        if (_driverPin.IsBelowSheer() && _pinState == PinState.MOVABLE)
-        {
-            DriverPinBlockadeActive(true);
-        }
-        else if (_pinState == PinState.LOOSE)
-        {
-            DriverPinBlockadeActive(false);
-        }
 
         // Check if Lock is openable
-        _isOpen = _driverPin.IsBelowSheer() && _pinState == PinState.MOVABLE;
+        // Should check if overset
+        _isOpen = _driverPin.IsBelowSheer();
 
 
         // Screw is always attached
@@ -71,23 +62,41 @@ public class PinController : MonoBehaviour
 
     protected void SwitchPinState()
     {
-        switch (_pinState)
+        switch (_tensionState)
         {
-            case PinState.LOOSE:
-            case PinState.MOVABLE:
+            case TensionState.LOOSE:
+            case TensionState.MOVABLE:
                 _keyPin.PhysicsUpdate();
                 _driverPin.PhysicsUpdate();
                 break;
-            case PinState.LOCKED:
+            case TensionState.LOCKED:
                 _keyPin.PhysicsStop();
                 _driverPin.PhysicsStop();
                 break;
         }
+
+
     }
 
-    public void SetPinState(PinState pinState)
+    public void UpdateDriverPinBlockade()
     {
-        _pinState = pinState;
+        if (_tensionState == TensionState.LOOSE)
+        {
+            DriverPinBlockadeActive(false);
+        }
+        else if (_driverPin.IsBelowSheer() && Mathf.Abs(_driverPin.GetVelocity()) <= _maxVelocityForSet)
+        {
+            DriverPinBlockadeActive(true);
+        } 
+        else
+        {
+            DriverPinBlockadeActive(false);
+        }
+    }
+
+    public void SetTensionState(TensionState tensionState)
+    {
+        _tensionState = tensionState;
     }
 
     public bool GetIsOpen()
@@ -108,15 +117,5 @@ public class PinController : MonoBehaviour
     public void DriverPinBlockadeActive(bool active)
     {
         _driverPinBlockade.enabled = active;
-    }
-
-    public void SetDriverPinStop(bool driverPinStop)
-    {
-        _driverPinStop = driverPinStop;
-    }
-
-    public void SetKeyPinStop(bool keyPinStop)
-    {
-        _keyPinStop = keyPinStop;
     }
 }

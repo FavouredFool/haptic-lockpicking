@@ -137,11 +137,11 @@ public class TensionManager : StateMachine
         Gizmos.DrawWireSphere(center, 1f);
     }
 
-    public void SetPinState(PinState pinState)
+    public void SetPinState(PinController.TensionState pinState)
     {
         foreach (PinController pinController in _pinControllerList)
         {
-            pinController.SetPinState(pinState);
+            pinController.SetTensionState(pinState);
         }
     }
 

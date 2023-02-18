@@ -15,7 +15,7 @@ public class LockState : State
     {
         Debug.Log("entered LockState");
 
-        _tensionManager.SetPinState(PinController.PinState.LOCKED);
+        _tensionManager.SetPinState(PinController.TensionState.LOCKED);
     }
 
     public override void UpdateState()
