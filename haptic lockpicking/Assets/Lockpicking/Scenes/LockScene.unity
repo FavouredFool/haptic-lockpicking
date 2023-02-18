@@ -296,7 +296,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30604
+  m_Name: pb_Mesh30610
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2618,8 +2618,8 @@ MonoBehaviour:
   _driverPin: {fileID: 995098839}
   _driverPinBlockade: {fileID: 1108628308}
   _screw: {fileID: 459868716}
-  _maxVelocityForSet: 0.25
-  _setThreshold: 0.15
+  _maxVelocityForSet: 0.1
+  _setThreshold: 0.02
 --- !u!1 &208636784
 GameObject:
   m_ObjectHideFlags: 0
@@ -4753,7 +4753,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30330
+  m_Name: pb_Mesh30336
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6707,8 +6707,8 @@ MonoBehaviour:
   _driverPin: {fileID: 912524747}
   _driverPinBlockade: {fileID: 1608950512}
   _screw: {fileID: 1104367016}
-  _maxVelocityForSet: 0.25
-  _setThreshold: 0.15
+  _maxVelocityForSet: 0.1
+  _setThreshold: 0.02
 --- !u!1 &563567959
 GameObject:
   m_ObjectHideFlags: 0
@@ -7900,7 +7900,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30228
+  m_Name: pb_Mesh30234
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13175,8 +13175,8 @@ MonoBehaviour:
   _driverPin: {fileID: 1068222255}
   _driverPinBlockade: {fileID: 1997103184}
   _screw: {fileID: 1489729910}
-  _maxVelocityForSet: 0.25
-  _setThreshold: 0.15
+  _maxVelocityForSet: 0.1
+  _setThreshold: 0.02
 --- !u!1 &1013960275
 GameObject:
   m_ObjectHideFlags: 0
@@ -14803,7 +14803,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31782
+  m_Name: pb_Mesh31778
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14980,7 +14980,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &1151640227
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18391,7 +18391,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31740
+  m_Name: pb_Mesh31748
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -18652,7 +18652,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30672
+  m_Name: pb_Mesh30678
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -21441,8 +21441,8 @@ MonoBehaviour:
   _driverPin: {fileID: 431364994}
   _driverPinBlockade: {fileID: 483067076}
   _screw: {fileID: 1082970773}
-  _maxVelocityForSet: 0.25
-  _setThreshold: 0.15
+  _maxVelocityForSet: 0.1
+  _setThreshold: 0.02
 --- !u!1 &1676640872
 GameObject:
   m_ObjectHideFlags: 0
@@ -25571,8 +25571,8 @@ MonoBehaviour:
   _driverPin: {fileID: 1473848309}
   _driverPinBlockade: {fileID: 458180691}
   _screw: {fileID: 34239537}
-  _maxVelocityForSet: 0.25
-  _setThreshold: 0.15
+  _maxVelocityForSet: 0.1
+  _setThreshold: 0.02
 --- !u!1 &2027552497
 GameObject:
   m_ObjectHideFlags: 0
