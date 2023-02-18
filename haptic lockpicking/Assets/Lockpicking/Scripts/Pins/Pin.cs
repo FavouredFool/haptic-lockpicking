@@ -12,6 +12,8 @@ public abstract class Pin : MonoBehaviour
 
     protected Rigidbody _rigidbody;
 
+    private RigidbodyConstraints _freezeAllButYPos = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+
     public virtual void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -19,16 +21,10 @@ public abstract class Pin : MonoBehaviour
 
     public void PhysicsUpdate()
     {
-        _rigidbody.isKinematic = false;
         float force = _springForce + -_gravityForce;
 
         Vector3 forceGlobalSpace = transform.TransformDirection(new Vector3(0, force, 0));
         _rigidbody.AddForce(forceGlobalSpace, ForceMode.Force);
-    }
-
-    public void PhysicsStop()
-    {
-        _rigidbody.isKinematic = true;
     }
 
     public Rigidbody GetRigidbody()
@@ -39,6 +35,16 @@ public abstract class Pin : MonoBehaviour
     public float GetVelocity()
     {
         return _rigidbody.velocity.y;
+    }
+
+    public void FreezePinMovement()
+    {
+        _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+    }
+
+    public void ActivatePinMovement()
+    {
+        _rigidbody.constraints = _freezeAllButYPos;
     }
 
 }

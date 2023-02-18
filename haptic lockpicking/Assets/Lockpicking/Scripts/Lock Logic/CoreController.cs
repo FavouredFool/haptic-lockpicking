@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PinController;
 
 public class CoreController : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class CoreController : MonoBehaviour
     {
         foreach (PinController pins in _pinControllers)
         {
-            if (!pins.GetIsOpen())
+            if (pins.GetSetState() != SetState.SET)
             {
                 return false;
             }

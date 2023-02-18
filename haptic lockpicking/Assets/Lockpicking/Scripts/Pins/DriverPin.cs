@@ -7,7 +7,19 @@ public class DriverPin : Pin
 {
     public bool IsBelowSheer()
     {
-        return transform.position.y + PinController.CONSTANT_DRIVER_OFFSET <= PinController.SHEERLINE_HEIGHT;
+        return GetUpperEdgePosition() <= PinController.SHEERLINE_HEIGHT;
+    }
+
+    public bool IsOnSheer(PinController pinController)
+    {
+        bool aboveThreshold = GetUpperEdgePosition() >= PinController.SHEERLINE_HEIGHT - pinController.GetSetThreshold();
+
+        return IsBelowSheer() && aboveThreshold;
+    }
+
+    public float GetUpperEdgePosition()
+    {
+        return transform.position.y + PinController.CONSTANT_DRIVER_OFFSET;
     }
 
 

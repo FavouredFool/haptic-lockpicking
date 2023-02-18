@@ -4,7 +4,7 @@ public class PinController : MonoBehaviour
 {
     public enum TensionState { LOOSE, MOVABLE, LOCKED };
 
-    public enum PinState { MOVING, STATIC }
+    public enum SetState { SPRINGY, SET }
 
     [SerializeField]
     private KeyPin _keyPin;
@@ -21,6 +21,9 @@ public class PinController : MonoBehaviour
     [SerializeField, Range(0, 1)]
     private float _maxVelocityForSet = 0.25f;
 
+    [SerializeField, Range(0, 1)]
+    private float _setThreshold = 0.25f;
+
     public static float CONSTANT_DRIVER_OFFSET = 0.53f;
 
     public static float CONSTANT_SCREW_OFFSET = 1.448f;
@@ -29,9 +32,9 @@ public class PinController : MonoBehaviour
 
     public static float SHEERLINE_HEIGHT = -0.99f;
 
-    private bool _isOpen = false;
-
     private TensionState _tensionState = TensionState.LOOSE;
+
+    private SetState _setState = SetState.SPRINGY;
 
     public void Awake()
     {
@@ -40,68 +43,75 @@ public class PinController : MonoBehaviour
 
     public void FixedUpdate()
     {
-        
-        SwitchPinState();
-        UpdateDriverPinBlockade();
+        AnimatePins();
 
+        CalculateSetState();
     }
 
     public void Update()
     {
+        AnimateScrew();
+    }
 
-        // Check if Lock is openable
-        // Should check if overset
-        _isOpen = _driverPin.IsBelowSheer();
-
-
-        // Screw is always attached
+    protected void AnimateScrew()
+    {
         float offset = _driverPin.transform.position.y - _screw.transform.position.y;
         float diff = offset - CONSTANT_SCREW_OFFSET;
         _screw.transform.localScale = new Vector3(1f, 1 + diff * CONSTANT_SCREW_MULTIPLIER, 1f);
     }
 
-    protected void SwitchPinState()
+    protected void AnimatePins()
     {
-        switch (_tensionState)
+        switch(_tensionState)
         {
             case TensionState.LOOSE:
+                AnimatePinActive(_keyPin);
+                AnimatePinActive(_driverPin);
+                break;
             case TensionState.MOVABLE:
-                _keyPin.PhysicsUpdate();
-                _driverPin.PhysicsUpdate();
+                if (_setState == SetState.SET)
+                {
+                    AnimatePinStatic(_driverPin);
+                    AnimatePinStatic(_keyPin);
+                }
+                else
+                {
+                    AnimatePinActive(_keyPin);
+                    AnimatePinActive(_driverPin);
+                }
                 break;
             case TensionState.LOCKED:
-                _keyPin.PhysicsStop();
-                _driverPin.PhysicsStop();
+                AnimatePinStatic(_keyPin);
+                AnimatePinStatic(_driverPin);
                 break;
         }
-
-
     }
 
-    public void UpdateDriverPinBlockade()
+    void AnimatePinActive(Pin pin)
     {
-        if (_tensionState == TensionState.LOOSE)
-        {
-            DriverPinBlockadeActive(false);
-        }
-        else if (_driverPin.IsBelowSheer() && Mathf.Abs(_driverPin.GetVelocity()) <= _maxVelocityForSet)
-        {
-            DriverPinBlockadeActive(true);
-        } 
-        else
-        {
-            DriverPinBlockadeActive(false);
-        }
+        pin.ActivatePinMovement();
+        pin.PhysicsUpdate();
+    }
+
+    void AnimatePinStatic(Pin pin)
+    {
+        pin.FreezePinMovement();
+    }
+
+    public void CalculateSetState()
+    {
+        bool tensionIsNotLoose = _tensionState != TensionState.LOOSE;
+        bool isOnSheer = _driverPin.IsOnSheer(this);
+        bool pinIsSlow = Mathf.Abs(_driverPin.GetVelocity()) <= _maxVelocityForSet;
+
+        _setState = (tensionIsNotLoose && isOnSheer && pinIsSlow) ? SetState.SET : SetState.SPRINGY;
+
+        DriverPinBlockadeActive(_setState == SetState.SET);
     }
 
     public void SetTensionState(TensionState tensionState)
     {
         _tensionState = tensionState;
-    }
-
-    public bool GetIsOpen()
-    {
-        return _isOpen;
     }
 
     public KeyPin GetKeyPin()
@@ -117,5 +127,15 @@ public class PinController : MonoBehaviour
     public void DriverPinBlockadeActive(bool active)
     {
         _driverPinBlockade.enabled = active;
+    }
+
+    public SetState GetSetState()
+    {
+        return _setState;
+    }
+
+    public float GetSetThreshold()
+    {
+        return _setThreshold;
     }
 }
