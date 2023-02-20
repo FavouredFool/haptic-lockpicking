@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TensionState : State
@@ -25,8 +23,6 @@ public class TensionState : State
             _skipFrameRemainingAmount = _tensionManager.GetAmountOfSkippedFrames();
         }
 
-        // Has a Driverpin just been set?
-        // -> No tension, waittime
         if (_skipFrameRemainingAmount > 0)
         {
             _skipFrameRemainingAmount -= 1;
@@ -49,5 +45,10 @@ public class TensionState : State
         {
             _tensionManager.SetState(new LockState(_tensionManager));
         }
+    }
+
+    public void SkipTensionFramesAfterSet()
+    {
+        _skipFrameRemainingAmount = _tensionManager.GetAmountOfSkippedFrames();
     }
 }

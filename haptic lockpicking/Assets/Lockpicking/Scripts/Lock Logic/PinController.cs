@@ -18,6 +18,9 @@ public class PinController : MonoBehaviour
     [SerializeField]
     private Transform _screw;
 
+    [SerializeField]
+    private TensionManager _tensionManager;
+
     [SerializeField, Range(0, 1)]
     private float _maxVelocityForSet = 0.25f;
 
@@ -104,9 +107,18 @@ public class PinController : MonoBehaviour
         bool isOnSheer = _driverPin.IsOnSheer(this);
         bool pinIsSlow = Mathf.Abs(_driverPin.GetVelocity()) <= _maxVelocityForSet;
 
+        SetState previousState = _setState;
+
         _setState = (tensionIsNotLoose && isOnSheer && pinIsSlow) ? SetState.SET : SetState.SPRINGY;
 
         DriverPinBlockadeActive(_setState == SetState.SET);
+
+        if (_setState == SetState.SET && _setState != previousState)
+        {
+            _tensionManager.SkipTensionFramesAfterSet();
+        }
+
+        
     }
 
     public void SetTensionState(TensionState tensionState)

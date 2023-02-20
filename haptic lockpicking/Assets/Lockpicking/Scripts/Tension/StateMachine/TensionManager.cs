@@ -84,7 +84,6 @@ public class TensionManager : StateMachine
         }
 
         CalculateTensionWrenchVisual();
-        
     }
 
     public void CalculateTensionWrenchVisual()
@@ -183,6 +182,17 @@ public class TensionManager : StateMachine
     public float GetStateTransitionOverflowLockToTension()
     {
         return _stateTransitionOverflowLockToTension;
+    }
+
+    public void SkipTensionFramesAfterSet()
+    {
+        if (_state is not TensionState)
+        {
+            return;
+        }
+
+        ((TensionState)_state).SkipTensionFramesAfterSet();
+
     }
 
 
