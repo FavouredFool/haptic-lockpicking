@@ -6,7 +6,7 @@ using static PinController;
 public class CoreController : MonoBehaviour
 {
     [SerializeField]
-    private List<PinController> _pinControllers;
+    PinManager _pinManager;
 
     private bool _lockFinished = false;
 
@@ -14,7 +14,7 @@ public class CoreController : MonoBehaviour
 
     public void Update()
     {
-        if (AssertOpen() && !_lockFinished)
+        if (_pinManager.UpdatePinLogic() && !_lockFinished)
         {
             // Rotate Core open. In the end this is either automatic or sensitive to push.
             StartCoroutine(Finish());
@@ -22,22 +22,10 @@ public class CoreController : MonoBehaviour
         }
     }
 
-    private bool AssertOpen()
-    {
-        foreach (PinController pins in _pinControllers)
-        {
-            if (pins.GetSetState() != SetState.SET)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
     private IEnumerator Finish()
     {
         yield return new WaitForSeconds(1);
-        foreach (PinController pins in _pinControllers)
+        foreach (PinController pins in _pinManager.GetPinControllers())
         {
             pins.GetKeyPin().transform.parent = transform;
             pins.GetKeyPin().GetRigidbody().isKinematic = true;

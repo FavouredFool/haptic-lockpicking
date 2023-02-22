@@ -41,7 +41,7 @@ public class TensionManager : StateMachine
 
     [Header("Pins")]
     [SerializeField]
-    private List<PinController> _pinControllerList;
+    PinManager _pinManager;
 
     [Header("TensionWrench Visual")]
     [SerializeField]
@@ -138,7 +138,7 @@ public class TensionManager : StateMachine
 
     public void SetPinState(PinController.TensionState pinState)
     {
-        foreach (PinController pinController in _pinControllerList)
+        foreach (PinController pinController in _pinManager.GetPinControllers())
         {
             pinController.SetTensionState(pinState);
         }

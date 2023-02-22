@@ -4,7 +4,7 @@ public class PinController : MonoBehaviour
 {
     public enum TensionState { LOOSE, MOVABLE, LOCKED };
 
-    public enum SetState { SPRINGY, SET }
+    public enum SetState { SPRINGY, BINDING, SET }
 
     [SerializeField]
     private KeyPin _keyPin;
@@ -38,6 +38,8 @@ public class PinController : MonoBehaviour
     private TensionState _tensionState = TensionState.LOOSE;
 
     private SetState _setState = SetState.SPRINGY;
+
+    private SetState _nonSetState = SetState.SPRINGY;
 
     public void Awake()
     {
@@ -109,7 +111,7 @@ public class PinController : MonoBehaviour
 
         SetState previousState = _setState;
 
-        _setState = (tensionIsNotLoose && isOnSheer && pinIsSlow) ? SetState.SET : SetState.SPRINGY;
+        _setState = (tensionIsNotLoose && isOnSheer && pinIsSlow && _nonSetState == SetState.BINDING) ? SetState.SET : _nonSetState;
 
         DriverPinBlockadeActive(_setState == SetState.SET);
 
@@ -149,5 +151,10 @@ public class PinController : MonoBehaviour
     public float GetSetThreshold()
     {
         return _setThreshold;
+    }
+
+    public void SetNonSetState(SetState nonSetState)
+    {
+        _nonSetState = nonSetState;
     }
 }
