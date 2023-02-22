@@ -2618,7 +2618,7 @@ MonoBehaviour:
   _driverPin: {fileID: 995098839}
   _driverPinBlockade: {fileID: 1108628308}
   _screw: {fileID: 459868716}
-  _tensionManager: {fileID: 549515373}
+  _tensionForceManager: {fileID: 549515373}
   _maxVelocityForSet: 0.1
   _setThreshold: 0.02
 --- !u!1 &208636784
@@ -6492,7 +6492,7 @@ GameObject:
   - component: {fileID: 549515374}
   - component: {fileID: 549515373}
   m_Layer: 0
-  m_Name: TensionManager
+  m_Name: TensionForceManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6519,12 +6519,7 @@ MonoBehaviour:
   _stateTransitionOverflowTensionToLoose: 0.05
   _lockedResetTime: 0.2
   _stateTransitionOverflowLockToTension: 0.15
-  _pinControllerList:
-  - {fileID: 552020658}
-  - {fileID: 2017012099}
-  - {fileID: 1011101409}
-  - {fileID: 198990301}
-  - {fileID: 1675065902}
+  _pinManager: {fileID: 854490678}
   _tensionWrench: {fileID: 939532976}
   _touchPoint: {fileID: 1430873514}
 --- !u!4 &549515374
@@ -6708,7 +6703,7 @@ MonoBehaviour:
   _driverPin: {fileID: 912524747}
   _driverPinBlockade: {fileID: 1608950512}
   _screw: {fileID: 1104367016}
-  _tensionManager: {fileID: 549515373}
+  _tensionForceManager: {fileID: 549515373}
   _maxVelocityForSet: 0.1
   _setThreshold: 0.02
 --- !u!1 &563567959
@@ -11873,6 +11868,56 @@ Transform:
   m_Father: {fileID: 1559997800}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &854490676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 854490677}
+  - component: {fileID: 854490678}
+  m_Layer: 0
+  m_Name: PinManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &854490677
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854490676}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1270378241}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &854490678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854490676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f593bb600c362ef4ba0d6488e83dcfba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pinControllers:
+  - {fileID: 552020658}
+  - {fileID: 2017012099}
+  - {fileID: 1011101409}
+  - {fileID: 198990301}
+  - {fileID: 1675065902}
 --- !u!1001 &854543194
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13341,7 +13386,7 @@ MonoBehaviour:
   _driverPin: {fileID: 1068222255}
   _driverPinBlockade: {fileID: 1997103184}
   _screw: {fileID: 1489729910}
-  _tensionManager: {fileID: 549515373}
+  _tensionForceManager: {fileID: 549515373}
   _maxVelocityForSet: 0.1
   _setThreshold: 0.02
 --- !u!1 &1013960275
@@ -14983,7 +15028,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &1151640227
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16360,6 +16405,8 @@ Transform:
   - {fileID: 1463262380}
   - {fileID: 537999684}
   - {fileID: 549515374}
+  - {fileID: 854490677}
+  - {fileID: 1361264102}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17058,6 +17105,37 @@ MonoBehaviour:
   trackingTarget: {fileID: 0}
   updateTime: 3
   linkMeTo: 0
+--- !u!1 &1361264101
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1361264102}
+  m_Layer: 0
+  m_Name: TensionVibrationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1361264102
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361264101}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1270378241}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1375825040
 GameObject:
   m_ObjectHideFlags: 0
@@ -21444,7 +21522,7 @@ MonoBehaviour:
   _driverPin: {fileID: 431364994}
   _driverPinBlockade: {fileID: 483067076}
   _screw: {fileID: 1082970773}
-  _tensionManager: {fileID: 549515373}
+  _tensionForceManager: {fileID: 549515373}
   _maxVelocityForSet: 0.1
   _setThreshold: 0.02
 --- !u!1 &1676640872
@@ -21664,12 +21742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5103eb639b4872f46b87fbb91195bad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pinControllers:
-  - {fileID: 552020658}
-  - {fileID: 2017012099}
-  - {fileID: 1011101409}
-  - {fileID: 198990301}
-  - {fileID: 1675065902}
+  _pinManager: {fileID: 854490678}
 --- !u!1 &1687912180
 GameObject:
   m_ObjectHideFlags: 0
@@ -25575,7 +25648,7 @@ MonoBehaviour:
   _driverPin: {fileID: 1473848309}
   _driverPinBlockade: {fileID: 458180691}
   _screw: {fileID: 34239537}
-  _tensionManager: {fileID: 549515373}
+  _tensionForceManager: {fileID: 549515373}
   _maxVelocityForSet: 0.1
   _setThreshold: 0.02
 --- !u!1 &2027552497
