@@ -1,10 +1,11 @@
 using UnityEngine;
+using static TensionForceManager;
 
-public class TensionState : State
+public class MovableState : State
 {
     int _skipFrameRemainingAmount = 0;
 
-    public TensionState(TensionManager tensionManager) : base(tensionManager)
+    public MovableState(TensionForceManager tensionManager) : base(tensionManager)
     {
     }
 
@@ -12,7 +13,7 @@ public class TensionState : State
     {
         Debug.Log("entered TensionState");
 
-        _tensionManager.SetPinState(PinController.TensionState.MOVABLE);
+        StaticTensionState = TensionState.MOVABLE;
     }
 
     public override void UpdateState()

@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static TensionForceManager;
 
 public class LooseState : State
 {
-    public LooseState(TensionManager tensionManager) : base(tensionManager)
+    public LooseState(TensionForceManager tensionManager) : base(tensionManager)
     {
     }
 
@@ -12,14 +13,14 @@ public class LooseState : State
     {
         Debug.Log("entered LooseState");
 
-        _tensionManager.SetPinState(PinController.TensionState.LOOSE);
+        StaticTensionState = TensionState.LOOSE;
     }
 
     public override void UpdateState()
     {
         if (_tensionManager.GetFingerPositionX() < _tensionManager.GetLineNearerBound())
         {
-            _tensionManager.SetState(new TensionState(_tensionManager));
+            _tensionManager.SetState(new MovableState(_tensionManager));
         }
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class State
 {
-    protected TensionManager _tensionManager;
+    protected TensionForceManager _tensionManager;
 
-    public State(TensionManager tensionManager)
+    public State(TensionForceManager tensionManager)
     {
         _tensionManager = tensionManager;
     }

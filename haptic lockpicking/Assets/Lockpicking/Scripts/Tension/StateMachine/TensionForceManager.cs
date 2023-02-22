@@ -4,10 +4,11 @@ using UnityEngine;
 using SGCore;
 using SGCore.Haptics;
 using SG;
-using static PinController;
 
-public class TensionManager : StateMachine
+public class TensionForceManager : StateMachine
 {
+    public enum TensionState { LOOSE, MOVABLE, LOCKED };
+
     [Header("Dependencies")]
     [SerializeField]
     private SG_HapticGlove _tensionGlove;
@@ -49,6 +50,8 @@ public class TensionManager : StateMachine
 
     [SerializeField]
     private Transform _touchPoint;
+
+    public static TensionState StaticTensionState = TensionState.LOOSE;
 
     private Vector3 _fingerPosition = Vector3.zero;
 
@@ -136,14 +139,6 @@ public class TensionManager : StateMachine
         Gizmos.DrawWireSphere(center, 1f);
     }
 
-    public void SetPinState(PinController.TensionState pinState)
-    {
-        foreach (PinController pinController in _pinManager.GetPinControllers())
-        {
-            pinController.SetTensionState(pinState);
-        }
-    }
-
     public void SetHapticActive(bool active)
     {
         _tensionGlove.SendCmd(active ? _fullForce : _noForce);
@@ -186,12 +181,12 @@ public class TensionManager : StateMachine
 
     public void SkipTensionFramesAfterSet()
     {
-        if (_state is not TensionState)
+        if (_state is not MovableState)
         {
             return;
         }
 
-        ((TensionState)_state).SkipTensionFramesAfterSet();
+        ((MovableState)_state).SkipTensionFramesAfterSet();
 
     }
 

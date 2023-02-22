@@ -1,10 +1,9 @@
 using UnityEngine;
+using static TensionForceManager;
 
 public class PinController : MonoBehaviour
 {
-    public enum TensionState { LOOSE, MOVABLE, LOCKED };
-
-    public enum SetState { SPRINGY, BINDING, SET }
+    public enum PinState { SPRINGY, BINDING, SET }
 
     [SerializeField]
     private KeyPin _keyPin;
@@ -19,7 +18,7 @@ public class PinController : MonoBehaviour
     private Transform _screw;
 
     [SerializeField]
-    private TensionManager _tensionManager;
+    private TensionForceManager _tensionForceManager;
 
     [SerializeField, Range(0, 1)]
     private float _maxVelocityForSet = 0.25f;
@@ -35,11 +34,9 @@ public class PinController : MonoBehaviour
 
     public static float SHEERLINE_HEIGHT = -0.99f;
 
-    private TensionState _tensionState = TensionState.LOOSE;
+    private PinState _setState = PinState.SPRINGY;
 
-    private SetState _setState = SetState.SPRINGY;
-
-    private SetState _nonSetState = SetState.SPRINGY;
+    private PinState _nonSetState = PinState.SPRINGY;
 
     public void Awake()
     {
@@ -67,14 +64,14 @@ public class PinController : MonoBehaviour
 
     protected void AnimatePins()
     {
-        switch(_tensionState)
+        switch(StaticTensionState)
         {
             case TensionState.LOOSE:
                 AnimatePinActive(_keyPin);
                 AnimatePinActive(_driverPin);
                 break;
             case TensionState.MOVABLE:
-                if (_setState == SetState.SET)
+                if (_setState == PinState.SET)
                 {
                     AnimatePinStatic(_driverPin);
                     AnimatePinStatic(_keyPin);
@@ -105,27 +102,22 @@ public class PinController : MonoBehaviour
 
     public void CalculateSetState()
     {
-        bool tensionIsNotLoose = _tensionState != TensionState.LOOSE;
+        bool tensionIsNotLoose = StaticTensionState != TensionState.LOOSE;
         bool isOnSheer = _driverPin.IsOnSheer(this);
         bool pinIsSlow = Mathf.Abs(_driverPin.GetVelocity()) <= _maxVelocityForSet;
 
-        SetState previousState = _setState;
+        PinState previousState = _setState;
 
-        _setState = (tensionIsNotLoose && isOnSheer && pinIsSlow && _nonSetState == SetState.BINDING) ? SetState.SET : _nonSetState;
+        _setState = (tensionIsNotLoose && isOnSheer && pinIsSlow && _nonSetState == PinState.BINDING) ? PinState.SET : _nonSetState;
 
-        DriverPinBlockadeActive(_setState == SetState.SET);
+        DriverPinBlockadeActive(_setState == PinState.SET);
 
-        if (_setState == SetState.SET && _setState != previousState)
+        if (_setState == PinState.SET && _setState != previousState)
         {
-            _tensionManager.SkipTensionFramesAfterSet();
+            _tensionForceManager.SkipTensionFramesAfterSet();
         }
 
         
-    }
-
-    public void SetTensionState(TensionState tensionState)
-    {
-        _tensionState = tensionState;
     }
 
     public KeyPin GetKeyPin()
@@ -143,7 +135,7 @@ public class PinController : MonoBehaviour
         _driverPinBlockade.enabled = active;
     }
 
-    public SetState GetSetState()
+    public PinState GetSetState()
     {
         return _setState;
     }
@@ -153,7 +145,7 @@ public class PinController : MonoBehaviour
         return _setThreshold;
     }
 
-    public void SetNonSetState(SetState nonSetState)
+    public void SetNonSetState(PinState nonSetState)
     {
         _nonSetState = nonSetState;
     }

@@ -28,16 +28,16 @@ public class PinManager : MonoBehaviour
 
             if (allSet)
             {
-                activePins.SetNonSetState(SetState.BINDING);
+                activePins.SetNonSetState(PinState.BINDING);
 
-                if (activePins.GetSetState() != SetState.SET)
+                if (activePins.GetSetState() != PinState.SET)
                 {
                     allSet = false;
                 }
             }
             else
             {
-                activePins.SetNonSetState(SetState.SPRINGY);
+                activePins.SetNonSetState(PinState.SPRINGY);
             }
         }
 

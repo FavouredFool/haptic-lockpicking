@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static TensionForceManager;
 
 
 public class LockState : State
 {
     float _startTime = float.PositiveInfinity;
 
-    public LockState(TensionManager tensionManager) : base(tensionManager)
+    public LockState(TensionForceManager tensionManager) : base(tensionManager)
     {
     }
 
@@ -15,7 +16,7 @@ public class LockState : State
     {
         Debug.Log("entered LockState");
 
-        _tensionManager.SetPinState(PinController.TensionState.LOCKED);
+        StaticTensionState = TensionState.LOCKED;
     }
 
     public override void UpdateState()
@@ -24,7 +25,7 @@ public class LockState : State
         {
             if (Time.time - _startTime > _tensionManager.GetLockedResetTime())
             {
-                _tensionManager.SetState(new TensionState(_tensionManager));
+                _tensionManager.SetState(new MovableState(_tensionManager));
             }
 
             return;
