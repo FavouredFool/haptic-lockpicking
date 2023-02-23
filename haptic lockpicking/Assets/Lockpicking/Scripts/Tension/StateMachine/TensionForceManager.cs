@@ -22,6 +22,9 @@ public class TensionForceManager : StateMachine
     [SerializeField]
     private TensionVibrationManager _tensionVibrationManager;
 
+    [SerializeField]
+    PinManager _pinManager;
+
     [Header("TensionLine")]
     [SerializeField, Range(-1, 1)]
     private float _linePositionAlongX = 0.1f;
@@ -30,7 +33,11 @@ public class TensionForceManager : StateMachine
     private float _lineOffsetNearer = 0.2f;
 
     [SerializeField, Range(0, 1)]
-    private float _lineOffsetFarther = 0.2f;
+    private float _lineOffsetFurtherBase = 0.2f;
+
+
+    [SerializeField, Range(0, 0.1f)]
+    float _lineOffsetFurtherIncrease = 0.025f;
 
     [Header("TensionState")]
     [SerializeField, Range(0, 100)]
@@ -45,10 +52,6 @@ public class TensionForceManager : StateMachine
 
     [SerializeField, Range(0, 1)]
     private float _stateTransitionOverflowLockToTension = 0.1f;
-
-    [Header("Pins")]
-    [SerializeField]
-    PinManager _pinManager;
 
     [Header("TensionWrench Visual")]
     [SerializeField]
@@ -68,10 +71,14 @@ public class TensionForceManager : StateMachine
 
     private SG_HandPose _latestPose;
 
+    float _lineOffsetFurtherCalculated;
+
     private void Start()
     {
         _noForce = new(Finger.Index, 0);
         _fullForce = new(Finger.Index, 100);
+
+        _lineOffsetFurtherCalculated = _lineOffsetFurtherBase;
     }
 
     private void Update()
@@ -95,6 +102,13 @@ public class TensionForceManager : StateMachine
         }
 
         CalculateTensionWrenchVisual();
+
+        CalculateLineOffsetFurther();
+    }
+
+    public void CalculateLineOffsetFurther()
+    {
+        _lineOffsetFurtherCalculated = _lineOffsetFurtherBase + _lineOffsetFurtherIncrease * _pinManager.GetAmountOfSetPins();
     }
 
     public void CalculateTensionWrenchVisual()
@@ -131,7 +145,6 @@ public class TensionForceManager : StateMachine
         return 0;
     }
 
-
     public float Remap(float value, float from1, float to1, float from2, float to2)
     {
         // https://forum.unity.com/threads/re-map-a-number-from-one-range-to-another.119437/
@@ -142,7 +155,6 @@ public class TensionForceManager : StateMachine
     {
         Vector3 difference = _indexFingerEndpointTransform.position - _indexFingerLastJointTransform.position;
         Vector3 center = _indexFingerLastJointTransform.position + difference / 2;
-
 
         Gizmos.DrawWireSphere(center, 1f);
     }
@@ -159,7 +171,7 @@ public class TensionForceManager : StateMachine
 
     public float GetLineFurtherBound()
     {
-        return _linePositionAlongX - _lineOffsetFarther;
+        return _linePositionAlongX - _lineOffsetFurtherCalculated;
     }
 
     public float GetFingerPositionX()

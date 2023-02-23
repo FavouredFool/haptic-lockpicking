@@ -15,7 +15,7 @@ public class PinManager : MonoBehaviour
     public void Start()
     {
         _pinOrder = _pinOrder.OrderBy(a => random.Next()).ToList();
-        Debug.Log(_pinOrder[0]);
+        Debug.Log("Order: " + _pinOrder[0] + ", " + _pinOrder[1] + ", " + _pinOrder[2] + ", " + _pinOrder[3] + ", " + _pinOrder[4]);
     }
 
     public bool UpdatePinLogic()
@@ -47,6 +47,22 @@ public class PinManager : MonoBehaviour
     public List<PinController> GetPinControllers()
     {
         return _pinControllers;
+    }
+
+    public int GetAmountOfSetPins()
+    {
+        for (int i = 0; i < _pinOrder.Count; i++)
+        {
+            PinController activePins = _pinControllers[_pinOrder[i]];
+
+            if (activePins.GetSetState() != PinState.SET)
+            {
+                return i;
+            }
+            
+        }
+
+        return 5;
     }
 
 }
