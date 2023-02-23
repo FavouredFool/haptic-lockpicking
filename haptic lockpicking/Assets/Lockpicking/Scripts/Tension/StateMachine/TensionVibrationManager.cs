@@ -61,7 +61,6 @@ public class TensionVibrationManager : MonoBehaviour
     private int CalculateMovableTension()
     {
         return (int) Remap(_tensionForceManager.GetFingerPositionX(), _tensionForceManager.GetLineNearerBound(), _tensionForceManager.GetLineFurtherBound(), _movableStartIntensity, _movableEndIntensitiy);
-
     }
 
     public void SkipVibrationAfterSet()

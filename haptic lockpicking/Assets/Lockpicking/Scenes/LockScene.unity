@@ -6514,13 +6514,15 @@ MonoBehaviour:
   _indexFingerLastJointTransform: {fileID: 1676640873}
   _indexFingerEndpointTransform: {fileID: 652894341}
   _tensionVibrationManager: {fileID: 1361264103}
+  _pinManager: {fileID: 854490678}
   _linePositionAlongX: 0.3
-  _lineOffsetBidirectional: 0.2
+  _lineOffsetNearer: 0.2
+  _lineOffsetFurtherBase: 0.2
+  _lineOffsetFurtherIncrease: 0.025
   _amountOfSkippedFrames: 1
   _stateTransitionOverflowTensionToLoose: 0.05
   _lockedResetTime: 0.2
   _stateTransitionOverflowLockToTension: 0.15
-  _pinManager: {fileID: 854490678}
   _tensionWrench: {fileID: 939532976}
   _touchPoint: {fileID: 1430873514}
 --- !u!4 &549515374
@@ -17153,8 +17155,8 @@ MonoBehaviour:
   _tensionForceManager: {fileID: 549515373}
   _setStopDuration: 0.25
   _lockedIntensity: 75
-  _movableStartIntensity: 20
-  _movableEndIntensitiy: 50
+  _movableStartIntensity: 5
+  _movableEndIntensitiy: 25
 --- !u!1 &1375825040
 GameObject:
   m_ObjectHideFlags: 0
