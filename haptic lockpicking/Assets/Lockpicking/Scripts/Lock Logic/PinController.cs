@@ -34,9 +34,9 @@ public class PinController : MonoBehaviour
 
     public static float SHEERLINE_HEIGHT = -0.99f;
 
-    private PinState _setState = PinState.SPRINGY;
+    private PinState _pinState = PinState.SPRINGY;
 
-    private PinState _nonSetState = PinState.SPRINGY;
+    private PinState _nonSetPinState = PinState.SPRINGY;
 
     public void Awake()
     {
@@ -71,7 +71,7 @@ public class PinController : MonoBehaviour
                 AnimatePinActive(_driverPin);
                 break;
             case TensionState.MOVABLE:
-                if (_setState == PinState.SET)
+                if (_pinState == PinState.SET)
                 {
                     AnimatePinStatic(_driverPin);
                     AnimatePinStatic(_keyPin);
@@ -104,15 +104,15 @@ public class PinController : MonoBehaviour
     {
         bool tensionIsNotLoose = StaticTensionState != TensionState.LOOSE;
         bool isOnSheer = _driverPin.IsOnSheer(this);
-        bool pinIsSlow = Mathf.Abs(_driverPin.GetVelocity()) <= _maxVelocityForSet;
+        bool pinIsSlow = Mathf.Abs(_driverPin.GetVelocity()) <=_maxVelocityForSet;
 
-        PinState previousState = _setState;
+        PinState previousState = _pinState;
 
-        _setState = (tensionIsNotLoose && isOnSheer && pinIsSlow && _nonSetState == PinState.BINDING) ? PinState.SET : _nonSetState;
+        _pinState = (tensionIsNotLoose && isOnSheer && pinIsSlow && _nonSetPinState == PinState.BINDING) ? PinState.SET : _nonSetPinState;
 
-        DriverPinBlockadeActive(_setState == PinState.SET);
+        DriverPinBlockadeActive(_pinState == PinState.SET);
 
-        if (_setState == PinState.SET && _setState != previousState)
+        if (_pinState == PinState.SET && _pinState != previousState)
         {
             _tensionForceManager.PinHasBeenSet();
         }
@@ -135,9 +135,9 @@ public class PinController : MonoBehaviour
         _driverPinBlockade.enabled = active;
     }
 
-    public PinState GetSetState()
+    public PinState GetPinState()
     {
-        return _setState;
+        return _pinState;
     }
 
     public float GetSetThreshold()
@@ -147,6 +147,23 @@ public class PinController : MonoBehaviour
 
     public void SetNonSetState(PinState nonSetState)
     {
-        _nonSetState = nonSetState;
+        _nonSetPinState = nonSetState;
+    }
+
+    public void ColorCodePins(Color driverColor, Color keyColor)
+    {
+        _driverPin.ChangeColor(driverColor);
+        _keyPin.ChangeColor(keyColor);
+    }
+
+    public void ResetPinColor()
+    {
+        _driverPin.ChangeColor(_driverPin.GetDefaultColor());
+        _keyPin.ChangeColor(_keyPin.GetDefaultColor());
+    }
+
+    public DriverPin GetDriverPin()
+    {
+        return _driverPin;
     }
 }

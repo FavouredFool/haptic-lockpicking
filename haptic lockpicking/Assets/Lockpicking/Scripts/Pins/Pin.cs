@@ -14,9 +14,15 @@ public abstract class Pin : MonoBehaviour
 
     private RigidbodyConstraints _freezeAllButYPos = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
 
-    public virtual void Start()
+    MeshRenderer _meshRenderer;
+
+    Color _defaultColor;
+
+    public virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _meshRenderer = GetComponentInChildren<MeshRenderer>();
+        _defaultColor = _meshRenderer.material.color;
     }
 
     public void PhysicsUpdate()
@@ -46,5 +52,22 @@ public abstract class Pin : MonoBehaviour
     {
         _rigidbody.constraints = _freezeAllButYPos;
     }
+
+    public void ChangeColor(Color color)
+    {
+        if(!_meshRenderer)
+        {
+            return;
+        }
+
+        _meshRenderer.material.color = color;
+    }
+
+    public Color GetDefaultColor()
+    {
+        return _defaultColor;
+    }
+
+
 
 }

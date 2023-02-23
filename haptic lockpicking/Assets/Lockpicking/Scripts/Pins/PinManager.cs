@@ -30,7 +30,7 @@ public class PinManager : MonoBehaviour
             {
                 activePins.SetNonSetState(PinState.BINDING);
 
-                if (activePins.GetSetState() != PinState.SET)
+                if (activePins.GetPinState() != PinState.SET)
                 {
                     allSet = false;
                 }
@@ -55,7 +55,7 @@ public class PinManager : MonoBehaviour
         {
             PinController activePins = _pinControllers[_pinOrder[i]];
 
-            if (activePins.GetSetState() != PinState.SET)
+            if (activePins.GetPinState() != PinState.SET)
             {
                 return i;
             }
