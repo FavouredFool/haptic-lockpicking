@@ -6513,6 +6513,7 @@ MonoBehaviour:
   _tensionGlove: {fileID: 271622097}
   _indexFingerLastJointTransform: {fileID: 1676640873}
   _indexFingerEndpointTransform: {fileID: 652894341}
+  _tensionVibrationManager: {fileID: 1361264103}
   _linePositionAlongX: 0.3
   _lineOffsetBidirectional: 0.2
   _amountOfSkippedFrames: 1
@@ -17114,6 +17115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1361264102}
+  - component: {fileID: 1361264103}
   m_Layer: 0
   m_Name: TensionVibrationManager
   m_TagString: Untagged
@@ -17136,6 +17138,23 @@ Transform:
   m_Father: {fileID: 1270378241}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1361264103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361264101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d48b385f18995c439ba0e617bc111aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tensionForceManager: {fileID: 549515373}
+  _setStopDuration: 0.25
+  _lockedIntensity: 75
+  _movableStartIntensity: 20
+  _movableEndIntensitiy: 50
 --- !u!1 &1375825040
 GameObject:
   m_ObjectHideFlags: 0

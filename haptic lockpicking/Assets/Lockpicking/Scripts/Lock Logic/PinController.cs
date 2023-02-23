@@ -114,7 +114,7 @@ public class PinController : MonoBehaviour
 
         if (_setState == PinState.SET && _setState != previousState)
         {
-            _tensionForceManager.SkipTensionFramesAfterSet();
+            _tensionForceManager.PinHasBeenSet();
         }
 
         

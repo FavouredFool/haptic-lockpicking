@@ -19,12 +19,18 @@ public class TensionForceManager : StateMachine
     [SerializeField]
     private Transform _indexFingerEndpointTransform;
 
+    [SerializeField]
+    private TensionVibrationManager _tensionVibrationManager;
+
     [Header("TensionLine")]
     [SerializeField, Range(-1, 1)]
     private float _linePositionAlongX = 0.1f;
 
     [SerializeField, Range(0, 1)]
-    private float _lineOffsetBidirectional = 0.1f;
+    private float _lineOffsetNearer = 0.2f;
+
+    [SerializeField, Range(0, 1)]
+    private float _lineOffsetFarther = 0.2f;
 
     [Header("TensionState")]
     [SerializeField, Range(0, 100)]
@@ -50,6 +56,8 @@ public class TensionForceManager : StateMachine
 
     [SerializeField]
     private Transform _touchPoint;
+
+
 
     public static TensionState StaticTensionState = TensionState.LOOSE;
 
@@ -146,12 +154,12 @@ public class TensionForceManager : StateMachine
 
     public float GetLineNearerBound()
     {
-        return _linePositionAlongX + _lineOffsetBidirectional;
+        return _linePositionAlongX + _lineOffsetNearer;
     }
 
     public float GetLineFurtherBound()
     {
-        return _linePositionAlongX - _lineOffsetBidirectional;
+        return _linePositionAlongX - _lineOffsetFarther;
     }
 
     public float GetFingerPositionX()
@@ -179,6 +187,12 @@ public class TensionForceManager : StateMachine
         return _stateTransitionOverflowLockToTension;
     }
 
+    public void PinHasBeenSet()
+    {
+        SkipTensionFramesAfterSet();
+        _tensionVibrationManager.SkipVibrationAfterSet();
+    }
+
     public void SkipTensionFramesAfterSet()
     {
         if (_state is not MovableState)
@@ -190,6 +204,9 @@ public class TensionForceManager : StateMachine
 
     }
 
-
+    public SG_HapticGlove GetTensionGlove()
+    {
+        return _tensionGlove;
+    }
 
 }
