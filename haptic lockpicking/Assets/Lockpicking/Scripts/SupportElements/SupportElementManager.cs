@@ -5,29 +5,34 @@ using UnityEngine;
 public class SupportElementManager : MonoBehaviour
 {
     [SerializeField]
-    Canvas _pickIndicatorCanvas;
+    GameObject _pickIndicatorCanvas;
 
     [SerializeField]
-    Canvas _forceIndicatorCanvas;
+    GameObject _forceIndicatorCanvas;
 
     [SerializeField]
-    PinColorManager _pinColorManager;
+    GameObject _pinColorManager;
 
-    
-
-
-    public void OnEnable()
+    public void Start()
     {
-        _pickIndicatorCanvas.gameObject.SetActive(true);
-        _forceIndicatorCanvas.gameObject.SetActive(true);
-        _pinColorManager.gameObject.SetActive(true);
+        _pickIndicatorCanvas.SetActive(false);
+        _forceIndicatorCanvas.SetActive(false);
+        _pinColorManager.SetActive(false);
     }
 
-    public void OnDisable()
+    public void TogglePinColor(bool active)
     {
-        _pickIndicatorCanvas.gameObject.SetActive(false);
-        _forceIndicatorCanvas.gameObject.SetActive(false);
-        _pinColorManager.gameObject.SetActive(false);
+        _pinColorManager.SetActive(active);
+    }
+
+    public void ToggleForceIndicator(bool active)
+    {
+        _forceIndicatorCanvas.SetActive(active);
+    }
+
+    public void TogglePickIndicator(bool active)
+    {
+        _pickIndicatorCanvas.SetActive(active);
     }
 
 }
