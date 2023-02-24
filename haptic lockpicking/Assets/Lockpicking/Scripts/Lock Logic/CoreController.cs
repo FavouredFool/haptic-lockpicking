@@ -2,23 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static PinController;
+using static TensionForceManager;
 
 public class CoreController : MonoBehaviour
 {
     [SerializeField]
     PinManager _pinManager;
 
-    private bool _lockFinished = false;
-
+    [SerializeField]
     private float _rotateSpeed = 1f;
+
+    [SerializeField]
+    GameObject _handVisual;
+
+    public static bool LockFinished = false;
 
     public void Update()
     {
-        if (_pinManager.UpdatePinLogic() && !_lockFinished)
+        if (_pinManager.UpdatePinLogic() && !LockFinished)
         {
             // Rotate Core open. In the end this is either automatic or sensitive to push.
             StartCoroutine(Finish());
-            _lockFinished = true;
+            LockFinished = true;
+            _handVisual.SetActive(false);
         }
     }
 
@@ -35,6 +41,11 @@ public class CoreController : MonoBehaviour
         while(true)
         {
             yield return null;
+
+            if (StaticTensionState == TensionState.LOOSE)
+            {
+                continue;
+            }
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, 90)), _rotateSpeed);
 

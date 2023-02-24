@@ -102,6 +102,11 @@ public class TensionForceManager : StateMachine
 
     public void CalculateTensionWrenchVisual()
     {
+        if (CoreController.LockFinished)
+        {
+            return;
+        }
+
         Vector2 originPoint2D = new Vector2(_tensionWrench.position.x, _tensionWrench.position.y);
         Vector2 touchPoint2D = new Vector2(_touchPoint.position.x, _touchPoint.position.y);
         Vector2 fingerPoint2D = new Vector2(_fingerPosition.x, _fingerPosition.y);

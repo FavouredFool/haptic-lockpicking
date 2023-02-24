@@ -47,7 +47,7 @@ public class PinColorManager : MonoBehaviour
             return _keyLockedColor;
         }
 
-        if (pinController.GetKeyPin().IsBeingTouched())
+        if (pinController.GetKeyPin().IsBeingTouched() && StaticTensionState != TensionState.LOCKED)
         {
             return _keyTouchedColor;
         }
