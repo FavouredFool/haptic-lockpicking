@@ -5072,13 +5072,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3723d167b2a0fb14d935c5a8d444111f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pinManager: {fileID: 854490678}
   _pickIndicatorCanvas: {fileID: 1506908115}
-  _driverSetColor: {r: 0, g: 0, b: 0, a: 0}
-  _driverBindingColor: {r: 0, g: 0, b: 0, a: 0}
-  _driverLockedColor: {r: 0, g: 0, b: 0, a: 0}
-  _keyTouchedColor: {r: 0, g: 0, b: 0, a: 0}
-  _keyLockedColor: {r: 0, g: 0, b: 0, a: 0}
+  _forceIndicatorCanvas: {fileID: 1808339600}
+  _pinColorManager: {fileID: 452349568}
 --- !u!1 &407387957
 GameObject:
   m_ObjectHideFlags: 0
@@ -5864,6 +5860,56 @@ Transform:
   m_Father: {fileID: 1559997800}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &452349566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 452349567}
+  - component: {fileID: 452349568}
+  m_Layer: 0
+  m_Name: PinColorManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &452349567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452349566}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1270378241}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &452349568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452349566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8d1755b2477a31409ecafc6cff491c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pinManager: {fileID: 854490678}
+  _driverSetColor: {r: 0.08235294, g: 0.5372549, b: 0, a: 0}
+  _driverBindingColor: {r: 0, g: 0.5372549, b: 0.4117647, a: 0}
+  _driverLockedColor: {r: 0.27058825, g: 0.44313726, b: 0.5372549, a: 0}
+  _keyTouchedColor: {r: 0, g: 0.6666667, b: 1, a: 0}
+  _keyLockedColor: {r: 0.4, g: 0.67058825, b: 0.8, a: 0}
 --- !u!1 &458180689
 GameObject:
   m_ObjectHideFlags: 0
@@ -7307,7 +7353,7 @@ MonoBehaviour:
   _pinManager: {fileID: 854490678}
   _linePositionAlongX: 0.3
   _lineOffsetNearer: 0.2
-  _lineOffsetFurtherBase: 0.2
+  _lineOffsetFurtherBase: 0.1
   _lineOffsetFurtherIncrease: 0.025
   _amountOfSkippedFrames: 1
   _stateTransitionOverflowTensionToLoose: 0.05
@@ -7328,7 +7374,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1270378241}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &550064319
 GameObject:
@@ -12635,7 +12681,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1270378241}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &854490678
 MonoBehaviour:
@@ -17460,10 +17506,11 @@ Transform:
   m_Children:
   - {fileID: 1463262380}
   - {fileID: 537999684}
-  - {fileID: 549515374}
   - {fileID: 854490677}
+  - {fileID: 549515374}
   - {fileID: 1361264102}
   - {fileID: 397699397}
+  - {fileID: 452349567}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23829,7 +23876,7 @@ GameObject:
   - component: {fileID: 1808339599}
   - component: {fileID: 1808339598}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: ForceIndicatorCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

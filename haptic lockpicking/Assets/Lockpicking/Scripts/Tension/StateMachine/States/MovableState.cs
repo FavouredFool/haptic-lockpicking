@@ -45,7 +45,6 @@ public class MovableState : State
         }
         else
         {
-            Debug.Log("movable: " + bounds[1]);
             _tensionManager.SetState(new LockState(_tensionManager));
         }
     }

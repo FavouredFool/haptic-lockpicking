@@ -33,7 +33,6 @@ public class LockState : State
 
         if (_tensionManager.GetFingerPositionX() > _tensionManager.GetLineBoundsAdjusted()[1])
         {
-            Debug.Log("locked: " + _tensionManager.GetLineBoundsAdjusted()[1]);
             _startTime = Time.time;
         }
         else
