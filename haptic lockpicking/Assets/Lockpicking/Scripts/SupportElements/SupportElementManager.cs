@@ -10,27 +10,29 @@ public class SupportElementManager : MonoBehaviour
     [SerializeField]
     PinManager _pinManager;
 
+    [SerializeField]
+    Canvas _pickIndicatorCanvas;
+
     [Header("PinColors")]
     [SerializeField]
-    Color driverSetColor;
+    Color _driverSetColor;
 
     [SerializeField]
-    Color driverBindingColor;
+    Color _driverBindingColor;
 
     [SerializeField]
-    Color driverLockedColor;
+    Color _driverLockedColor;
 
     [SerializeField]
-    Color keyTouchedColor;
+    Color _keyTouchedColor;
 
     [SerializeField]
-    Color keyLockedColor;
+    Color _keyLockedColor;
+
 
     public void OnEnable()
     {
-
-
-        // Update Pick Visual Clues
+        _pickIndicatorCanvas.gameObject.SetActive(true);
     }
 
     public void OnDisable()
@@ -39,6 +41,8 @@ public class SupportElementManager : MonoBehaviour
         {
             pinController.ResetPinColor();
         }
+
+        _pickIndicatorCanvas.gameObject.SetActive(false);
     }
 
     public void Update()
@@ -55,12 +59,12 @@ public class SupportElementManager : MonoBehaviour
     {
         if (StaticTensionState == TensionState.LOCKED)
         {
-            return keyLockedColor;
+            return _keyLockedColor;
         }
 
         if (pinController.GetKeyPin().IsBeingTouched())
         {
-            return keyTouchedColor;
+            return _keyTouchedColor;
         }
 
         return pinController.GetKeyPin().GetDefaultColor();
@@ -70,17 +74,17 @@ public class SupportElementManager : MonoBehaviour
     {
         if (pinController.GetPinState() == PinState.SET)
         {
-            return driverSetColor;
+            return _driverSetColor;
         }
 
         if (StaticTensionState == TensionState.LOCKED)
         {
-            return driverLockedColor;
+            return _driverLockedColor;
         }
 
         if (pinController.GetPinState() == PinState.BINDING)
         {
-            return driverBindingColor;
+            return _driverBindingColor;
         }
 
         return pinController.GetDriverPin().GetDefaultColor();

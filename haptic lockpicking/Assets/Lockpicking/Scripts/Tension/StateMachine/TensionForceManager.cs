@@ -71,14 +71,10 @@ public class TensionForceManager : StateMachine
 
     private SG_HandPose _latestPose;
 
-    float _lineOffsetFurtherCalculated;
-
     private void Start()
     {
         _noForce = new(Finger.Index, 0);
         _fullForce = new(Finger.Index, 100);
-
-        _lineOffsetFurtherCalculated = _lineOffsetFurtherBase;
     }
 
     private void Update()
@@ -102,13 +98,6 @@ public class TensionForceManager : StateMachine
         }
 
         CalculateTensionWrenchVisual();
-
-        CalculateLineOffsetFurther();
-    }
-
-    public void CalculateLineOffsetFurther()
-    {
-        _lineOffsetFurtherCalculated = _lineOffsetFurtherBase + _lineOffsetFurtherIncrease * _pinManager.GetAmountOfSetPins();
     }
 
     public void CalculateTensionWrenchVisual()
@@ -164,14 +153,33 @@ public class TensionForceManager : StateMachine
         _tensionGlove.SendCmd(active ? _fullForce : _noForce);
     }
 
-    public float GetLineNearerBound()
+    private float GetLineFurtherBoundAdjusted()
     {
-        return _linePositionAlongX + _lineOffsetNearer;
+        float farBound = _linePositionAlongX - (_lineOffsetFurtherBase + _lineOffsetFurtherIncrease * _pinManager.GetAmountOfSetPins());
+
+        if (StaticTensionState == TensionState.LOCKED)
+        {
+            farBound += _stateTransitionOverflowLockToTension;
+        }
+
+        return farBound;
     }
 
-    public float GetLineFurtherBound()
+    private float GetLineNearerBoundAdjusted()
     {
-        return _linePositionAlongX - _lineOffsetFurtherCalculated;
+        float nearBound = _linePositionAlongX + (_lineOffsetNearer);
+
+        if (StaticTensionState == TensionState.MOVABLE)
+        {
+            nearBound += _stateTransitionOverflowTensionToLoose;
+        }
+
+        return nearBound;
+    }
+
+    public float[] GetLineBoundsAdjusted()
+    {
+        return new[] { GetLineNearerBoundAdjusted(), GetLineFurtherBoundAdjusted() };
     }
 
     public float GetFingerPositionX()
@@ -220,5 +228,12 @@ public class TensionForceManager : StateMachine
     {
         return _tensionGlove;
     }
+
+    public float GetFingerPosition01()
+    {
+        float[] bounds = GetLineBoundsAdjusted();
+        return Mathf.Clamp01(MathLib.Remap(GetFingerPositionX(), bounds[0], bounds[1], 0, 1));
+    }
+
 
 }

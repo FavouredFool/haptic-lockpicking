@@ -18,7 +18,7 @@ public class LooseState : State
 
     public override void UpdateState()
     {
-        if (_tensionManager.GetFingerPositionX() < _tensionManager.GetLineNearerBound())
+        if (_tensionManager.GetFingerPositionX() < _tensionManager.GetLineBoundsAdjusted()[0])
         {
             _tensionManager.SetState(new MovableState(_tensionManager));
         }

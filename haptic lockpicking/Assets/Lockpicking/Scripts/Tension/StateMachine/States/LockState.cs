@@ -31,8 +31,9 @@ public class LockState : State
             return;
         }
 
-        if (_tensionManager.GetFingerPositionX() > _tensionManager.GetLineFurtherBound() + _tensionManager.GetStateTransitionOverflowLockToTension())
+        if (_tensionManager.GetFingerPositionX() > _tensionManager.GetLineBoundsAdjusted()[1])
         {
+            Debug.Log("locked: " + _tensionManager.GetLineBoundsAdjusted()[1]);
             _startTime = Time.time;
         }
         else

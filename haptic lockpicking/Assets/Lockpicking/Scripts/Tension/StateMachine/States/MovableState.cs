@@ -33,17 +33,19 @@ public class MovableState : State
 
         _tensionManager.SetHapticActive(true);
 
+        float[] bounds = _tensionManager.GetLineBoundsAdjusted();
 
-        if (_tensionManager.GetFingerPositionX() > _tensionManager.GetLineNearerBound() + _tensionManager.GetStateTransitionOverflowTensionToLoose())
+        if (_tensionManager.GetFingerPositionX() > bounds[0])
         {
             _tensionManager.SetState(new LooseState(_tensionManager));
         }
-        else if (_tensionManager.GetFingerPositionX() > _tensionManager.GetLineFurtherBound())
+        else if (_tensionManager.GetFingerPositionX() > bounds[1])
         {
 
         }
         else
         {
+            Debug.Log("movable: " + bounds[1]);
             _tensionManager.SetState(new LockState(_tensionManager));
         }
     }

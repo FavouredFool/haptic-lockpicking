@@ -60,7 +60,8 @@ public class TensionVibrationManager : MonoBehaviour
 
     private int CalculateMovableTension()
     {
-        return (int) Remap(_tensionForceManager.GetFingerPositionX(), _tensionForceManager.GetLineNearerBound(), _tensionForceManager.GetLineFurtherBound(), _movableStartIntensity, _movableEndIntensitiy);
+        float[] bounds = _tensionForceManager.GetLineBoundsAdjusted();
+        return (int) MathLib.Remap(_tensionForceManager.GetFingerPositionX(), bounds[0], bounds[1], _movableStartIntensity, _movableEndIntensitiy);
     }
 
     public void SkipVibrationAfterSet()
@@ -68,9 +69,5 @@ public class TensionVibrationManager : MonoBehaviour
         _setStopStart = Time.time;
     }
 
-    public float Remap(float value, float from1, float to1, float from2, float to2)
-    {
-        // https://forum.unity.com/threads/re-map-a-number-from-one-range-to-another.119437/
-        return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
-    }
+
 }
