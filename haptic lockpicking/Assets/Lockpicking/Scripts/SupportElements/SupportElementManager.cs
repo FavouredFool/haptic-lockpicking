@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static CutoutManager;
 
 public class SupportElementManager : MonoBehaviour
 {
+    [SerializeField]
+    CutoutManager _cutoutManager;
+
     [SerializeField]
     GameObject _pickIndicatorCanvas;
 
@@ -15,8 +19,8 @@ public class SupportElementManager : MonoBehaviour
 
     public void Start()
     {
-        _pickIndicatorCanvas.SetActive(false);
-        _forceIndicatorCanvas.SetActive(true);
+        _pickIndicatorCanvas.SetActive(true);
+        _forceIndicatorCanvas.SetActive(false);
         _pinColorManager.SetActive(true);
     }
 
@@ -33,6 +37,11 @@ public class SupportElementManager : MonoBehaviour
     public void TogglePickIndicator(bool active)
     {
         _pickIndicatorCanvas.SetActive(active);
+    }
+
+    public void SetCutout(float value)
+    {
+        _cutoutManager.SetCutoutFromState((CutoutState)value);
     }
 
 }

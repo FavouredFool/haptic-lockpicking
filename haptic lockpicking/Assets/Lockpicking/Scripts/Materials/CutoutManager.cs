@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class CutoutManager : MonoBehaviour
 {
+    public enum CutoutState { NONE, PARTIAL, FULL };
+
     [Header("Core")]
     [SerializeField]
     GameObject _core;
@@ -25,7 +27,7 @@ public class CutoutManager : MonoBehaviour
 
     public void Start()
     {
-        SetPreset3();
+        SetCutoutFromState(CutoutState.FULL);
     }
 
     public void SetPreset1()
@@ -60,19 +62,20 @@ public class CutoutManager : MonoBehaviour
         _hullFrontHalf.SetActive(true);
     }
 
-    public void Update()
+    public void SetCutoutFromState(CutoutState state)
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        switch (state)
         {
-            SetPreset1();
+            case CutoutState.NONE:
+                SetPreset1();
+                break;
+            case CutoutState.PARTIAL:
+                SetPreset2();
+                break;
+            case CutoutState.FULL:
+                SetPreset3();
+                break;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SetPreset2();
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            SetPreset3();
-        }
+            
     }
 }
