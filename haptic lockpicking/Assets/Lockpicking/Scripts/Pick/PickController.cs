@@ -45,9 +45,6 @@ public class PickController : MonoBehaviour
 
     public void Awake()
     {
-        _meshRenderer.enabled = false;
-        _meshCollider.enabled = false;
-
         _startPosition = transform.position;
 
         _startRotation = transform.rotation;
@@ -57,19 +54,11 @@ public class PickController : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Recalibrate();
-        }
-
         transform.SetLocalPositionAndRotation(CalculatePosition(), CalculateRotation());
     }
 
     public void Recalibrate()
     {
-        _meshRenderer.enabled = true;
-        _meshCollider.enabled = true;
-        
         _positionOffset = ((_viewRotation * _driver.position) * _speedMultiplicator) - _startPosition;
 
         _rotationOffset = Quaternion.Inverse(_driver.transform.rotation) * _startRotation;

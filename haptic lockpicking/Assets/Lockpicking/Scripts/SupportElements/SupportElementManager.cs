@@ -16,8 +16,8 @@ public class SupportElementManager : MonoBehaviour
     public void Start()
     {
         _pickIndicatorCanvas.SetActive(false);
-        _forceIndicatorCanvas.SetActive(false);
-        _pinColorManager.SetActive(false);
+        _forceIndicatorCanvas.SetActive(true);
+        _pinColorManager.SetActive(true);
     }
 
     public void TogglePinColor(bool active)

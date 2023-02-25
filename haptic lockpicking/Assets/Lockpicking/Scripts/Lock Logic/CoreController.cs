@@ -10,10 +10,16 @@ public class CoreController : MonoBehaviour
     PinManager _pinManager;
 
     [SerializeField]
+    TensionForceManager _tensionForceManager;
+
+    [SerializeField]
     private float _rotateSpeed = 1f;
 
     [SerializeField]
     GameObject _handVisual;
+
+    [SerializeField]
+    GameObject _pick;
 
     public static bool LockFinished = false;
 
@@ -21,16 +27,16 @@ public class CoreController : MonoBehaviour
     {
         if (_pinManager.UpdatePinLogic() && !LockFinished)
         {
-            // Rotate Core open. In the end this is either automatic or sensitive to push.
             StartCoroutine(Finish());
             LockFinished = true;
+
             _handVisual.SetActive(false);
+            _pick.SetActive(false);
         }
     }
 
     private IEnumerator Finish()
     {
-        yield return new WaitForSeconds(1);
         foreach (PinController pins in _pinManager.GetPinControllers())
         {
             pins.GetKeyPin().transform.parent = transform;
@@ -47,7 +53,7 @@ public class CoreController : MonoBehaviour
                 continue;
             }
 
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, 90)), _rotateSpeed);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, 90)), _tensionForceManager.GetFingerPosition01() * _rotateSpeed);
 
             if (transform.rotation == Quaternion.Euler(new Vector3(0, 0, 90)))
             {

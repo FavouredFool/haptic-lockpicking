@@ -87,11 +87,6 @@ public class TensionForceManager : StateMachine
 
         _fingerPosition = _indexFingerLastJointTransform.position + (_indexFingerEndpointTransform.position - _indexFingerLastJointTransform.position) / 2;
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            SetState(new LooseState(this));
-        }
-
         if (_state != null)
         {
             UpdateState(_state);
