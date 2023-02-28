@@ -16,8 +16,23 @@ public class PickController : MonoBehaviour
     [SerializeField]
     private Camera _camera;
 
+    [SerializeField]
+    private LayerMask _borderLayer;
+
+    [SerializeField]
+    private float _physicsMoveSpeed = 1;
+
+    [SerializeField]
+    private float _physicsRotateSpeed = 1;
+
+    [SerializeField, Range(0, 1)]
+    private float _deltaMoveThreshold = 0.25f;
+
+    [SerializeField, Range(0, 1)]
+    private float _deltaRotateThreshold = 0.25f;
+
     [SerializeField, Range(1, 20)]
-    private float _speedMultiplicator;
+    private float _distanceMultiplicator;
 
     [SerializeField, Range(0, 5)]
     private float _upBoundsThreshold;
@@ -43,6 +58,13 @@ public class PickController : MonoBehaviour
 
     Quaternion _viewRotation;
 
+    Rigidbody _rigidBody;
+
+    int _collideAmount = 0;
+
+    Vector3 _pickPosition = Vector3.zero;
+    Quaternion _pickRotation = Quaternion.identity;
+
     public void Awake()
     {
         _startPosition = transform.position;
@@ -50,16 +72,41 @@ public class PickController : MonoBehaviour
         _startRotation = transform.rotation;
 
         _viewRotation = _camera.transform.rotation * Quaternion.Euler(new Vector3(180, 0, 180));
+
+        _rigidBody = GetComponent<Rigidbody>();
+
+        
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
-        transform.SetLocalPositionAndRotation(CalculatePosition(), CalculateRotation());
+        Vector3 goalPosition = CalculatePosition();
+        Quaternion goalRotation = CalculateRotation();
+
+        float keepZ = _pickPosition.z;
+
+        if (Vector3.Distance(_pickPosition, goalPosition) > _deltaMoveThreshold)
+        {
+            _pickPosition = Vector3.MoveTowards(_pickPosition, goalPosition, _physicsMoveSpeed);
+        }
+
+        if (1 - Quaternion.Dot(_pickRotation, goalRotation) > _deltaRotateThreshold)
+        {
+            _pickRotation = Quaternion.RotateTowards(_pickRotation, goalRotation, _physicsRotateSpeed);
+        }
+
+        if (_collideAmount > 0)
+        {
+            _pickPosition.z = Mathf.Max(_pickPosition.z, keepZ);
+        }
+
+        _rigidBody.MovePosition(_pickPosition);
+        _rigidBody.MoveRotation(_pickRotation);    
     }
 
     public void Recalibrate()
     {
-        _positionOffset = ((_viewRotation * _driver.position) * _speedMultiplicator) - _startPosition;
+        _positionOffset = ((_viewRotation * _driver.position) * _distanceMultiplicator) - _startPosition;
 
         _rotationOffset = Quaternion.Inverse(_driver.transform.rotation) * _startRotation;
     }
@@ -73,7 +120,7 @@ public class PickController : MonoBehaviour
 
     public Vector3 CalculatePosition()
     {
-        Vector3 absolutePosition = ((_viewRotation * _driver.position) * _speedMultiplicator) - _positionOffset;
+        Vector3 absolutePosition = ((_viewRotation * _driver.position) * _distanceMultiplicator) - _positionOffset;
 
 
         float positionUp = Vector3.Dot(Vector3.up, absolutePosition);
@@ -123,6 +170,24 @@ public class PickController : MonoBehaviour
         // Uses Unity Mathematics Library
         swing = rotation * Unity.Mathematics.math.conjugate(twist);
 
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (_borderLayer == (_borderLayer | (1 << collider.gameObject.layer)))
+        {
+            _collideAmount += 1;
+        }
+
+        
+    }
+
+    private void OnTriggerExit(Collider collider)
+    {
+        if (_borderLayer == (_borderLayer | (1 << collider.gameObject.layer)))
+        {
+            _collideAmount -= 1;
+        }
     }
 
 
