@@ -22,8 +22,6 @@ public class ForceDisplay : MonoBehaviour
 
     Slider _slider;
 
-    Color _fillColor;
-
     private void Start()
     {
         _slider = GetComponent<Slider>();
@@ -46,10 +44,5 @@ public class ForceDisplay : MonoBehaviour
         }
 
         _fill.color = color;
-
-        //if (_slider.value >= 1)
-        //{
-        //    _fill.color = _lockedColor;
-        //}
     }
 }
