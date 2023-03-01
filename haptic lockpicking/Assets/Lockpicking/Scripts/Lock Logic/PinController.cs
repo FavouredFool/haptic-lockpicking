@@ -103,12 +103,10 @@ public class PinController : MonoBehaviour
     public void CalculateSetState()
     {
         bool tensionIsNotLoose = StaticTensionState != TensionState.LOOSE;
-        bool isOnSheer = _driverPin.IsOnSheer(this);
-        bool pinIsSlow = Mathf.Abs(_driverPin.GetVelocity()) <=_maxVelocityForSet;
 
         PinState previousState = _pinState;
 
-        _pinState = (tensionIsNotLoose && isOnSheer && pinIsSlow && _nonSetPinState == PinState.BINDING) ? PinState.SET : _nonSetPinState;
+        _pinState = (tensionIsNotLoose && GetPinIsOnSheer() && GetPinIsSlow() && _nonSetPinState == PinState.BINDING) ? PinState.SET : _nonSetPinState;
 
         DriverPinBlockadeActive(_pinState == PinState.SET);
 
@@ -118,6 +116,21 @@ public class PinController : MonoBehaviour
         }
 
         
+    }
+
+    public bool GetPinIsSlow()
+    {
+        return Mathf.Abs(_driverPin.GetVelocity()) <= _maxVelocityForSet;
+    }
+
+    public bool GetPinIsOnSheer()
+    {
+        return _driverPin.IsOnSheer(this);
+    }
+
+    public bool GetPinIsInOpenPosition()
+    {
+        return _pinState == PinState.SET || GetPinIsOnSheer() && GetPinIsSlow();
     }
 
     public KeyPin GetKeyPin()

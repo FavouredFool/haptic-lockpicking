@@ -21,18 +21,35 @@ public class CoreController : MonoBehaviour
     [SerializeField]
     GameObject _pick;
 
+    [SerializeField]
+    bool _turnsOnlyWithForce = true;
+
     public static bool LockFinished = false;
 
     public void Update()
     {
-        if (_pinManager.UpdatePinLogic() && !LockFinished)
+        if (AllPinsInOpenPosition() && !LockFinished)
         {
-            StartCoroutine(Finish());
             LockFinished = true;
 
             _handVisual.SetActive(false);
             _pick.SetActive(false);
+
+            StartCoroutine(Finish());
         }
+    }
+
+    public bool AllPinsInOpenPosition()
+    {
+        foreach(PinController pinController in _pinManager.GetPinControllers())
+        {
+            if (!pinController.GetPinIsInOpenPosition())
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private IEnumerator Finish()
@@ -48,12 +65,14 @@ public class CoreController : MonoBehaviour
         {
             yield return null;
 
-            if (StaticTensionState == TensionState.LOOSE)
+            if (StaticTensionState == TensionState.LOOSE && _turnsOnlyWithForce)
             {
                 continue;
             }
 
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, 90)), _tensionForceManager.GetFingerPosition01() * _rotateSpeed);
+            float speed = _turnsOnlyWithForce ? _tensionForceManager.GetFingerPosition01() * _rotateSpeed : _rotateSpeed/4;
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, 90)), speed);
 
             if (transform.rotation == Quaternion.Euler(new Vector3(0, 0, 90)))
             {

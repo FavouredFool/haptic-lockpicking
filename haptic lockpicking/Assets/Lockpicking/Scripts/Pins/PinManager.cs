@@ -18,6 +18,11 @@ public class PinManager : MonoBehaviour
         Debug.Log("Order: " + _pinOrder[0] + ", " + _pinOrder[1] + ", " + _pinOrder[2] + ", " + _pinOrder[3] + ", " + _pinOrder[4]);
     }
 
+    public void Update()
+    {
+        UpdatePinLogic();
+    }
+
     public bool UpdatePinLogic()
     {
         bool allSet = true;
