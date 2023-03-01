@@ -70,7 +70,7 @@ public class CoreController : MonoBehaviour
                 continue;
             }
 
-            float speed = _turnsOnlyWithForce ? _tensionForceManager.GetFingerPosition01() * _rotateSpeed : _rotateSpeed/4;
+            float speed = _turnsOnlyWithForce ? _tensionForceManager.GetFingerPosition01() * _rotateSpeed : _rotateSpeed/3;
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, 90)), speed);
 

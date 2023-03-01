@@ -108,7 +108,7 @@ public class PinController : MonoBehaviour
 
         _pinState = (tensionIsNotLoose && GetPinIsOnSheer() && GetPinIsSlow() && _nonSetPinState == PinState.BINDING) ? PinState.SET : _nonSetPinState;
 
-        DriverPinBlockadeActive(_pinState == PinState.SET);
+        DriverPinBlockadeActive(_pinState == PinState.SET || CoreController.LockFinished);
 
         if (_pinState == PinState.SET && _pinState != previousState)
         {
