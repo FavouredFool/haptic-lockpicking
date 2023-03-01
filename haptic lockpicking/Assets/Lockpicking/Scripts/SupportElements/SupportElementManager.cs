@@ -17,7 +17,7 @@ public class SupportElementManager : MonoBehaviour
     [SerializeField]
     GameObject _pinColorManager;
 
-    public void Start()
+    public void Awake()
     {
         _pickIndicatorCanvas.SetActive(true);
         _forceIndicatorCanvas.SetActive(false);
@@ -39,9 +39,9 @@ public class SupportElementManager : MonoBehaviour
         _pickIndicatorCanvas.SetActive(active);
     }
 
-    public void SetCutout(float value)
+    public void SetCutout(int cutoutInt)
     {
-        _cutoutManager.SetCutoutFromState((CutoutState)value);
+        _cutoutManager.SetCutoutFromState((CutoutState)cutoutInt);
     }
 
 }

@@ -2,12 +2,10 @@ using UnityEngine;
 using SG;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using static CutoutManager;
 
-public class GestureMenuToggle : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class GestureMenuSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    public enum UseCaseToggle { PINCOLOR, FORCEINDICATOR, PICKINDICATOR };
-
-
     [SerializeField]
     SG_BasicGesture _leftGesture;
 
@@ -24,10 +22,11 @@ public class GestureMenuToggle : MonoBehaviour, IPointerDownHandler, IPointerUpH
     Slider _backgroundSlider;
 
     [SerializeField]
-    bool _toggleActive = false;
+    CutoutState _cutoutState;
 
-    [SerializeField]
-    UseCaseToggle _useCase;
+    int _cutoutInt;
+
+    int sign = 1;
 
     float _pressStartTime = float.PositiveInfinity;
 
@@ -41,25 +40,24 @@ public class GestureMenuToggle : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     public void Start()
     {
-        if (_toggleActive)
+
+        _cutoutInt = (int)_cutoutState;
+
+        _backgroundSlider.value = _cutoutInt;
+
+        if (_cutoutInt == 2)
         {
-            _backgroundSlider.value = 1;
-        }
-        else
-        {
-            _backgroundSlider.value = 0;
+            sign = -1;
         }
 
-        ToggleActivated();
+        SliderMoved();
     }
 
     public void Update()
     {
         UpdateGestures();
 
-        float upperBound = _toggleActive ? 0 : 1;
-
-        _backgroundSlider.value = Mathf.Clamp01(MathLib.Remap(Time.time, _pressStartTime, _pressStartTime + _buttonHoldTime, 1-upperBound, upperBound));
+        _backgroundSlider.value = Mathf.Clamp(MathLib.Remap(Time.time, _pressStartTime, _pressStartTime + _buttonHoldTime, (float)_cutoutInt, (float)(_cutoutInt + sign)), 0, 2);
 
         if (Time.time - _pressStartTime > _buttonHoldTime)
         {
@@ -67,26 +65,25 @@ public class GestureMenuToggle : MonoBehaviour, IPointerDownHandler, IPointerUpH
             _leftGestureActive = false;
             _rightGestureActive = false;
 
-            _toggleActive = !_toggleActive;
-            ToggleActivated();
+            _cutoutInt += sign;
+
+            if (_cutoutInt == 0)
+            {
+                sign = 1;
+            }
+            if (_cutoutInt == 2)
+            {
+                sign = -1;
+            }
+
+
+            SliderMoved();
         }
     }
 
-    public void ToggleActivated()
+    public void SliderMoved()
     {
-        switch (_useCase)
-        {
-            case UseCaseToggle.PICKINDICATOR:
-                _supportElementManager.TogglePickIndicator(_toggleActive);
-                break;
-            case UseCaseToggle.FORCEINDICATOR:
-                _supportElementManager.ToggleForceIndicator(_toggleActive);
-                break;
-            case UseCaseToggle.PINCOLOR:
-                _supportElementManager.TogglePinColor(_toggleActive);
-                break;
-        }
-
+        _supportElementManager.SetCutout(_cutoutInt);
     }
 
     public void UpdateGestures()
