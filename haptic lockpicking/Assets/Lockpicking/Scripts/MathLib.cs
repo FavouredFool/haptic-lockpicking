@@ -4,14 +4,14 @@ using UnityEngine;
 
 public static class MathLib
 {
-    public static float Remap(float value, float from1, float to1, float from2, float to2)
+    public static float Remap(float value, float fromlow, float fromhigh, float tolow, float tohigh)
     {
         // https://forum.unity.com/threads/re-map-a-number-from-one-range-to-another.119437/
-        float res = (value - from1) / (to1 - from1) * (to2 - from2) + from2;
+        float res = (value - fromlow) / (fromhigh - fromlow) * (tohigh - tolow) + tolow;
 
         if (res.Equals(float.NaN))
         {
-            res = 0;
+            res = tolow;
         }
 
         return res;
