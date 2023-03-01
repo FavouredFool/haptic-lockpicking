@@ -235,5 +235,9 @@ public class TensionForceManager : StateMachine
         return Mathf.Clamp01(MathLib.Remap(GetFingerPositionX(), bounds[0], bounds[1], 0, 1));
     }
 
+    public void SetTensionWrenchActive(bool active)
+    {
+        _tensionWrench.gameObject.SetActive(active);
+    }
 
 }

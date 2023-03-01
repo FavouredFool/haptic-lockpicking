@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using SG;
-using SGCore;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class GestureMenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
+    public enum UseCase { START, TUTORIAL, EXIT };
+
 
     [SerializeField]
     SG_BasicGesture _leftGesture;
@@ -24,26 +23,16 @@ public class GestureMenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
     [SerializeField]
     Slider _backgroundSlider;
 
-    Button _button;
-
-    bool _buttonIsPressed = false;
+    [SerializeField]
+    UseCase _useCase;
 
     float _pressStartTime = float.PositiveInfinity;
-
-    SG_HandPose _leftHandPose;
-
-    SG_HandPose _rightHandPose;
 
     bool _leftGestureActive = false;
 
     bool _rightGestureActive = false;
 
     bool _gesturesHolding = false;
-
-    public void Awake()
-    {
-        _button = GetComponent<Button>();
-    }
 
     public void Update()
     {
@@ -63,11 +52,28 @@ public class GestureMenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     public void ButtonActivated()
     {
-        Debug.Log("do stuff");
+        switch (_useCase)
+        {
+            case UseCase.START:
+                _menuManager.StartPressed();
+                break;
+            case UseCase.TUTORIAL:
+                _menuManager.TutorialPressed();
+                break;
+            case UseCase.EXIT:
+                _menuManager.ExitPressed();
+                break;
+        }
+
     }
 
     public void UpdateGestures()
     {
+        if (!(_leftGesture != null && _rightGesture != null))
+        {
+            return;
+        }
+
         if (_leftGesture.GestureMade)
         {
             _leftGestureActive = true;

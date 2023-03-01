@@ -16,6 +16,8 @@ public class CalibrationManager : MonoBehaviour
     void Awake()
     {
         _pickController.gameObject.SetActive(false);
+        _tensionForceManager.SetTensionWrenchActive(false);
+        
 
 
         // Stuff to test for in the calibration manager
@@ -37,6 +39,7 @@ public class CalibrationManager : MonoBehaviour
             if (!_isInitialized)
             {
                 _pickController.gameObject.SetActive(true);
+                _tensionForceManager.SetTensionWrenchActive(true);
                 _tensionForceManager.SetState(new LooseState(_tensionForceManager));
             }
 
