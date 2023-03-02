@@ -55,7 +55,7 @@ public class TensionForceManager : StateMachine
 
     [Header("TensionWrench Visual")]
     [SerializeField]
-    private Transform _tensionWrench;
+    private TensionToolManager _tensionToolManager;
 
     [SerializeField]
     private Transform _touchPoint;
@@ -102,7 +102,7 @@ public class TensionForceManager : StateMachine
             return;
         }
 
-        Vector2 originPoint2D = new Vector2(_tensionWrench.position.x, _tensionWrench.position.y);
+        Vector2 originPoint2D = new Vector2(_tensionToolManager.GetTensionTool().position.x, _tensionToolManager.GetTensionTool().position.y);
         Vector2 touchPoint2D = new Vector2(_touchPoint.position.x, _touchPoint.position.y);
         Vector2 fingerPoint2D = new Vector2(_fingerPosition.x, _fingerPosition.y);
 
@@ -113,7 +113,7 @@ public class TensionForceManager : StateMachine
         if (angle < 0) angle = 0;
 
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        _tensionWrench.rotation = rotation;
+        _tensionToolManager.GetTensionTool().rotation = rotation;
     }
 
 
@@ -237,7 +237,7 @@ public class TensionForceManager : StateMachine
 
     public void SetTensionWrenchActive(bool active)
     {
-        _tensionWrench.gameObject.SetActive(active);
+        _tensionToolManager.GetTensionTool().gameObject.SetActive(active);
     }
 
 }

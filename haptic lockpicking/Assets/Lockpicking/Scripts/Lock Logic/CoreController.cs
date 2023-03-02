@@ -22,6 +22,9 @@ public class CoreController : MonoBehaviour
     GameObject _pick;
 
     [SerializeField]
+    Transform _tensionTool;
+
+    [SerializeField]
     bool _turnsOnlyWithForce = true;
 
     public static bool LockFinished = false;
@@ -89,4 +92,8 @@ public class CoreController : MonoBehaviour
         _pinManager.RandomizePins();
     }
 
+    public Transform GetTensionTool()
+    {
+        return _tensionTool;
+    }
 }

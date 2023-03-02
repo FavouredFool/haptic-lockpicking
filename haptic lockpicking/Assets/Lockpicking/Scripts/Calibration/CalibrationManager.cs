@@ -5,7 +5,7 @@ using UnityEngine;
 public class CalibrationManager : MonoBehaviour
 {
     [SerializeField]
-    PickController _pickController;
+    PickManager _pickManager;
 
     [SerializeField]
     TensionForceManager _tensionForceManager;
@@ -15,7 +15,7 @@ public class CalibrationManager : MonoBehaviour
 
     void Awake()
     {
-        _pickController.gameObject.SetActive(false);
+        _pickManager.GetPickController().gameObject.SetActive(false);
         _tensionForceManager.SetTensionWrenchActive(false);
         
 
@@ -38,12 +38,12 @@ public class CalibrationManager : MonoBehaviour
         {
             if (!_isInitialized)
             {
-                _pickController.gameObject.SetActive(true);
+                _pickManager.GetPickController().gameObject.SetActive(true);
                 _tensionForceManager.SetTensionWrenchActive(true);
                 _tensionForceManager.SetState(new LooseState(_tensionForceManager));
             }
 
-            _pickController.Recalibrate();
+            _pickManager.GetPickController().Recalibrate();
             _isInitialized = true;
         }
     }

@@ -7,7 +7,7 @@ using static PinController;
 public class PinManager : MonoBehaviour
 {
     [SerializeField]
-    List<PinController> _pinControllers;
+    LockController _lockController;
 
     List<int> _pinOrder = new() { 0, 1, 2, 3, 4 };
     private static readonly System.Random random = new();
@@ -28,7 +28,7 @@ public class PinManager : MonoBehaviour
 
         for (int i = 0; i < _pinOrder.Count; i++)
         {
-            PinController activePins = _pinControllers[_pinOrder[i]];
+            PinController activePins = _lockController.GetPinControllers()[_pinOrder[i]];
 
             if (allSet)
             {
@@ -50,14 +50,14 @@ public class PinManager : MonoBehaviour
 
     public List<PinController> GetPinControllers()
     {
-        return _pinControllers;
+        return _lockController.GetPinControllers();
     }
 
     public int GetAmountOfSetPins()
     {
         for (int i = 0; i < _pinOrder.Count; i++)
         {
-            PinController activePins = _pinControllers[_pinOrder[i]];
+            PinController activePins = _lockController.GetPinControllers()[_pinOrder[i]];
 
             if (activePins.GetPinState() != PinState.SET)
             {

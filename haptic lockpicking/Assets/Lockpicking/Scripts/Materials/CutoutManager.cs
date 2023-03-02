@@ -5,61 +5,51 @@ public class CutoutManager : MonoBehaviour
 {
     public enum CutoutState { NONE, PARTIAL, FULL };
 
-    [Header("Core")]
     [SerializeField]
-    GameObject _core;
+    LockController _lock;
 
-    [SerializeField]
-    GameObject _coreBackHalf;
+    List<GameObject> _coreList;
 
-    [SerializeField]
-    GameObject _coreFrontHalf;
-
-    [Header("Hull")]
-    [SerializeField]
-    GameObject _hull;
-
-    [SerializeField]
-    GameObject _hullBackHalf;
-
-    [SerializeField]
-    GameObject _hullFrontHalf;
+    List<GameObject> _hullList;
 
     public void Start()
     {
+        _coreList = _lock.GetCoreParts();
+        _hullList = _lock.GetHullParts();
+
         SetCutoutFromState(CutoutState.FULL);
     }
 
     public void SetPreset1()
     {
-        _core.SetActive(true);
-        _coreBackHalf.SetActive(false);
-        _coreFrontHalf.SetActive(false);
+        _coreList[0].SetActive(true);
+        _coreList[2].SetActive(false);
+        _coreList[1].SetActive(false);
 
-        _hull.SetActive(true);
-        _hullBackHalf.SetActive(false);
-        _hullFrontHalf.SetActive(false);
+        _hullList[0].SetActive(true);
+        _hullList[2].SetActive(false);
+        _hullList[1].SetActive(false);
     }
 
     public void SetPreset2()
     {
-        _core.SetActive(true);
-        _coreBackHalf.SetActive(false);
-        _coreFrontHalf.SetActive(false);
+        _coreList[0].SetActive(true);
+        _coreList[2].SetActive(false);
+        _coreList[1].SetActive(false);
 
-        _hull.SetActive(false);
-        _hullBackHalf.SetActive(true);
-        _hullFrontHalf.SetActive(true);
+        _hullList[0].SetActive(false);
+        _hullList[2].SetActive(true);
+        _hullList[1].SetActive(true);
     }
     public void SetPreset3()
     {
-        _core.SetActive(false);
-        _coreBackHalf.SetActive(true);
-        _coreFrontHalf.SetActive(true);
+        _coreList[0].SetActive(false);
+        _coreList[2].SetActive(true);
+        _coreList[1].SetActive(true);
 
-        _hull.SetActive(false);
-        _hullBackHalf.SetActive(true);
-        _hullFrontHalf.SetActive(true);
+        _hullList[0].SetActive(false);
+        _hullList[2].SetActive(true);
+        _hullList[1].SetActive(true);
     }
 
     public void SetCutoutFromState(CutoutState state)

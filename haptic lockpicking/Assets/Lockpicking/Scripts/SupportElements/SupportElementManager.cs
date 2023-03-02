@@ -9,7 +9,7 @@ public class SupportElementManager : MonoBehaviour
     CutoutManager _cutoutManager;
 
     [SerializeField]
-    GameObject _pickIndicatorCanvas;
+    PickManager _pickManager;
 
     [SerializeField]
     GameObject _forceIndicatorCanvas;
@@ -19,7 +19,7 @@ public class SupportElementManager : MonoBehaviour
 
     public void Awake()
     {
-        _pickIndicatorCanvas.SetActive(true);
+        _pickManager.GetPickIndicatorCanvas().SetActive(true);
         _forceIndicatorCanvas.SetActive(false);
         _pinColorManager.SetActive(true);
     }
@@ -36,7 +36,7 @@ public class SupportElementManager : MonoBehaviour
 
     public void TogglePickIndicator(bool active)
     {
-        _pickIndicatorCanvas.SetActive(active);
+        _pickManager.GetPickIndicatorCanvas().SetActive(active);
     }
 
     public void SetCutout(int cutoutInt)
