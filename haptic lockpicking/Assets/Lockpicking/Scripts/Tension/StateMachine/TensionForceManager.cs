@@ -11,6 +11,9 @@ public class TensionForceManager : StateMachine
 
     [Header("Dependencies")]
     [SerializeField]
+    LockController _lock;
+
+    [SerializeField]
     private SG_HapticGlove _tensionGlove;
 
     [SerializeField]
@@ -55,9 +58,6 @@ public class TensionForceManager : StateMachine
 
     [Header("TensionWrench Visual")]
     [SerializeField]
-    private TensionToolManager _tensionToolManager;
-
-    [SerializeField]
     private Transform _touchPoint;
 
 
@@ -97,12 +97,12 @@ public class TensionForceManager : StateMachine
 
     public void CalculateTensionWrenchVisual()
     {
-        if (CoreController.LockFinished)
+        if (_lock.GetCoreController().GetLockFinished())
         {
             return;
         }
 
-        Vector2 originPoint2D = new Vector2(_tensionToolManager.GetTensionTool().position.x, _tensionToolManager.GetTensionTool().position.y);
+        Vector2 originPoint2D = new Vector2(_lock.GetCoreController().GetTensionTool().position.x, _lock.GetCoreController().GetTensionTool().position.y);
         Vector2 touchPoint2D = new Vector2(_touchPoint.position.x, _touchPoint.position.y);
         Vector2 fingerPoint2D = new Vector2(_fingerPosition.x, _fingerPosition.y);
 
@@ -113,7 +113,7 @@ public class TensionForceManager : StateMachine
         if (angle < 0) angle = 0;
 
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        _tensionToolManager.GetTensionTool().rotation = rotation;
+        _lock.GetCoreController().GetTensionTool().rotation = rotation;
     }
 
 
@@ -235,9 +235,14 @@ public class TensionForceManager : StateMachine
         return Mathf.Clamp01(MathLib.Remap(GetFingerPositionX(), bounds[0], bounds[1], 0, 1));
     }
 
-    public void SetTensionWrenchActive(bool active)
+    public Transform GetTensionTool()
     {
-        _tensionToolManager.GetTensionTool().gameObject.SetActive(active);
+        return _lock.GetCoreController().GetTensionTool();
+    }
+
+    public void SetTensionToolActive(bool active)
+    {
+        _lock.GetCoreController().GetTensionTool().gameObject.SetActive(active);
     }
 
 }

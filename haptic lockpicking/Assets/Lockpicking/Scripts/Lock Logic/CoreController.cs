@@ -7,16 +7,10 @@ using static TensionForceManager;
 public class CoreController : MonoBehaviour
 {
     [SerializeField]
-    PinManager _pinManager;
-
-    [SerializeField]
-    TensionForceManager _tensionForceManager;
+    LockController _lock;
 
     [SerializeField]
     private float _rotateSpeed = 1f;
-
-    [SerializeField]
-    GameObject _handVisual;
 
     [SerializeField]
     GameObject _pick;
@@ -27,15 +21,14 @@ public class CoreController : MonoBehaviour
     [SerializeField]
     bool _turnsOnlyWithForce = true;
 
-    public static bool LockFinished = false;
+    public bool _lockFinished = false;
 
     public void Update()
     {
-        if (AllPinsInOpenPosition() && !LockFinished)
+        if (AllPinsInOpenPosition() && !_lockFinished)
         {
-            LockFinished = true;
+            _lockFinished = true;
 
-            _handVisual.SetActive(false);
             _pick.SetActive(false);
 
             StartCoroutine(Finish());
@@ -44,7 +37,7 @@ public class CoreController : MonoBehaviour
 
     public bool AllPinsInOpenPosition()
     {
-        foreach(PinController pinController in _pinManager.GetPinControllers())
+        foreach(PinController pinController in _lock.GetPinManager().GetPinControllers())
         {
             if (!pinController.GetPinIsInOpenPosition())
             {
@@ -57,7 +50,7 @@ public class CoreController : MonoBehaviour
 
     private IEnumerator Finish()
     {
-        foreach (PinController pins in _pinManager.GetPinControllers())
+        foreach (PinController pins in _lock.GetPinManager().GetPinControllers())
         {
             pins.GetKeyPin().transform.parent = transform;
             pins.GetKeyPin().GetRigidbody().isKinematic = true;
@@ -73,7 +66,7 @@ public class CoreController : MonoBehaviour
                 continue;
             }
 
-            float speed = _turnsOnlyWithForce ? _tensionForceManager.GetFingerPosition01() * _rotateSpeed : _rotateSpeed/3;
+            float speed = _turnsOnlyWithForce ? _lock.GetTensionForceManager().GetFingerPosition01() * _rotateSpeed : _rotateSpeed/3;
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, 90)), speed);
 
@@ -89,11 +82,16 @@ public class CoreController : MonoBehaviour
 
     public void ResetLock()
     {
-        _pinManager.RandomizePins();
+        _lock.GetPinManager().RandomizePins();
     }
 
     public Transform GetTensionTool()
     {
         return _tensionTool;
+    }
+
+    public bool GetLockFinished()
+    {
+        return _lockFinished;
     }
 }

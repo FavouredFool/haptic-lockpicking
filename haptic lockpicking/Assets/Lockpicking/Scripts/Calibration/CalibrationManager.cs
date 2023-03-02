@@ -16,7 +16,7 @@ public class CalibrationManager : MonoBehaviour
     void Awake()
     {
         _pickManager.GetPickController().gameObject.SetActive(false);
-        _tensionForceManager.SetTensionWrenchActive(false);
+        _tensionForceManager.SetTensionToolActive(false);
         
 
 
@@ -39,7 +39,7 @@ public class CalibrationManager : MonoBehaviour
             if (!_isInitialized)
             {
                 _pickManager.GetPickController().gameObject.SetActive(true);
-                _tensionForceManager.SetTensionWrenchActive(true);
+                _tensionForceManager.SetTensionToolActive(true);
                 _tensionForceManager.SetState(new LooseState(_tensionForceManager));
             }
 

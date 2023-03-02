@@ -767,13 +767,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f02931e9ee1ac478cd74a0472fd699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lock: {fileID: 3252769561771166651}
   _keyPin: {fileID: 6160485232732190705}
   _driverPin: {fileID: 6160485230976062966}
   _driverPinBlockade: {fileID: 6160485231925981833}
   _screw: {fileID: 5977624503126297671}
-  _tensionForceManager: {fileID: 0}
-  _maxVelocityForSet: 0.1
-  _setThreshold: 0.02
 --- !u!1 &6160485231061325698
 GameObject:
   m_ObjectHideFlags: 0
@@ -1312,13 +1310,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f02931e9ee1ac478cd74a0472fd699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lock: {fileID: 3252769561771166651}
   _keyPin: {fileID: 6160485232321251399}
   _driverPin: {fileID: 6160485230861981458}
   _driverPinBlockade: {fileID: 6160485232581750825}
   _screw: {fileID: 5977624502976886933}
-  _tensionForceManager: {fileID: 0}
-  _maxVelocityForSet: 0.1
-  _setThreshold: 0.02
 --- !u!1 &6160485231178007156
 GameObject:
   m_ObjectHideFlags: 0
@@ -2370,10 +2366,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63bb29136f48a7544923f80fbc229377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _driver: {fileID: 0}
+  _lock: {fileID: 3252769561771166651}
   _meshRenderer: {fileID: 4861187880178637852}
   _meshCollider: {fileID: 6160485231061325700}
-  _camera: {fileID: 0}
+  _pickIndicatorCanvas: {fileID: 6160485232549299467}
   _borderLayer:
     serializedVersion: 2
     m_Bits: 2048
@@ -2908,13 +2904,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f02931e9ee1ac478cd74a0472fd699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lock: {fileID: 3252769561771166651}
   _keyPin: {fileID: 6160485232210711430}
   _driverPin: {fileID: 6160485230913622542}
   _driverPinBlockade: {fileID: 6160485232679174541}
   _screw: {fileID: 5977624504210423577}
-  _tensionForceManager: {fileID: 0}
-  _maxVelocityForSet: 0.1
-  _setThreshold: 0.02
 --- !u!1 &6160485231722905595
 GameObject:
   m_ObjectHideFlags: 0
@@ -4071,13 +4065,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f02931e9ee1ac478cd74a0472fd699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lock: {fileID: 3252769561771166651}
   _keyPin: {fileID: 6160485232332520829}
   _driverPin: {fileID: 6160485232449204524}
   _driverPinBlockade: {fileID: 6160485231451888266}
   _screw: {fileID: 5977624504095113474}
-  _tensionForceManager: {fileID: 0}
-  _maxVelocityForSet: 0.1
-  _setThreshold: 0.02
 --- !u!1 &6160485232073357382
 GameObject:
   m_ObjectHideFlags: 0
@@ -4171,13 +4163,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f02931e9ee1ac478cd74a0472fd699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lock: {fileID: 3252769561771166651}
   _keyPin: {fileID: 6160485231972058889}
   _driverPin: {fileID: 6160485231477623131}
   _driverPinBlockade: {fileID: 6160485231561184797}
   _screw: {fileID: 5977624502996314022}
-  _tensionForceManager: {fileID: 0}
-  _maxVelocityForSet: 0.1
-  _setThreshold: 0.02
 --- !u!1 &6160485232210711428
 GameObject:
   m_ObjectHideFlags: 0
@@ -4295,12 +4285,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5103eb639b4872f46b87fbb91195bad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pinManager: {fileID: 0}
-  _tensionForceManager: {fileID: 0}
+  _lock: {fileID: 3252769561771166651}
   _rotateSpeed: 2
-  _handVisual: {fileID: 0}
   _pick: {fileID: 6160485231507365677}
+  _tensionTool: {fileID: 5977624503150204529}
   _turnsOnlyWithForce: 1
+  _lockFinished: 0
 --- !u!1 &6160485232253762296
 GameObject:
   m_ObjectHideFlags: 0

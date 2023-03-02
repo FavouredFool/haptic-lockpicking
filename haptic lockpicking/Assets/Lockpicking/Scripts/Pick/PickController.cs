@@ -5,7 +5,7 @@ using UnityEngine;
 public class PickController : MonoBehaviour
 {
     [SerializeField]
-    private Transform _driver;
+    LockController _lock;
 
     [SerializeField]
     private MeshRenderer _meshRenderer;
@@ -14,7 +14,7 @@ public class PickController : MonoBehaviour
     private MeshCollider _meshCollider;
 
     [SerializeField]
-    private Camera _camera;
+    private GameObject _pickIndicatorCanvas;
 
     [SerializeField]
     private LayerMask _borderLayer;
@@ -71,7 +71,7 @@ public class PickController : MonoBehaviour
 
         _startRotation = transform.rotation;
 
-        _viewRotation = _camera.transform.rotation * Quaternion.Euler(new Vector3(180, 0, 180));
+        _viewRotation = _lock.GetCamera().transform.rotation * Quaternion.Euler(new Vector3(180, 0, 180));
 
         _rigidBody = GetComponent<Rigidbody>();
 
@@ -106,21 +106,21 @@ public class PickController : MonoBehaviour
 
     public void Recalibrate()
     {
-        _positionOffset = ((_viewRotation * _driver.position) * _distanceMultiplicator) - _startPosition;
+        _positionOffset = ((_viewRotation * _lock.GetPickManager().GetPickDriver().position) * _distanceMultiplicator) - _startPosition;
 
-        _rotationOffset = Quaternion.Inverse(_driver.transform.rotation) * _startRotation;
+        _rotationOffset = Quaternion.Inverse(_lock.GetPickManager().GetPickDriver().transform.rotation) * _startRotation;
     }
 
     public Quaternion CalculateRotation()
     {
-        Quaternion absoluteRotation = _driver.rotation * _rotationOffset;
+        Quaternion absoluteRotation = _lock.GetPickManager().GetPickDriver().rotation * _rotationOffset;
         Swing_Twist_Decomposition(absoluteRotation, Vector3.right, out Quaternion swing, out Quaternion twist);
         return Quaternion.RotateTowards(_startRotation, twist, _rotationAngleThreshold);
     }
 
     public Vector3 CalculatePosition()
     {
-        Vector3 absolutePosition = ((_viewRotation * _driver.position) * _distanceMultiplicator) - _positionOffset;
+        Vector3 absolutePosition = ((_viewRotation * _lock.GetPickManager().GetPickDriver().position) * _distanceMultiplicator) - _positionOffset;
 
 
         float positionUp = Vector3.Dot(Vector3.up, absolutePosition);
@@ -188,6 +188,11 @@ public class PickController : MonoBehaviour
         {
             _collideAmount -= 1;
         }
+    }
+
+    public GameObject GetPickIndicatorCanvas()
+    {
+        return _pickIndicatorCanvas;
     }
 
 

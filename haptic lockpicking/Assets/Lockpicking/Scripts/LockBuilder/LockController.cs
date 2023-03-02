@@ -20,6 +20,10 @@ public class LockController : MonoBehaviour
     [SerializeField]
     List<GameObject> _hullParts;
 
+    PinManager _pinManager;
+    TensionForceManager _tensionForceManager;
+    PickManager _pickManager;
+    Camera _camera;
 
     public List<PinController> GetPinControllers()
     {
@@ -45,4 +49,25 @@ public class LockController : MonoBehaviour
     {
         return _hullParts;
     }
+
+    public PinManager GetPinManager()
+    {
+        return _pinManager;
+    }
+
+    public TensionForceManager GetTensionForceManager()
+    {
+        return _tensionForceManager;
+    }
+
+    public PickManager GetPickManager()
+    {
+        return _pickManager;
+    }
+
+    public Camera GetCamera()
+    {
+        return _camera;
+    }
+
 }

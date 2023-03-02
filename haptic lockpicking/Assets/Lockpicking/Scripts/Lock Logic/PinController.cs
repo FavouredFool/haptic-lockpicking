@@ -6,6 +6,9 @@ public class PinController : MonoBehaviour
     public enum PinState { SPRINGY, BINDING, SET }
 
     [SerializeField]
+    LockController _lock;
+
+    [SerializeField]
     private KeyPin _keyPin;
 
     [SerializeField]
@@ -17,14 +20,7 @@ public class PinController : MonoBehaviour
     [SerializeField]
     private Transform _screw;
 
-    [SerializeField]
-    private TensionForceManager _tensionForceManager;
 
-    [SerializeField, Range(0, 1)]
-    private float _maxVelocityForSet = 0.25f;
-
-    [SerializeField, Range(0, 1)]
-    private float _setThreshold = 0.25f;
 
     public static float CONSTANT_DRIVER_OFFSET = 0.53f;
 
@@ -108,11 +104,11 @@ public class PinController : MonoBehaviour
 
         _pinState = (tensionIsNotLoose && GetPinIsOnSheer() && GetPinIsSlow() && _nonSetPinState == PinState.BINDING) ? PinState.SET : _nonSetPinState;
 
-        DriverPinBlockadeActive(_pinState == PinState.SET || CoreController.LockFinished);
+        DriverPinBlockadeActive(_pinState == PinState.SET || _lock.GetCoreController().GetLockFinished());
 
         if (_pinState == PinState.SET && _pinState != previousState)
         {
-            _tensionForceManager.PinHasBeenSet();
+            _lock.GetTensionForceManager().PinHasBeenSet();
         }
 
         
@@ -120,7 +116,7 @@ public class PinController : MonoBehaviour
 
     public bool GetPinIsSlow()
     {
-        return Mathf.Abs(_driverPin.GetVelocity()) <= _maxVelocityForSet;
+        return Mathf.Abs(_driverPin.GetVelocity()) <= _lock.GetPinManager().GetMaxVelocityForSet();
     }
 
     public bool GetPinIsOnSheer()
@@ -155,7 +151,7 @@ public class PinController : MonoBehaviour
 
     public float GetSetThreshold()
     {
-        return _setThreshold;
+        return _lock.GetPinManager().GetSetThreshold();
     }
 
     public void SetNonSetState(PinState nonSetState)
