@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class GestureMenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    public enum UseCase { START, TUTORIAL, EXIT };
+    public enum UseCase { START, TUTORIAL, EXIT, RESET };
 
 
     [SerializeField]
@@ -62,6 +62,9 @@ public class GestureMenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
                 break;
             case UseCase.EXIT:
                 _menuManager.ExitPressed();
+                break;
+            case UseCase.RESET:
+                _menuManager.ResetPressed();
                 break;
         }
 

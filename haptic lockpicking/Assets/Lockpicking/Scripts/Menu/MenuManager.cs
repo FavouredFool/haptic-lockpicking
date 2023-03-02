@@ -5,6 +5,9 @@ using UnityEngine;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField]
+    CoreController _coreController;
+
+    [SerializeField]
     GameObject _menuCanvas;
 
     [SerializeField]
@@ -47,6 +50,11 @@ public class MenuManager : MonoBehaviour
 
         _leftHandModel.SetActive(false);
         _rightHandModel.SetActive(false);
+    }
+
+    public void ResetPressed()
+    {
+        _coreController.ResetLock();
     }
 
     public void ExitPressed()

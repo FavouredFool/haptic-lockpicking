@@ -14,8 +14,7 @@ public class PinManager : MonoBehaviour
 
     public void Start()
     {
-        _pinOrder = _pinOrder.OrderBy(a => random.Next()).ToList();
-        Debug.Log("Order: " + _pinOrder[0] + ", " + _pinOrder[1] + ", " + _pinOrder[2] + ", " + _pinOrder[3] + ", " + _pinOrder[4]);
+        RandomizePins();
     }
 
     public void Update()
@@ -68,6 +67,12 @@ public class PinManager : MonoBehaviour
         }
 
         return 5;
+    }
+
+    public void RandomizePins()
+    {
+        _pinOrder = _pinOrder.OrderBy(a => random.Next()).ToList();
+        Debug.Log("Order: " + _pinOrder[0] + ", " + _pinOrder[1] + ", " + _pinOrder[2] + ", " + _pinOrder[3] + ", " + _pinOrder[4]);
     }
 
 }

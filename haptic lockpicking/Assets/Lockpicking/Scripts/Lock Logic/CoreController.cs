@@ -84,4 +84,9 @@ public class CoreController : MonoBehaviour
        
     }
 
+    public void ResetLock()
+    {
+        _pinManager.RandomizePins();
+    }
+
 }
