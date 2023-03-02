@@ -81,6 +81,7 @@ public class GestureMenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
         if (_leftGesture.GestureStopped)
         {
             _leftGestureActive = false;
+            _rightGestureActive = false;
         }
 
         if (_rightGesture.GestureMade)
@@ -90,6 +91,7 @@ public class GestureMenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
         if (_rightGesture.GestureStopped)
         {
             _rightGestureActive = false;
+            _leftGestureActive = false;
         }
 
         if (_leftGestureActive && _rightGestureActive && !_gesturesHolding)
