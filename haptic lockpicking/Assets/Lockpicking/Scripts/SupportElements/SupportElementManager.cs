@@ -43,7 +43,7 @@ public class SupportElementManager : MonoBehaviour
 
     public void TogglePickIndicator(bool active)
     {
-        //_pickManager.GetPickIndicatorCanvas().SetActive(active);
+        PickManager.Instance.GetPickIndicatorCanvas().SetActive(active);
     }
 
     public void SetCutout(int cutoutInt)

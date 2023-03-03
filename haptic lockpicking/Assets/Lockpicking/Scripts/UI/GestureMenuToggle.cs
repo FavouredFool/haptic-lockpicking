@@ -49,12 +49,15 @@ public class GestureMenuToggle : MonoBehaviour, IPointerDownHandler, IPointerUpH
         {
             _backgroundSlider.value = 0;
         }
-
-        ToggleActivated();
     }
 
     public void Update()
     {
+        if (LockManager.Lock == null)
+        {
+            return;
+        }
+
         UpdateGestures();
 
         float upperBound = _toggleActive ? 0 : 1;
