@@ -6,6 +6,12 @@ public class CalibrationManager : MonoBehaviour
 {
     public static CalibrationManager Instance { get; private set; }
 
+    [SerializeField]
+    GameObject _leftHandModel;
+
+    [SerializeField]
+    GameObject _rightHandModel;
+
     bool _isCalibrated = false;
 
 
@@ -31,15 +37,20 @@ public class CalibrationManager : MonoBehaviour
         // 4. If the position is held until the loading screen finishes, the last position is seen as your new default calibration.
     }
 
+    private void Start()
+    {
+        _leftHandModel.SetActive(false);
+        _rightHandModel.SetActive(false);
+    }
+
     void Update()
     {
         if (LockManager.Lock == null)
         {
+            _leftHandModel.SetActive(false);
+            _rightHandModel.SetActive(false);
             return;
         }
-
-        UpdateVisual();
-
 
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -49,13 +60,29 @@ public class CalibrationManager : MonoBehaviour
 
             _isCalibrated = true;
         }
+
+        UpdateToolsVisual();
         
     }
 
-    public void UpdateVisual()
+
+    public void UpdateToolsVisual()
     {
-        TensionForceManager.Instance.GetTensionTool().gameObject.SetActive(_isCalibrated);
-        PickManager.Instance.GetPickController().gameObject.SetActive(_isCalibrated);
+        if (LockManager.Lock.GetCoreController().GetLockFinished())
+        {
+            TensionForceManager.Instance.GetTensionTool().gameObject.SetActive(_isCalibrated);
+            PickManager.Instance.GetPickController().gameObject.SetActive(false);
+            _leftHandModel.SetActive(false);
+            _rightHandModel.SetActive(false);
+
+        }
+        else
+        {
+            TensionForceManager.Instance.GetTensionTool().gameObject.SetActive(_isCalibrated);
+            PickManager.Instance.GetPickController().gameObject.SetActive(_isCalibrated);
+            _leftHandModel.SetActive(_isCalibrated);
+            _rightHandModel.SetActive(_isCalibrated);
+        }
     }
 
     public bool GetIsCalibrated()
@@ -66,6 +93,6 @@ public class CalibrationManager : MonoBehaviour
     public void SetIsCalibrated(bool isCalibrated)
     {
         _isCalibrated = isCalibrated;
-        UpdateVisual();
+        UpdateToolsVisual();
     }
 }

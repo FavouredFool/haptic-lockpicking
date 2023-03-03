@@ -21,6 +21,11 @@ public class LockState : State
 
     public override void UpdateState()
     {
+        if (LockManager.Lock.GetCoreController().GetLockFinished())
+        {
+            _tensionManager.SetState(new FinishedState(_tensionManager));
+        }
+
         if (_startTime < Time.time)
         {
             if (Time.time - _startTime > _tensionManager.GetLockedResetTime())

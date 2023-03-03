@@ -9967,7 +9967,7 @@ GameObject:
   - component: {fileID: 804122657}
   - component: {fileID: 804122658}
   m_Layer: 0
-  m_Name: CalibrationManager
+  m_Name: CalibrationAndVisibilityManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10000,6 +10000,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f7324556138f0499c725bdc44c460a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _leftHandModel: {fileID: 563567959}
+  _rightHandModel: {fileID: 930174226}
 --- !u!1 &811221880
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,7 +18,12 @@ public class MovableState : State
 
     public override void UpdateState()
     {
-        
+
+        if (LockManager.Lock.GetCoreController().GetLockFinished())
+        {
+            _tensionManager.SetState(new FinishedState(_tensionManager));
+        }
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             _skipFrameRemainingAmount = _tensionManager.GetAmountOfSkippedFrames();

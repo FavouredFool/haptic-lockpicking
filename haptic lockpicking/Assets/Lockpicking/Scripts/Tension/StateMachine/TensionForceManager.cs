@@ -9,7 +9,7 @@ public class TensionForceManager : StateMachine
 {
     public static TensionForceManager Instance { get; private set; }
 
-    public enum TensionState { LOOSE, MOVABLE, LOCKED };
+    public enum TensionState { LOOSE, MOVABLE, LOCKED, FINISHED };
 
     [Header("Dependencies")]
     [SerializeField]

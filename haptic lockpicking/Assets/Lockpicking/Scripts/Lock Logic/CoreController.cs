@@ -19,12 +19,9 @@ public class CoreController : MonoBehaviour
     Transform _tensionTool;
 
     [SerializeField]
-    bool _turnsOnlyWithForce = true;
-
-    [SerializeField]
     Transform _touchPoint;
 
-    public bool _lockFinished = false;
+    bool _lockFinished = false;
 
     public void Update()
     {
@@ -69,14 +66,7 @@ public class CoreController : MonoBehaviour
         {
             yield return null;
 
-            if (StaticTensionState == TensionState.LOOSE && _turnsOnlyWithForce)
-            {
-                continue;
-            }
-
-            float speed = _turnsOnlyWithForce ? TensionForceManager.Instance.GetFingerPosition01() * _rotateSpeed : _rotateSpeed/3;
-
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, 90)), speed);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, 90)), _rotateSpeed);
 
             if (transform.rotation == Quaternion.Euler(new Vector3(0, 0, 90)))
             {
