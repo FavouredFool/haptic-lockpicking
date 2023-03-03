@@ -13,9 +13,6 @@ public class TensionForceManager : StateMachine
 
     [Header("Dependencies")]
     [SerializeField]
-    LockController _lock;
-
-    [SerializeField]
     private SG_HapticGlove _tensionGlove;
 
     [SerializeField]
@@ -67,6 +64,18 @@ public class TensionForceManager : StateMachine
 
     private SG_HandPose _latestPose;
 
+    public void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            throw new System.Exception();
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     private void Start()
     {
         _noForce = new(Finger.Index, 0);
@@ -75,7 +84,7 @@ public class TensionForceManager : StateMachine
 
     private void Update()
     {
-        if (_lock == null)
+        if (LockManager.Lock == null)
         {
             return;
         }
@@ -98,12 +107,12 @@ public class TensionForceManager : StateMachine
 
     public void CalculateTensionWrenchVisual()
     {
-        if (_lock.GetCoreController().GetLockFinished())
+        if (LockManager.Lock.GetCoreController().GetLockFinished())
         {
             return;
         }
 
-        Vector2 originPoint2D = new Vector2(_lock.GetCoreController().GetTensionTool().position.x, _lock.GetCoreController().GetTensionTool().position.y);
+        Vector2 originPoint2D = new Vector2(LockManager.Lock.GetCoreController().GetTensionTool().position.x, LockManager.Lock.GetCoreController().GetTensionTool().position.y);
         Vector2 touchPoint2D = new Vector2(_touchPoint.position.x, _touchPoint.position.y);
         Vector2 fingerPoint2D = new Vector2(_fingerPosition.x, _fingerPosition.y);
 
@@ -114,7 +123,7 @@ public class TensionForceManager : StateMachine
         if (angle < 0) angle = 0;
 
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        _lock.GetCoreController().GetTensionTool().rotation = rotation;
+        LockManager.Lock.GetCoreController().GetTensionTool().rotation = rotation;
     }
 
 
@@ -238,12 +247,12 @@ public class TensionForceManager : StateMachine
 
     public Transform GetTensionTool()
     {
-        return _lock.GetCoreController().GetTensionTool();
+        return LockManager.Lock.GetCoreController().GetTensionTool();
     }
 
     public void SetTensionToolActive(bool active)
     {
-        _lock.GetCoreController().GetTensionTool().gameObject.SetActive(active);
+        LockManager.Lock.GetCoreController().GetTensionTool().gameObject.SetActive(active);
     }
 
 }

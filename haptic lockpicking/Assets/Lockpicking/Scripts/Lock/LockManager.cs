@@ -1,11 +1,13 @@
 using UnityEngine;
 
-public class CameraManager : MonoBehaviour
+public class LockManager : MonoBehaviour
 {
-    public static CameraManager Instance { get; private set; }
+    public static LockManager Instance { get; private set; }
+
+    public static LockController Lock { get; private set; }
 
     [SerializeField]
-    Camera _camera;
+    LockBuilder _lockBuilder;
 
     public void Awake()
     {
@@ -19,8 +21,8 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    public Camera GetCamera()
+    public void CreateNewLock()
     {
-        return _camera;
+        Lock = _lockBuilder.BuildLock();
     }
 }

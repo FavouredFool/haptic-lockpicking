@@ -22,6 +22,18 @@ public class PinColorManager : MonoBehaviour
     [SerializeField]
     Color _keyLockedColor;
 
+    public void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            throw new System.Exception();
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     void OnDisable()
     {
         foreach (PinController pinController in PinManager.Instance.GetPinControllers())

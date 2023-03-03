@@ -26,6 +26,18 @@ public class TensionVibrationManager : MonoBehaviour
 
     float _setStopStart = float.NegativeInfinity;
 
+    public void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            throw new System.Exception();
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
 
     private void Start()
     {

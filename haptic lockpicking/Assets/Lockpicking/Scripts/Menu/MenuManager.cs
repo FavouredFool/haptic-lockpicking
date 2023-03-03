@@ -21,6 +21,18 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     GameObject _rightHandModel;
 
+    public void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            throw new System.Exception();
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     public void Start()
     {
         _menuCanvas.SetActive(true);

@@ -5,29 +5,38 @@ public class PickManager : MonoBehaviour
     public static PickManager Instance { get; private set; }
 
     [SerializeField]
-    LockController _lock;
-
-    [SerializeField]
     Transform _pickDriver;
+
+    public void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            throw new System.Exception();
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     public PickController GetPickController()
     {
-        if (_lock == null)
+        if (LockManager.Lock == null)
         {
             return null;
         }
 
-        return _lock.GetPickController();
+        return LockManager.Lock.GetPickController();
     }
 
     public GameObject GetPickIndicatorCanvas()
     {
-        if (_lock == null)
+        if (LockManager.Lock == null)
         {
             return null;
         }
 
-        return _lock.GetPickController().GetPickIndicatorCanvas();
+        return LockManager.Lock.GetPickController().GetPickIndicatorCanvas();
     }
 
     public Transform GetPickDriver()

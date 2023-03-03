@@ -8,10 +8,6 @@ public class PinManager : MonoBehaviour
 {
     public static PinManager Instance { get; private set; }
 
-
-    [SerializeField]
-    LockController _lock;
-
     [SerializeField, Range(0, 1)]
     private float _maxVelocityForSet = 0.25f;
 
@@ -21,6 +17,18 @@ public class PinManager : MonoBehaviour
     List<int> _pinOrder = new() { 0, 1, 2, 3, 4 };
     private static readonly System.Random random = new();
 
+    public void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            throw new System.Exception();
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     public void Start()
     {
         RandomizePins();
@@ -28,7 +36,7 @@ public class PinManager : MonoBehaviour
 
     public void Update()
     {
-        if (_lock == null)
+        if (LockManager.Lock == null)
         {
             return;
         }
@@ -42,7 +50,7 @@ public class PinManager : MonoBehaviour
 
         for (int i = 0; i < _pinOrder.Count; i++)
         {
-            PinController activePins = _lock.GetPinControllers()[_pinOrder[i]];
+            PinController activePins = LockManager.Lock.GetPinControllers()[_pinOrder[i]];
 
             if (allSet)
             {
@@ -64,19 +72,19 @@ public class PinManager : MonoBehaviour
 
     public List<PinController> GetPinControllers()
     {
-        if (_lock == null)
+        if (LockManager.Lock == null)
         {
             return new() { };
         }
 
-        return _lock.GetPinControllers();
+        return LockManager.Lock.GetPinControllers();
     }
 
     public int GetAmountOfSetPins()
     {
         for (int i = 0; i < _pinOrder.Count; i++)
         {
-            PinController activePins = _lock.GetPinControllers()[_pinOrder[i]];
+            PinController activePins = LockManager.Lock.GetPinControllers()[_pinOrder[i]];
 
             if (activePins.GetPinState() != PinState.SET)
             {

@@ -12,10 +12,24 @@ public class SupportElementManager : MonoBehaviour
 
     public void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            throw new System.Exception();
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
+    public void Start()
+    {
         //_pickManager.GetPickIndicatorCanvas().SetActive(true);
         _forceIndicatorCanvas.SetActive(false);
         PinColorManager.Instance.gameObject.SetActive(true);
     }
+
+
 
     public void TogglePinColor(bool active)
     {

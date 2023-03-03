@@ -7,12 +7,21 @@ public class CutoutManager : MonoBehaviour
 
     public enum CutoutState { NONE, PARTIAL, FULL };
 
-    [SerializeField]
-    LockController _lock;
-
     List<GameObject> _coreList;
 
     List<GameObject> _hullList;
+
+    public void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            throw new System.Exception();
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     public void SetPreset1()
     {
@@ -48,13 +57,13 @@ public class CutoutManager : MonoBehaviour
 
     public void SetCutoutFromState(CutoutState state)
     {
-        if (_lock == null)
+        if (LockManager.Lock == null)
         {
             return;
         }
 
-        _coreList = _lock.GetCoreParts();
-        _hullList = _lock.GetHullParts();
+        _coreList = LockManager.Lock.GetCoreParts();
+        _hullList = LockManager.Lock.GetHullParts();
 
         switch (state)
         {
