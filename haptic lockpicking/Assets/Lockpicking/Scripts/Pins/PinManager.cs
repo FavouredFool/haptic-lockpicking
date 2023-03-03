@@ -29,11 +29,6 @@ public class PinManager : MonoBehaviour
         }
     }
 
-    public void Start()
-    {
-        RandomizePins();
-    }
-
     public void Update()
     {
         if (LockManager.Lock == null)
@@ -96,12 +91,6 @@ public class PinManager : MonoBehaviour
         return 5;
     }
 
-    public void RandomizePins()
-    {
-        _pinOrder = _pinOrder.OrderBy(a => random.Next()).ToList();
-        Debug.Log("Order: " + _pinOrder[0] + ", " + _pinOrder[1] + ", " + _pinOrder[2] + ", " + _pinOrder[3] + ", " + _pinOrder[4]);
-    }
-
     public float GetMaxVelocityForSet()
     {
         return _maxVelocityForSet;
@@ -111,5 +100,17 @@ public class PinManager : MonoBehaviour
     public float GetSetThreshold()
     {
         return _setThreshold;
+    }
+
+    public void SetPinOrder(List<int> pinOrder)
+    {
+        _pinOrder = pinOrder;
+    }
+
+    public List<int> GetRandomPinOrder(int size)
+    {
+        List<int> list = new() { 0, 1, 2, 3, 4 };
+
+        return list.Take(size).OrderBy(a => random.Next()).ToList();
     }
 }

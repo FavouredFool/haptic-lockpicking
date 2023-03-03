@@ -22,15 +22,6 @@ public class SupportElementManager : MonoBehaviour
         }
     }
 
-    public void Start()
-    {
-        //_pickManager.GetPickIndicatorCanvas().SetActive(true);
-        _forceIndicatorCanvas.SetActive(false);
-        PinColorManager.Instance.gameObject.SetActive(true);
-    }
-
-
-
     public void TogglePinColor(bool active)
     {
         PinColorManager.Instance.gameObject.SetActive(active);

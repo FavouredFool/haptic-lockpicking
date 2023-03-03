@@ -78,11 +78,6 @@ public class CoreController : MonoBehaviour
        
     }
 
-    public void ResetLock()
-    {
-        PinManager.Instance.RandomizePins();
-    }
-
     public Transform GetTensionTool()
     {
         return _tensionTool;
