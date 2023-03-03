@@ -36,6 +36,10 @@ public class LockManager : MonoBehaviour
             Destroy(Lock.gameObject);
         }
 
+        
+
         Lock = _lockBuilder.BuildLock();
+
+        CalibrationManager.Instance.SetIsCalibrated(false);
     }
 }

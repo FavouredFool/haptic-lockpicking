@@ -6,7 +6,7 @@ public class CalibrationManager : MonoBehaviour
 {
     public static CalibrationManager Instance { get; private set; }
 
-    bool _isInitialized = false;
+    bool _isCalibrated = false;
 
 
     public void Awake()
@@ -37,13 +37,35 @@ public class CalibrationManager : MonoBehaviour
         {
             return;
         }
-        
+
+        UpdateVisual();
+
+
         if (Input.GetKeyDown(KeyCode.R))
         {
 
             TensionForceManager.Instance.SetState(new LooseState(TensionForceManager.Instance));
             PickManager.Instance.GetPickController().Recalibrate();
+
+            _isCalibrated = true;
         }
         
+    }
+
+    public void UpdateVisual()
+    {
+        TensionForceManager.Instance.GetTensionTool().gameObject.SetActive(_isCalibrated);
+        PickManager.Instance.GetPickController().gameObject.SetActive(_isCalibrated);
+    }
+
+    public bool GetIsCalibrated()
+    {
+        return _isCalibrated;
+    }
+
+    public void SetIsCalibrated(bool isCalibrated)
+    {
+        _isCalibrated = isCalibrated;
+        UpdateVisual();
     }
 }

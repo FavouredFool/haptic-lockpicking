@@ -375,7 +375,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1184
+  m_VersionIndex: 1187
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -815,7 +815,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1184
+  m_VersionIndex: 1187
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1679,7 +1679,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 690
+  m_VersionIndex: 693
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2512,7 +2512,7 @@ MonoBehaviour:
   _physicsRotateSpeed: 45
   _deltaMoveThreshold: 0.005
   _deltaRotateThreshold: 0.0000001
-  _distanceMultiplicator: 12
+  _distanceMultiplicator: 30
   _upBoundsThreshold: 0.35
   _downBoundsThreshold: 0.35
   _forwardBoundsThreshold: 0.5
@@ -3240,7 +3240,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1181
+  m_VersionIndex: 1184
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -6659,7 +6659,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1184
+  m_VersionIndex: 1187
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -7035,7 +7035,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1184
+  m_VersionIndex: 1187
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

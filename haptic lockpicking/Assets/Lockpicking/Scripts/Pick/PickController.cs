@@ -31,7 +31,7 @@ public class PickController : MonoBehaviour
     [SerializeField, Range(0, 1)]
     private float _deltaRotateThreshold = 0.25f;
 
-    [SerializeField, Range(1, 20)]
+    [SerializeField, Range(1, 100)]
     private float _distanceMultiplicator;
 
     [SerializeField, Range(0, 5)]
@@ -76,6 +76,15 @@ public class PickController : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody>();
 
         
+    }
+
+    public void OnEnable()
+    {
+        _pickPosition = CalculatePosition();
+        _pickRotation = CalculateRotation();
+
+        transform.position = _pickPosition;
+        transform.rotation = _pickRotation;
     }
 
     public void FixedUpdate()
