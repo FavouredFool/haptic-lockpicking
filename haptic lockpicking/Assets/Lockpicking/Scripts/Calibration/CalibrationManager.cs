@@ -4,22 +4,13 @@ using UnityEngine;
 
 public class CalibrationManager : MonoBehaviour
 {
-    [SerializeField]
-    PickManager _pickManager;
-
-    [SerializeField]
-    TensionForceManager _tensionForceManager;
+    public static CalibrationManager Instance { get; private set; }
 
     bool _isInitialized = false;
 
 
     void Awake()
     {
-        _pickManager.GetPickController().gameObject.SetActive(false);
-        _tensionForceManager.SetTensionToolActive(false);
-        
-
-
         // Stuff to test for in the calibration manager
         // - are the hands in a proper position and rotation relative to each other?
         // - Is a very specific pose for both hands being held for a period of time with supporting visual feedback? Or has a button been pressed?
@@ -34,17 +25,17 @@ public class CalibrationManager : MonoBehaviour
 
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.R))
         {
             if (!_isInitialized)
             {
-                _pickManager.GetPickController().gameObject.SetActive(true);
-                _tensionForceManager.SetTensionToolActive(true);
                 _tensionForceManager.SetState(new LooseState(_tensionForceManager));
             }
 
             _pickManager.GetPickController().Recalibrate();
             _isInitialized = true;
         }
+        */
     }
 }

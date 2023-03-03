@@ -7,6 +7,8 @@ using SG;
 
 public class TensionForceManager : StateMachine
 {
+    public static TensionForceManager Instance { get; private set; }
+
     public enum TensionState { LOOSE, MOVABLE, LOCKED };
 
     [Header("Dependencies")]
@@ -21,12 +23,6 @@ public class TensionForceManager : StateMachine
 
     [SerializeField]
     private Transform _indexFingerEndpointTransform;
-
-    [SerializeField]
-    private TensionVibrationManager _tensionVibrationManager;
-
-    [SerializeField]
-    PinManager _pinManager;
 
     [Header("TensionLine")]
     [SerializeField, Range(-1, 1)]
@@ -79,6 +75,11 @@ public class TensionForceManager : StateMachine
 
     private void Update()
     {
+        if (_lock == null)
+        {
+            return;
+        }
+
         if (!_tensionGlove.GetHandPose(out _latestPose))
         {
             Debug.Log("Could not retrieve from " + _tensionGlove.name);
@@ -155,7 +156,7 @@ public class TensionForceManager : StateMachine
 
     private float GetLineFurtherBoundAdjusted()
     {
-        float farBound = _linePositionAlongX - (_lineOffsetFurtherBase + _lineOffsetFurtherIncrease * _pinManager.GetAmountOfSetPins());
+        float farBound = _linePositionAlongX - (_lineOffsetFurtherBase + _lineOffsetFurtherIncrease * PinManager.Instance.GetAmountOfSetPins());
 
         if (StaticTensionState == TensionState.LOCKED)
         {
@@ -210,7 +211,7 @@ public class TensionForceManager : StateMachine
     public void PinHasBeenSet()
     {
         SkipTensionFramesAfterSet();
-        _tensionVibrationManager.SkipVibrationAfterSet();
+        TensionVibrationManager.Instance.SkipVibrationAfterSet();
     }
 
     public void SkipTensionFramesAfterSet()

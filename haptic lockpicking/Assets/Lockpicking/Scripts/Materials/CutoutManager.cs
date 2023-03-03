@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class CutoutManager : MonoBehaviour
 {
+    public static CutoutManager Instance { get; private set; }
+
     public enum CutoutState { NONE, PARTIAL, FULL };
 
     [SerializeField]
@@ -11,14 +13,6 @@ public class CutoutManager : MonoBehaviour
     List<GameObject> _coreList;
 
     List<GameObject> _hullList;
-
-    public void Start()
-    {
-        _coreList = _lock.GetCoreParts();
-        _hullList = _lock.GetHullParts();
-
-        SetCutoutFromState(CutoutState.FULL);
-    }
 
     public void SetPreset1()
     {
@@ -54,6 +48,14 @@ public class CutoutManager : MonoBehaviour
 
     public void SetCutoutFromState(CutoutState state)
     {
+        if (_lock == null)
+        {
+            return;
+        }
+
+        _coreList = _lock.GetCoreParts();
+        _hullList = _lock.GetHullParts();
+
         switch (state)
         {
             case CutoutState.NONE:

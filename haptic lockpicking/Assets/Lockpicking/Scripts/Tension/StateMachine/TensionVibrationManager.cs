@@ -8,8 +8,7 @@ using static TensionForceManager;
 
 public class TensionVibrationManager : MonoBehaviour
 {
-    [SerializeField]
-    TensionForceManager _tensionForceManager;
+    public static TensionVibrationManager Instance { get; private set; }
 
     [SerializeField, Range(0, 1)]
     float _setStopDuration;
@@ -30,7 +29,7 @@ public class TensionVibrationManager : MonoBehaviour
 
     private void Start()
     {
-        _tensionGlove = _tensionForceManager.GetTensionGlove();
+        _tensionGlove = TensionForceManager.Instance.GetTensionGlove();
     }
 
     private void Update()
@@ -60,8 +59,8 @@ public class TensionVibrationManager : MonoBehaviour
 
     private int CalculateMovableTension()
     {
-        float[] bounds = _tensionForceManager.GetLineBoundsAdjusted();
-        return (int) MathLib.Remap(_tensionForceManager.GetFingerPositionX(), bounds[0], bounds[1], _movableStartIntensity, _movableEndIntensitiy);
+        float[] bounds = TensionForceManager.Instance.GetLineBoundsAdjusted();
+        return (int) MathLib.Remap(TensionForceManager.Instance.GetFingerPositionX(), bounds[0], bounds[1], _movableStartIntensity, _movableEndIntensitiy);
     }
 
     public void SkipVibrationAfterSet()

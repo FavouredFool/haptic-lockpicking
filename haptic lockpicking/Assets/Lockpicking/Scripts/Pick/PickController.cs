@@ -71,7 +71,7 @@ public class PickController : MonoBehaviour
 
         _startRotation = transform.rotation;
 
-        _viewRotation = _lock.GetCamera().transform.rotation * Quaternion.Euler(new Vector3(180, 0, 180));
+        _viewRotation = CameraManager.Instance.GetCamera().transform.rotation * Quaternion.Euler(new Vector3(180, 0, 180));
 
         _rigidBody = GetComponent<Rigidbody>();
 
@@ -106,21 +106,21 @@ public class PickController : MonoBehaviour
 
     public void Recalibrate()
     {
-        _positionOffset = ((_viewRotation * _lock.GetPickManager().GetPickDriver().position) * _distanceMultiplicator) - _startPosition;
+        _positionOffset = ((_viewRotation * PickManager.Instance.GetPickDriver().position) * _distanceMultiplicator) - _startPosition;
 
-        _rotationOffset = Quaternion.Inverse(_lock.GetPickManager().GetPickDriver().transform.rotation) * _startRotation;
+        _rotationOffset = Quaternion.Inverse(PickManager.Instance.GetPickDriver().transform.rotation) * _startRotation;
     }
 
     public Quaternion CalculateRotation()
     {
-        Quaternion absoluteRotation = _lock.GetPickManager().GetPickDriver().rotation * _rotationOffset;
+        Quaternion absoluteRotation = PickManager.Instance.GetPickDriver().rotation * _rotationOffset;
         Swing_Twist_Decomposition(absoluteRotation, Vector3.right, out Quaternion swing, out Quaternion twist);
         return Quaternion.RotateTowards(_startRotation, twist, _rotationAngleThreshold);
     }
 
     public Vector3 CalculatePosition()
     {
-        Vector3 absolutePosition = ((_viewRotation * _lock.GetPickManager().GetPickDriver().position) * _distanceMultiplicator) - _positionOffset;
+        Vector3 absolutePosition = ((_viewRotation * PickManager.Instance.GetPickDriver().position) * _distanceMultiplicator) - _positionOffset;
 
 
         float positionUp = Vector3.Dot(Vector3.up, absolutePosition);

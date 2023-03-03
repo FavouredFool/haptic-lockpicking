@@ -5,28 +5,21 @@ using static CutoutManager;
 
 public class SupportElementManager : MonoBehaviour
 {
-    [SerializeField]
-    CutoutManager _cutoutManager;
-
-    [SerializeField]
-    PickManager _pickManager;
+    public static SupportElementManager Instance { get; private set; }
 
     [SerializeField]
     GameObject _forceIndicatorCanvas;
 
-    [SerializeField]
-    GameObject _pinColorManager;
-
     public void Awake()
     {
-        _pickManager.GetPickIndicatorCanvas().SetActive(true);
+        //_pickManager.GetPickIndicatorCanvas().SetActive(true);
         _forceIndicatorCanvas.SetActive(false);
-        _pinColorManager.SetActive(true);
+        PinColorManager.Instance.gameObject.SetActive(true);
     }
 
     public void TogglePinColor(bool active)
     {
-        _pinColorManager.SetActive(active);
+        PinColorManager.Instance.gameObject.SetActive(active);
     }
 
     public void ToggleForceIndicator(bool active)
@@ -36,12 +29,12 @@ public class SupportElementManager : MonoBehaviour
 
     public void TogglePickIndicator(bool active)
     {
-        _pickManager.GetPickIndicatorCanvas().SetActive(active);
+        //_pickManager.GetPickIndicatorCanvas().SetActive(active);
     }
 
     public void SetCutout(int cutoutInt)
     {
-        _cutoutManager.SetCutoutFromState((CutoutState)cutoutInt);
+        CutoutManager.Instance.SetCutoutFromState((CutoutState)cutoutInt);
     }
 
 }

@@ -4,8 +4,7 @@ using static TensionForceManager;
 
 public class PinColorManager : MonoBehaviour
 {
-    [SerializeField]
-    PinManager _pinManager;
+    public static PinColorManager Instance { get; private set; }
 
     [Header("PinColors")]
     [SerializeField]
@@ -25,7 +24,7 @@ public class PinColorManager : MonoBehaviour
 
     void OnDisable()
     {
-        foreach (PinController pinController in _pinManager.GetPinControllers())
+        foreach (PinController pinController in PinManager.Instance.GetPinControllers())
         {
             pinController.ResetPinColor();
         }
@@ -34,7 +33,7 @@ public class PinColorManager : MonoBehaviour
 
     public void Update()
     {
-        foreach (PinController pinController in _pinManager.GetPinControllers())
+        foreach (PinController pinController in PinManager.Instance.GetPinControllers())
         {
             pinController.ColorCodePins(CalculateDriverPinColor(pinController), CalculateKeyPinColor(pinController));
         }

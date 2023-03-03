@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
+    public static MenuManager Instance { get; private set; }
+
     [SerializeField]
     GameObject _menuCanvas;
 

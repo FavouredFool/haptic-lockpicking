@@ -108,7 +108,7 @@ public class PinController : MonoBehaviour
 
         if (_pinState == PinState.SET && _pinState != previousState)
         {
-            _lock.GetTensionForceManager().PinHasBeenSet();
+            TensionForceManager.Instance.PinHasBeenSet();
         }
 
         
@@ -116,7 +116,7 @@ public class PinController : MonoBehaviour
 
     public bool GetPinIsSlow()
     {
-        return Mathf.Abs(_driverPin.GetVelocity()) <= _lock.GetPinManager().GetMaxVelocityForSet();
+        return Mathf.Abs(_driverPin.GetVelocity()) <= PinManager.Instance.GetMaxVelocityForSet();
     }
 
     public bool GetPinIsOnSheer()
@@ -151,7 +151,7 @@ public class PinController : MonoBehaviour
 
     public float GetSetThreshold()
     {
-        return _lock.GetPinManager().GetSetThreshold();
+        return PinManager.Instance.GetSetThreshold();
     }
 
     public void SetNonSetState(PinState nonSetState)

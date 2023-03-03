@@ -37,7 +37,12 @@ public class CoreController : MonoBehaviour
 
     public bool AllPinsInOpenPosition()
     {
-        foreach(PinController pinController in _lock.GetPinManager().GetPinControllers())
+        if (_lock == null)
+        {
+            return false;
+        }
+
+        foreach(PinController pinController in PinManager.Instance.GetPinControllers())
         {
             if (!pinController.GetPinIsInOpenPosition())
             {
@@ -50,7 +55,7 @@ public class CoreController : MonoBehaviour
 
     private IEnumerator Finish()
     {
-        foreach (PinController pins in _lock.GetPinManager().GetPinControllers())
+        foreach (PinController pins in PinManager.Instance.GetPinControllers())
         {
             pins.GetKeyPin().transform.parent = transform;
             pins.GetKeyPin().GetRigidbody().isKinematic = true;
@@ -66,7 +71,7 @@ public class CoreController : MonoBehaviour
                 continue;
             }
 
-            float speed = _turnsOnlyWithForce ? _lock.GetTensionForceManager().GetFingerPosition01() * _rotateSpeed : _rotateSpeed/3;
+            float speed = _turnsOnlyWithForce ? TensionForceManager.Instance.GetFingerPosition01() * _rotateSpeed : _rotateSpeed/3;
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, 90)), speed);
 
@@ -82,7 +87,7 @@ public class CoreController : MonoBehaviour
 
     public void ResetLock()
     {
-        _lock.GetPinManager().RandomizePins();
+        PinManager.Instance.RandomizePins();
     }
 
     public Transform GetTensionTool()

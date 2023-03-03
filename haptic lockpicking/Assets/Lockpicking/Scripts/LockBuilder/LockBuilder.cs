@@ -8,13 +8,17 @@ public class LockBuilder : MonoBehaviour
     [SerializeField]
     LockController _lockPrefab;
 
+    
+
     private void Start()
     {
-        BuildLock();
+        //BuildLock();
     }
 
     public LockController BuildLock()
     {
-        return Instantiate(_lockPrefab, _lockParent);
+        LockController builtLock = Instantiate(_lockPrefab, _lockParent);
+
+        return null;
     }
 }

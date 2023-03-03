@@ -6,8 +6,11 @@ using static PinController;
 
 public class PinManager : MonoBehaviour
 {
+    public static PinManager Instance { get; private set; }
+
+
     [SerializeField]
-    LockController _lockController;
+    LockController _lock;
 
     [SerializeField, Range(0, 1)]
     private float _maxVelocityForSet = 0.25f;
@@ -25,6 +28,11 @@ public class PinManager : MonoBehaviour
 
     public void Update()
     {
+        if (_lock == null)
+        {
+            return;
+        }
+
         UpdatePinLogic();
     }
 
@@ -34,7 +42,7 @@ public class PinManager : MonoBehaviour
 
         for (int i = 0; i < _pinOrder.Count; i++)
         {
-            PinController activePins = _lockController.GetPinControllers()[_pinOrder[i]];
+            PinController activePins = _lock.GetPinControllers()[_pinOrder[i]];
 
             if (allSet)
             {
@@ -56,14 +64,19 @@ public class PinManager : MonoBehaviour
 
     public List<PinController> GetPinControllers()
     {
-        return _lockController.GetPinControllers();
+        if (_lock == null)
+        {
+            return new() { };
+        }
+
+        return _lock.GetPinControllers();
     }
 
     public int GetAmountOfSetPins()
     {
         for (int i = 0; i < _pinOrder.Count; i++)
         {
-            PinController activePins = _lockController.GetPinControllers()[_pinOrder[i]];
+            PinController activePins = _lock.GetPinControllers()[_pinOrder[i]];
 
             if (activePins.GetPinState() != PinState.SET)
             {

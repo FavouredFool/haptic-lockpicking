@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PickManager : MonoBehaviour
 {
+    public static PickManager Instance { get; private set; }
+
     [SerializeField]
     LockController _lock;
 
@@ -10,11 +12,21 @@ public class PickManager : MonoBehaviour
 
     public PickController GetPickController()
     {
+        if (_lock == null)
+        {
+            return null;
+        }
+
         return _lock.GetPickController();
     }
 
     public GameObject GetPickIndicatorCanvas()
     {
+        if (_lock == null)
+        {
+            return null;
+        }
+
         return _lock.GetPickController().GetPickIndicatorCanvas();
     }
 
