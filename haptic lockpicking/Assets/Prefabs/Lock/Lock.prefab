@@ -4290,6 +4290,7 @@ MonoBehaviour:
   _pick: {fileID: 6160485231507365677}
   _tensionTool: {fileID: 5977624503150204529}
   _turnsOnlyWithForce: 1
+  _touchPoint: {fileID: 6160485232492214131}
   _lockFinished: 0
 --- !u!1 &6160485232253762296
 GameObject:

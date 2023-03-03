@@ -21,6 +21,9 @@ public class CoreController : MonoBehaviour
     [SerializeField]
     bool _turnsOnlyWithForce = true;
 
+    [SerializeField]
+    Transform _touchPoint;
+
     public bool _lockFinished = false;
 
     public void Update()
@@ -98,5 +101,10 @@ public class CoreController : MonoBehaviour
     public bool GetLockFinished()
     {
         return _lockFinished;
+    }
+
+    public Transform GetTouchPoint()
+    {
+        return _touchPoint;
     }
 }

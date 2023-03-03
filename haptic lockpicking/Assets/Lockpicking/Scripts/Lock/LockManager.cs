@@ -21,8 +21,21 @@ public class LockManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            CreateNewLock();
+        }
+    }
+
     public void CreateNewLock()
     {
+        if (Lock != null)
+        {
+            Destroy(Lock.gameObject);
+        }
+
         Lock = _lockBuilder.BuildLock();
     }
 }

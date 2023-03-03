@@ -19,6 +19,6 @@ public class LockBuilder : MonoBehaviour
     {
         LockController builtLock = Instantiate(_lockPrefab, _lockParent);
 
-        return null;
+        return builtLock;
     }
 }

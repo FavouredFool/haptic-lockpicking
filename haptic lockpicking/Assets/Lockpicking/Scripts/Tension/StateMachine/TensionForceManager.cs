@@ -113,7 +113,7 @@ public class TensionForceManager : StateMachine
         }
 
         Vector2 originPoint2D = new Vector2(LockManager.Lock.GetCoreController().GetTensionTool().position.x, LockManager.Lock.GetCoreController().GetTensionTool().position.y);
-        Vector2 touchPoint2D = new Vector2(_touchPoint.position.x, _touchPoint.position.y);
+        Vector2 touchPoint2D = new Vector2(LockManager.Lock.GetCoreController().GetTouchPoint().position.x, LockManager.Lock.GetCoreController().GetTouchPoint().position.y);
         Vector2 fingerPoint2D = new Vector2(_fingerPosition.x, _fingerPosition.y);
 
         Vector2 originToTouch = touchPoint2D - originPoint2D;
