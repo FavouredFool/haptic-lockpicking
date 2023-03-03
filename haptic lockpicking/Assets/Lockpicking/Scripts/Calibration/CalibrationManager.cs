@@ -33,17 +33,17 @@ public class CalibrationManager : MonoBehaviour
 
     void Update()
     {
-        /*
+        if (LockManager.Lock == null)
+        {
+            return;
+        }
+        
         if (Input.GetKeyDown(KeyCode.R))
         {
-            if (!_isInitialized)
-            {
-                _tensionForceManager.SetState(new LooseState(_tensionForceManager));
-            }
 
-            _pickManager.GetPickController().Recalibrate();
-            _isInitialized = true;
+            TensionForceManager.Instance.SetState(new LooseState(TensionForceManager.Instance));
+            PickManager.Instance.GetPickController().Recalibrate();
         }
-        */
+        
     }
 }

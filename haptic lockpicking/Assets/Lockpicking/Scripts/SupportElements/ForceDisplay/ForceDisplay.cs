@@ -29,6 +29,11 @@ public class ForceDisplay : MonoBehaviour
 
     private void Update()
     {
+        if (LockManager.Lock == null)
+        {
+            return;
+        }
+
         _slider.value = _tensionForceManager.GetFingerPosition01();
 
         Color color;

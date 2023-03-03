@@ -51,6 +51,11 @@ public class TensionVibrationManager : MonoBehaviour
             return;
         }
 
+        if (LockManager.Lock == null)
+        {
+            return;
+        }
+
         CalculateAndSendVibration();
     }
 
