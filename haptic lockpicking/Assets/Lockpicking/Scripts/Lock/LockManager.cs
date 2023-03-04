@@ -40,14 +40,6 @@ public class LockManager : MonoBehaviour
         pinOrderParameters = new() { PinManager.Instance.GetRandomPinOrder(5) };
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            CreateNewLock(0);
-        }
-    }
-
     public void CreateNewLock(int type)
     {
         if (Lock != null)
@@ -55,7 +47,11 @@ public class LockManager : MonoBehaviour
             Destroy(Lock.gameObject);
         }
 
+        // TODO VORRÜBERGEHEND DAMIT'S NICHT BRICHT
+        type = 0;
+
         Lock = _lockBuilder.BuildLock();
+
         _lockBuilder.SetParameters(pinCountParameters[type], pinOrderParameters[type], respectOrderParameters[type], hasPickParameters[type], hasTensionParameters[type], colorCodePinsParameters[type], showTensionIndicatorParameters[type], showPinPositionIndicatorParameters[type], cutoutStateParameters[type]);
 
         CalibrationManager.Instance.SetIsCalibrated(false);
