@@ -11,6 +11,8 @@ public class LockManager : MonoBehaviour
     [SerializeField]
     LockBuilder _lockBuilder;
 
+    private List<int> _notNulledPinOrder;
+
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -32,12 +34,9 @@ public class LockManager : MonoBehaviour
 
         Lock = _lockBuilder.BuildLock();
 
-        if (_information.PinOrder == null)
-        {
-            _information.PinOrder = PinManager.Instance.GetRandomPinOrder(_information.PinCount);
-        }
+        _notNulledPinOrder = (_information.PinOrder != null) ? _information.PinOrder : PinManager.Instance.GetRandomPinOrder(_information.PinCount);
 
-        _lockBuilder.SetParameters(_information.PinCount, _information.PinOrder, _information.RespectOrder, _information.HasPick, _information.HasTension, _information.ColorCodePins, _information.ShowTensionIndicator, _information.ShowPinPositionIndicator, _information.CutoutState);
+        _lockBuilder.SetParameters(_information.PinCount, _notNulledPinOrder, _information.RespectOrder, _information.HasPick, _information.HasTension, _information.ColorCodePins, _information.ShowTensionIndicator, _information.ShowPinPositionIndicator, _information.CutoutState);
 
         CalibrationManager.Instance.SetIsCalibrated(false);
     }

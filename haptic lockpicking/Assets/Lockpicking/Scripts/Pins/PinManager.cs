@@ -110,7 +110,7 @@ public class PinManager : MonoBehaviour
     public List<int> GetRandomPinOrder(int size)
     {
         List<int> list = new() { 0, 1, 2, 3, 4 };
-
-        return list.Take(size).OrderBy(a => random.Next()).ToList();
+        list = list.Take(size).OrderBy(a => random.Next()).ToList();
+        return list;
     }
 }
