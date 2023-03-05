@@ -40,19 +40,23 @@ public class LockManager : MonoBehaviour
         pinOrderParameters = new() { PinManager.Instance.GetRandomPinOrder(5) };
     }
 
-    public void CreateNewLock(int type)
+    public void CreateNewLock(TutorialSectionInformation _information)
     {
         if (Lock != null)
         {
             Destroy(Lock.gameObject);
         }
 
-        // TODO VORRÜBERGEHEND DAMIT'S NICHT BRICHT
-        type = 0;
-
         Lock = _lockBuilder.BuildLock();
 
-        _lockBuilder.SetParameters(pinCountParameters[type], pinOrderParameters[type], respectOrderParameters[type], hasPickParameters[type], hasTensionParameters[type], colorCodePinsParameters[type], showTensionIndicatorParameters[type], showPinPositionIndicatorParameters[type], cutoutStateParameters[type]);
+        if (_information.PinOrder == null)
+        {
+            _information.PinOrder = PinManager.Instance.GetRandomPinOrder(_information.PinCount);
+        }
+
+        Debug.Log(_information.PinCount + " " + _information.PinOrder[0] + _information.RespectOrder + _information.HasPick +  _information.HasTension + _information.ColorCodePins + _information.ShowTensionIndicator + _information.ShowPinPositionIndicator + _information.CutoutState);
+
+        _lockBuilder.SetParameters(_information.PinCount, _information.PinOrder, _information.RespectOrder, _information.HasPick, _information.HasTension, _information.ColorCodePins, _information.ShowTensionIndicator, _information.ShowPinPositionIndicator, _information.CutoutState);
 
         CalibrationManager.Instance.SetIsCalibrated(false);
     }

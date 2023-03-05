@@ -26,7 +26,7 @@ public class TutorialSectionManager : MonoBehaviour
     [SerializeField]
     GameObject _resetButton;
 
-    TutorialSections tutorialSection;
+    TutorialSections _tutorialSection;
 
 
     int _activeTutorialSectionNr = -1;
@@ -47,7 +47,7 @@ public class TutorialSectionManager : MonoBehaviour
     }
     private void Start()
     {
-        tutorialSection = JsonConvert.DeserializeObject<TutorialSections>(_jsonText.text);
+        _tutorialSection = JsonConvert.DeserializeObject<TutorialSections>(_jsonText.text);
 
         _playCanvas.SetActive(false);
         _startButton.SetActive(true);
@@ -71,7 +71,7 @@ public class TutorialSectionManager : MonoBehaviour
 
     void ReloadLock()
     {
-        LockManager.Instance.CreateNewLock(_activeTutorialSectionNr);
+        LockManager.Instance.CreateNewLock(_tutorialSection.TutorialSectionInformationList[_activeTutorialSectionNr]);
     }
 
     void SetSectionUI(TutorialSectionInformation information)
@@ -82,14 +82,14 @@ public class TutorialSectionManager : MonoBehaviour
         _startButton.SetActive(false);
         _resetButton.SetActive(true);
 
-        _nextButton.SetActive(_activeTutorialSectionNr < tutorialSection.TutorialSectionInformationList.Count - 1);
+        _nextButton.SetActive(_activeTutorialSectionNr < _tutorialSection.TutorialSectionInformationList.Count - 1);
     }
 
     public void GoToTutorialSection(int sectionNr)
     {
         _activeTutorialSectionNr = sectionNr;
 
-        SetSectionUI(tutorialSection.TutorialSectionInformationList[sectionNr]);
+        SetSectionUI(_tutorialSection.TutorialSectionInformationList[sectionNr]);
         ReloadLock();
     }
 
