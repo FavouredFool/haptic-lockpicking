@@ -5,22 +5,54 @@ using Newtonsoft.Json;
 
 public class TutorialSectionManager : MonoBehaviour
 {
+    public static TutorialSectionManager Instance { get; private set; }
+
+
     [SerializeField]
     TutorialUI _tutorialUI;
 
     [SerializeField]
     TextAsset _jsonText;
 
+    [SerializeField]
+    GameObject _playCanvas;
+
+    [SerializeField]
+    GameObject _startButton;
+
+    [SerializeField]
+    GameObject _nextButton;
+
+    [SerializeField]
+    GameObject _resetButton;
+
     TutorialSections tutorialSection;
 
 
     int _activeTutorialSectionNr = -1;
 
-
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            throw new System.Exception();
+        }
+        else
+        {
+            Instance = this;
+        }
+
+        
+
+    }
+    private void Start()
+    {
         tutorialSection = JsonConvert.DeserializeObject<TutorialSections>(_jsonText.text);
-        Debug.Log(tutorialSection.TutorialSectionInformationList[0].Label);
+
+        _playCanvas.SetActive(false);
+        _startButton.SetActive(true);
+        _nextButton.SetActive(false);
+        _resetButton.SetActive(false);
     }
 
     void Update()
@@ -42,22 +74,22 @@ public class TutorialSectionManager : MonoBehaviour
         LockManager.Instance.CreateNewLock(_activeTutorialSectionNr);
     }
 
-    void SetSectionText(TutorialSectionInformation information)
+    void SetSectionUI(TutorialSectionInformation information)
     {
         _tutorialUI.SetSectionLabel(_activeTutorialSectionNr, information.Label);
         _tutorialUI.SetSectionText(information.Info);
+
+        _startButton.SetActive(false);
+        _resetButton.SetActive(true);
+
+        _nextButton.SetActive(_activeTutorialSectionNr < tutorialSection.TutorialSectionInformationList.Count - 1);
     }
 
     public void GoToTutorialSection(int sectionNr)
     {
-        if (sectionNr == _activeTutorialSectionNr)
-        {
-            return;
-        }
-
         _activeTutorialSectionNr = sectionNr;
 
-        SetSectionText(tutorialSection.TutorialSectionInformationList[sectionNr]);
+        SetSectionUI(tutorialSection.TutorialSectionInformationList[sectionNr]);
         ReloadLock();
     }
 
@@ -112,6 +144,28 @@ public class TutorialSectionManager : MonoBehaviour
 
         return -1;
     }
+
+
+    public void StartPressed()
+    {
+        GoToTutorialSection(0);
+    }
+
+    public void NextPressed()
+    {
+        GoToTutorialSection(TutorialSectionManager.Instance.GetActiveTutorialSectionNr() + 1);
+    }
+
+    public void ResetPressed()
+    {
+        GoToTutorialSection(TutorialSectionManager.Instance.GetActiveTutorialSectionNr());
+    }
+
+    public void ExitPressed()
+    {
+        Application.Quit();
+    }
+
 
 
 }

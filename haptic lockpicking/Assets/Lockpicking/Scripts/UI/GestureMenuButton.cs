@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class GestureMenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    public enum UseCase { START, TUTORIAL, EXIT, RESET };
+    public enum UseCase { START, NEXT, EXIT, RESET };
 
 
     [SerializeField]
@@ -13,9 +13,6 @@ public class GestureMenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     [SerializeField]
     SG_BasicGesture _rightGesture;
-
-    [SerializeField]
-    MenuManager _menuManager;
     
     [SerializeField, Range(1, 5)]
     float _buttonHoldTime;
@@ -55,16 +52,16 @@ public class GestureMenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
         switch (_useCase)
         {
             case UseCase.START:
-                _menuManager.StartPressed();
+                TutorialSectionManager.Instance.StartPressed();
                 break;
-            case UseCase.TUTORIAL:
-                _menuManager.TutorialPressed();
+            case UseCase.NEXT:
+                TutorialSectionManager.Instance.NextPressed();
                 break;
             case UseCase.EXIT:
-                _menuManager.ExitPressed();
+                TutorialSectionManager.Instance.ExitPressed();
                 break;
             case UseCase.RESET:
-                _menuManager.ResetPressed();
+                TutorialSectionManager.Instance.ResetPressed();
                 break;
         }
 
