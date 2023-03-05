@@ -22,7 +22,7 @@ public class GestureMenuSlider : MonoBehaviour, IPointerDownHandler, IPointerUpH
     Slider _backgroundSlider;
 
     [SerializeField]
-    CutoutState _cutoutState;
+    CutoutState _initialCutoutState;
 
     int _cutoutInt;
 
@@ -41,7 +41,7 @@ public class GestureMenuSlider : MonoBehaviour, IPointerDownHandler, IPointerUpH
     public void Start()
     {
 
-        _cutoutInt = (int)_cutoutState;
+        _cutoutInt = (int)_initialCutoutState;
 
         _backgroundSlider.value = _cutoutInt;
 
@@ -134,7 +134,10 @@ public class GestureMenuSlider : MonoBehaviour, IPointerDownHandler, IPointerUpH
         _pressStartTime = float.PositiveInfinity;
     }
 
-
+    public int GetCutoutInt()
+    {
+        return _cutoutInt;
+    }
 
 
 }

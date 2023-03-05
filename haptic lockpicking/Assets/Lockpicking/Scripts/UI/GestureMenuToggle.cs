@@ -140,6 +140,10 @@ public class GestureMenuToggle : MonoBehaviour, IPointerDownHandler, IPointerUpH
         _pressStartTime = float.PositiveInfinity;
     }
 
+    public bool GetToggleActive()
+    {
+        return _toggleActive;
+    }
 
 
 

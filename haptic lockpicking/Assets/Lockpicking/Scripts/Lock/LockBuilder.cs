@@ -35,11 +35,11 @@ public class LockBuilder : MonoBehaviour
         return builtLock;
     }
 
-    public void SetParameters(int pinAmount, List<int> pinOrder, bool respectOrder, bool hasPick, bool hasTension, bool colorCodePins, bool showTensionIndicator, bool showPinPositionIndicator, CutoutState cutoutState)
+    public void SetParameters(int pinAmount, List<int> pinOrder, bool respectOrder, bool hasPick, bool hasTension, bool colorCodePins, bool showTensionIndicator, bool showPinPositionIndicator, CutoutState cutoutState, bool enableCustomization)
     {
         SetPinFundamentals(pinAmount, pinOrder, respectOrder);
         SetTools(hasPick, hasTension);
-        SetHelp(colorCodePins, showTensionIndicator, showPinPositionIndicator, cutoutState);
+        SetHelp(colorCodePins, showTensionIndicator, showPinPositionIndicator, cutoutState, enableCustomization);
     }
 
     void SetPinFundamentals(int pinAmount, List<int> pinOrder, bool respectOrder)
@@ -58,8 +58,7 @@ public class LockBuilder : MonoBehaviour
 
         PinManager.Instance.SetPinOrder(pinOrder);
 
-        Debug.Log("respect order: " + respectOrder);
-
+        PinManager.Instance.SetRespectOrder(respectOrder);
     }
 
     void SetTools(bool hasPick, bool hasTension)
@@ -68,12 +67,27 @@ public class LockBuilder : MonoBehaviour
         Debug.Log("has tension: " + hasTension);
     }
 
-    void SetHelp(bool colorCodePins, bool showTensionIndicator, bool showPinPositionIndicator, CutoutState cutoutState)
+    void SetHelp(bool colorCodePins, bool showTensionIndicator, bool showPinPositionIndicator, CutoutState cutoutState, bool enableCustomization)
     {
-        SupportElementManager.Instance.TogglePinColor(colorCodePins);
-        SupportElementManager.Instance.ToggleForceIndicator(showTensionIndicator);
-        SupportElementManager.Instance.TogglePickIndicator(showPinPositionIndicator);
-        SupportElementManager.Instance.SetCutout((int)cutoutState);
+        if (enableCustomization)
+        {
+            SupportElementManager.Instance.TogglePinColor(SupportElementManager.Instance.GetPinColorToggle().GetToggleActive());
+            SupportElementManager.Instance.ToggleForceIndicator(SupportElementManager.Instance.GetForceIndicatorToggle().GetToggleActive());
+            SupportElementManager.Instance.TogglePickIndicator(SupportElementManager.Instance.GetPickIndicatorToggle().GetToggleActive());
+            SupportElementManager.Instance.SetCutout(SupportElementManager.Instance.GetCutoutSlider().GetCutoutInt());
+        }
+        else
+        {
+            SupportElementManager.Instance.TogglePinColor(colorCodePins);
+            SupportElementManager.Instance.ToggleForceIndicator(showTensionIndicator);
+            SupportElementManager.Instance.TogglePickIndicator(showPinPositionIndicator);
+            SupportElementManager.Instance.SetCutout((int)cutoutState);
+        }
+
+
+
+
+        TutorialSectionManager.Instance.EnableCustomization(enableCustomization);
     }
 
 }

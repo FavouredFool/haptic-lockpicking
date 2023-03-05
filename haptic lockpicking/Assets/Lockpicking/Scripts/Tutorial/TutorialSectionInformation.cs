@@ -25,4 +25,6 @@ public class TutorialSectionInformation
 
     public CutoutState CutoutState { get; set; }
 
+    public bool EnableCustomization { get; set; }
+
 }

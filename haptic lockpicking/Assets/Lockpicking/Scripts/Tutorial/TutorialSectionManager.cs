@@ -18,6 +18,15 @@ public class TutorialSectionManager : MonoBehaviour
     GameObject _playCanvas;
 
     [SerializeField]
+    GestureMenuToggle _pinColorToggle;
+
+    [SerializeField]
+    GestureMenuToggle _pickIndicatorToggle;
+
+    [SerializeField]
+    GestureMenuToggle _forceIndicatorToggle;
+
+    [SerializeField]
     GameObject _startButton;
 
     [SerializeField]
@@ -27,7 +36,6 @@ public class TutorialSectionManager : MonoBehaviour
     GameObject _resetButton;
 
     TutorialSections _tutorialSection;
-
 
     int _activeTutorialSectionNr = -1;
 
@@ -41,8 +49,6 @@ public class TutorialSectionManager : MonoBehaviour
         {
             Instance = this;
         }
-
-        
 
     }
     private void Start()
@@ -96,6 +102,12 @@ public class TutorialSectionManager : MonoBehaviour
     public int GetActiveTutorialSectionNr()
     {
         return _activeTutorialSectionNr;
+    }
+
+
+    public void EnableCustomization(bool enableCustomization)
+    {
+        _playCanvas.SetActive(enableCustomization);
     }
 
     int GetSectionNrFromKeyPressed()
@@ -158,7 +170,7 @@ public class TutorialSectionManager : MonoBehaviour
 
     public void ResetPressed()
     {
-        GoToTutorialSection(TutorialSectionManager.Instance.GetActiveTutorialSectionNr());
+          GoToTutorialSection(TutorialSectionManager.Instance.GetActiveTutorialSectionNr());
     }
 
     public void ExitPressed()

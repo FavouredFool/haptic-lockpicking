@@ -12,7 +12,8 @@
             "colorCodePins": false,
             "showTensionIndicator":false,
             "showPinPositionIndicator":false,
-            "cutoutState": "FULL"
+            "cutoutState": "FULL",
+            "enableCustomization": false
         },
         {
             "info": "Zum Lockpicken muss ein \"Pick\" (Dietrich) in das Schlüsselloch bewegt werden und manuell die Pin-Paare in die korrekte Position bewegen. Wenn ein Pin-Paar in der richtigen Position feststeckt, nennt man das Pin-Paar \"SET\". Warum die Pins nicht immer von der Feder nach unten geschoben werden, wird in der nächsten Sektion klarer.",
@@ -25,7 +26,8 @@
             "colorCodePins": false,
             "showTensionIndicator":false,
             "showPinPositionIndicator":false,
-            "cutoutState": "FULL"
+            "cutoutState": "FULL",
+            "enableCustomization": false
         },
         {
             "info": "Da die Pin-Paare nacheinander bewegt werden müssen, muss man die Position eines Pin-Paares festsetzen können. Dafür wird über ein \"Tension Tool\" (Spannschlüssel) ein Winkeldruck auf den Core übertragen. Sobald ein Pin-Paar an der korrekten Position ist, kann der Core ein kleines Stück gedreht werden, wodurch die Pins nicht mehr von der Feder zurückgedrückt werden können solange der Druck aufrecht erhalten bleibt. Wichtig ist dabei, dass der Druck nur sehr schwach angesetzt wird, damit Pins beweglich bleiben.",
@@ -38,7 +40,8 @@
             "colorCodePins": false,
             "showTensionIndicator":true,
             "showPinPositionIndicator":false,
-            "cutoutState": "FULL"
+            "cutoutState": "FULL",
+            "enableCustomization": false
         },
         {
             "info": "Bei zu starkem Druck kann ein \"Overset\" stattfinden, bei welchem Pins über die Sheerline hinaus geschoben wurden, aber aufgrund des Winkeldrucks trotzdem festgesetzt werden. Sobald ein Pin gesetted wird, ist eine kleine Drehung spürbar. TODO: Das ist bisher in diesem Programm nur so mäßig gut dargestellt.",
@@ -51,7 +54,8 @@
             "colorCodePins": false,
             "showTensionIndicator":false,
             "showPinPositionIndicator":false,
-            "cutoutState": "FULL"
+            "cutoutState": "FULL",
+            "enableCustomization": false
         },
         {
             "info": "Falls der Winkeldruck auf alle Pins gleichstark angewandt werden würde, könnte kein Pin je SETTEN. Lockpicking macht immer von den nicht vermeidbaren Ungenauigkeiten bei der Schloss-Manufaktur gebrauch. Aufgrund dieser Ungenauigkeiten, wird der Druck des Cores auf die Pins in einer spezifischen Reihenfolge angewandt. Das Pin-Paar, das den Hauptteil des Drucks abbekommt, wird als \"BINDING\" beschrieben. Die anderen Pins sind hierbei \"SPRINGY\", werden also nur von der Feder und nicht von dem Winkeldruck beeinflusst. Sobald ein Binding-Pin gesetted ist, bindet ein anderes Paar. Nur Paare die bereits binden können auch gesetted werden.",
@@ -64,7 +68,8 @@
             "colorCodePins": true,
             "showTensionIndicator":false,
             "showPinPositionIndicator":false,
-            "cutoutState": "FULL"
+            "cutoutState": "FULL",
+            "enableCustomization": false
         },
         {
             "info": "Ein binding Pin-Paar erkennt man durch eine erhöhte Resistenz und Schwerfälligkeit in der Bewegung des Keypins. Einen gesetteten Pin erkennt man dadurch, dass das der Keypin nicht bewegt werden kann. Dies äußert sich im Programm in Form einer starken Vibration sobald man den Pick in den gesetteten Pin hinein bewegt.",
@@ -77,7 +82,8 @@
             "colorCodePins": false,
             "showTensionIndicator":false,
             "showPinPositionIndicator":false,
-            "cutoutState": "FULL"
+            "cutoutState": "FULL",
+            "enableCustomization": false
         },
         {
             "info": "Beim Lockpicking muss man sich auf das haptische Feedback verlassen um ein Schloss zu navigieren. Als Hilfestellung wurden hier noch Markierungen an den Pick angefügt, welche man an das Schlüsselloch ausrichten kann um die exakte Position jedes Pins zu kennen.",
@@ -90,7 +96,8 @@
             "colorCodePins": false,
             "showTensionIndicator":false,
             "showPinPositionIndicator":true,
-            "cutoutState": "Partial"
+            "cutoutState": "Partial",
+            "enableCustomization": false
         },
         {
             "info": "Um sich im Schloss zu orientieren kann es helfen mit der Pick vor den ersten Pin zu stoßen, was zu einem Sound und einer kurzen Vibration führt. Daraufhin kann man diesen herunter drücken, und dann auf den nächsten stoßen. Sobald man seinen Pick entfernt und die Pins wieder nach oben schnellen, ist außerdem ein deutliches klicken zu hören. Dies hilft dabei, sich im Schloss zurecht zu finden.",
@@ -103,7 +110,8 @@
             "colorCodePins": false,
             "showTensionIndicator": false,
             "showPinPositionIndicator": true,
-            "cutoutState": "NONE"
+            "cutoutState": "NONE",
+            "enableCustomization": false
         },
         {
             "info": "Dies ist der finale Test. 5 Pins!",
@@ -116,7 +124,8 @@
             "colorCodePins": false,
             "showTensionIndicator":false,
             "showPinPositionIndicator":false,
-            "cutoutState": "NONE"
+            "cutoutState": "NONE",
+            "enableCustomization": false
         },
         {
             "info": "Probier' herum!",
@@ -129,7 +138,8 @@
             "colorCodePins": true,
             "showTensionIndicator":true,
             "showPinPositionIndicator":true,
-            "cutoutState": "FULL"
+            "cutoutState": "FULL",
+            "enableCustomization": true
         }
     ]
 }
