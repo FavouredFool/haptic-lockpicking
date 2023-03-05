@@ -34,7 +34,7 @@ public class LockManager : MonoBehaviour
 
         Lock = _lockBuilder.BuildLock();
 
-        _notNulledPinOrder = (_information.PinOrder != null) ? _information.PinOrder : PinManager.Instance.GetRandomPinOrder(_information.PinCount);
+        _notNulledPinOrder = _information.PinOrder ?? PinManager.Instance.GetRandomPinOrder(_information.PinCount);
 
         _lockBuilder.SetParameters(_information.PinCount, _notNulledPinOrder, _information.RespectOrder, _information.HasPick, _information.HasTension, _information.ColorCodePins, _information.ShowTensionIndicator, _information.ShowPinPositionIndicator, _information.CutoutState);
 

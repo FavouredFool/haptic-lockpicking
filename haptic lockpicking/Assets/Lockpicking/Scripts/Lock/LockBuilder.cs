@@ -54,7 +54,7 @@ public class LockBuilder : MonoBehaviour
             throw new System.Exception();
         }
 
-        Debug.Log("set Pin Amount: " + pinAmount);
+        PinManager.Instance.SetPinAmount(pinAmount);
 
         PinManager.Instance.SetPinOrder(pinOrder);
 

@@ -14,8 +14,12 @@ public class PinManager : MonoBehaviour
     [SerializeField, Range(0, 1)]
     private float _setThreshold = 0.25f;
 
-    List<int> _pinOrder = new() { 0, 1, 2, 3, 4 };
+    List<int> _pinOrder;
     private static readonly System.Random random = new();
+
+    private int _pinAmount;
+
+    private bool _respectOrder;
 
     public void Awake()
     {
@@ -43,7 +47,7 @@ public class PinManager : MonoBehaviour
     {
         bool allSet = true;
 
-        for (int i = 0; i < _pinOrder.Count; i++)
+        for (int i = 0; i < _pinAmount; i++)
         {
             PinController activePins = LockManager.Lock.GetPinControllers()[_pinOrder[i]];
 
@@ -77,7 +81,7 @@ public class PinManager : MonoBehaviour
 
     public int GetAmountOfSetPins()
     {
-        for (int i = 0; i < _pinOrder.Count; i++)
+        for (int i = 0; i < _pinAmount; i++)
         {
             PinController activePins = LockManager.Lock.GetPinControllers()[_pinOrder[i]];
 
@@ -88,14 +92,13 @@ public class PinManager : MonoBehaviour
             
         }
 
-        return 5;
+        return _pinAmount;
     }
 
     public float GetMaxVelocityForSet()
     {
         return _maxVelocityForSet;
     }
-
 
     public float GetSetThreshold()
     {
@@ -112,5 +115,33 @@ public class PinManager : MonoBehaviour
         List<int> list = new() { 0, 1, 2, 3, 4 };
         list = list.Take(size).OrderBy(a => random.Next()).ToList();
         return list;
+    }
+
+    public void SetPinAmount(int pinAmount)
+    {
+        _pinAmount = pinAmount;
+
+        int i = 0;
+
+        foreach (PinController pin in LockManager.Lock.GetPinControllers())
+        {
+            pin.gameObject.SetActive(i < pinAmount);
+            i++;
+        }
+    }
+
+    public int GetPinAmount()
+    {
+        return _pinAmount;
+    }
+
+    public void SetRespectOrder(bool respectOrder)
+    {
+        _respectOrder = respectOrder;
+    }
+
+    public bool GetRespectOrder()
+    {
+        return _respectOrder;
     }
 }
