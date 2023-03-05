@@ -1,28 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
 
 public class TutorialSectionManager : MonoBehaviour
 {
     [SerializeField]
     TutorialUI _tutorialUI;
 
-    List<TutorialSectionInformation> _informationList;
+    [SerializeField]
+    TextAsset _jsonText;
+
+    TutorialSections tutorialSection;
+
 
     int _activeTutorialSectionNr = -1;
 
-    void Awake()
+
+    private void Awake()
     {
-        _informationList = new()
-        {
-            new TutorialSectionInformation("dies ist ein text der probably aus einer Datei ausgelesen werden sollte", "Tension"),
-            new TutorialSectionInformation("dies ist auch ein text der probably aus einer Datei ausgelesen werden sollte", "Pick-Bewegung"),
-            new TutorialSectionInformation("dies ist auch ein text der probably aus einer Datei ausgelesen werden sollte", "3Pick-Bewegung"),
-            new TutorialSectionInformation("dies ist auch ein text der probably aus einer Datei ausgelesen werden sollte", "4Pick-Bewegung"),
-            new TutorialSectionInformation("dies ist auch ein text der probably aus einer Datei ausgelesen werden sollte", "5Pick-Bewegung"),
-            new TutorialSectionInformation("dies ist auch ein text der probably aus einer Datei ausgelesen werden sollte", "Pick-Bewegung"),
-            new TutorialSectionInformation("dies ist auch ein text der probably aus einer Datei ausgelesen werden sollte", "Pick-Bewegung"),
-        };
+        tutorialSection = JsonConvert.DeserializeObject<TutorialSections>(_jsonText.text);
+        Debug.Log(tutorialSection.TutorialSectionInformationList[0].Label);
     }
 
     void Update()
@@ -46,8 +44,8 @@ public class TutorialSectionManager : MonoBehaviour
 
     void SetSectionText(TutorialSectionInformation information)
     {
-        _tutorialUI.SetSectionLabel(_activeTutorialSectionNr, information.GetLabelText());
-        _tutorialUI.SetSectionText(information.GetInfoText());
+        _tutorialUI.SetSectionLabel(_activeTutorialSectionNr, information.Label);
+        _tutorialUI.SetSectionText(information.Info);
     }
 
     public void GoToTutorialSection(int sectionNr)
@@ -59,7 +57,7 @@ public class TutorialSectionManager : MonoBehaviour
 
         _activeTutorialSectionNr = sectionNr;
 
-        SetSectionText(_informationList[sectionNr]);
+        SetSectionText(tutorialSection.TutorialSectionInformationList[sectionNr]);
         ReloadLock();
     }
 

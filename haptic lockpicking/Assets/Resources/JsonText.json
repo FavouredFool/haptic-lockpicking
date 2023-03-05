@@ -1,0 +1,21 @@
+{
+    "TutorialSectionInformationList":
+    [
+        {
+            "info": "1This is an info Text",
+            "label": "1this is a label"
+        },
+        {
+            "info": "2This is an info Text",
+            "label": "2this is a label"
+        },
+        {
+            "info": "3This is an info Text",
+            "label": "3this is a label"
+        },
+        {
+            "info": "4This is an info Text",
+            "label": "4this is a label"
+        }
+    ]
+}

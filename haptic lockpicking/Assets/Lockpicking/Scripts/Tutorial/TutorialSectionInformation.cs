@@ -2,23 +2,13 @@
 
 public class TutorialSectionInformation
 {
-    string _infoText;
+    public string Info { get; set; }
 
-    string _labelText;
+    public string Label { get; set; }
 
     public TutorialSectionInformation(string infoText, string labelText)
     {
-        _infoText = infoText;
-        _labelText = labelText;
-    }
-
-    public string GetInfoText()
-    {
-        return _infoText;
-    }
-
-    public string GetLabelText()
-    {
-        return _labelText;
+        Info = infoText;
+        Label = labelText;
     }
 }
