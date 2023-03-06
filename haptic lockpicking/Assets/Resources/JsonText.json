@@ -49,7 +49,7 @@
             "pinCount": 3,
             "pinOrder": null,
             "respectOrder": false,
-            "hasPick": false,
+            "hasPick": true,
             "hasTension": true,
             "colorCodePins": false,
             "showTensionIndicator":false,
