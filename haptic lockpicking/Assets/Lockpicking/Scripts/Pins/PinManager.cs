@@ -76,7 +76,7 @@ public class PinManager : MonoBehaviour
             return new() { };
         }
 
-        return LockManager.Lock.GetPinControllers();
+        return LockManager.Lock.GetPinControllers().Take(_pinAmount).ToList();
     }
 
     public int GetAmountOfSetPins()
