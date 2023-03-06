@@ -91,6 +91,12 @@ public class TensionForceManager : StateMachine
             return;
         }
 
+        if (KeyAnimationManager.Instance.GetIsActive())
+        {
+            StaticTensionState = TensionState.LOOSE;
+            return;
+        }
+
         if (!_hasTension)
         {
             StaticTensionState = TensionState.MOVABLE;

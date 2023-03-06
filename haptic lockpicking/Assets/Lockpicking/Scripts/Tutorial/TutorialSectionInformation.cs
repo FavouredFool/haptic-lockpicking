@@ -27,4 +27,6 @@ public class TutorialSectionInformation
 
     public bool EnableCustomization { get; set; }
 
+    public bool KeyAnimation { get; set; }
+
 }

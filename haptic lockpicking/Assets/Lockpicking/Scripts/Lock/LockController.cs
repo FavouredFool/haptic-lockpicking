@@ -12,6 +12,9 @@ public class LockController : MonoBehaviour
     [SerializeField]
     CoreController _coreController;
 
+    [SerializeField]
+    Rigidbody _key;
+
     [Header("Core")]
     [SerializeField]
     List<GameObject> _coreParts;
@@ -19,6 +22,7 @@ public class LockController : MonoBehaviour
     [Header("Hull")]
     [SerializeField]
     List<GameObject> _hullParts;
+
 
 
     public List<PinController> GetPinControllers()
@@ -44,5 +48,10 @@ public class LockController : MonoBehaviour
     public List<GameObject> GetHullParts()
     {
         return _hullParts;
+    }
+
+    public Rigidbody GetKey()
+    {
+        return _key;
     }
 }

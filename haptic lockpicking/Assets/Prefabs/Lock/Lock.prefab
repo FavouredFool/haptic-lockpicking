@@ -522,6 +522,7 @@ MonoBehaviour:
   - {fileID: 6160485232113019127}
   _pickController: {fileID: 6160485231507365664}
   _coreController: {fileID: 6160485232238384333}
+  _key: {fileID: 6160485232253762299}
   _coreParts:
   - {fileID: 6466915611477686985}
   - {fileID: 6466915610763948120}
@@ -3674,9 +3675,7 @@ MonoBehaviour:
   _rotateSpeed: 2
   _pick: {fileID: 6160485231507365677}
   _tensionTool: {fileID: 5977624503150204529}
-  _turnsOnlyWithForce: 1
   _touchPoint: {fileID: 6160485232492214131}
-  _lockFinished: 0
 --- !u!1 &6160485232253762296
 GameObject:
   m_ObjectHideFlags: 0
@@ -3693,7 +3692,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6160485232253762298
 Transform:
   m_ObjectHideFlags: 0
@@ -5589,7 +5588,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 137
+  m_VersionIndex: 143
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -5642,7 +5641,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6160485232597484147}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

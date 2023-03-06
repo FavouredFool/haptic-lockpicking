@@ -35,10 +35,10 @@ public class LockBuilder : MonoBehaviour
         return builtLock;
     }
 
-    public void SetParameters(int pinAmount, List<int> pinOrder, bool respectOrder, bool hasPick, bool hasTension, bool colorCodePins, bool showTensionIndicator, bool showPinPositionIndicator, CutoutState cutoutState, bool enableCustomization)
+    public void SetParameters(int pinAmount, List<int> pinOrder, bool respectOrder, bool hasPick, bool hasTension, bool colorCodePins, bool showTensionIndicator, bool showPinPositionIndicator, CutoutState cutoutState, bool enableCustomization, bool keyAnimation)
     {
         SetPinFundamentals(pinAmount, pinOrder, respectOrder);
-        SetTools(hasPick, hasTension);
+        SetTools(hasPick, hasTension, keyAnimation);
         SetHelp(colorCodePins, showTensionIndicator, showPinPositionIndicator, cutoutState, enableCustomization);
     }
 
@@ -61,11 +61,13 @@ public class LockBuilder : MonoBehaviour
         PinManager.Instance.SetRespectOrder(respectOrder);
     }
 
-    void SetTools(bool hasPick, bool hasTension)
+    void SetTools(bool hasPick, bool hasTension, bool keyAnimation)
     {
         PickManager.Instance.SetHasPick(hasPick);
 
         TensionForceManager.Instance.SetHasTension(hasTension);
+
+        KeyAnimationManager.Instance.SetKey(keyAnimation);
     }
 
     void SetHelp(bool colorCodePins, bool showTensionIndicator, bool showPinPositionIndicator, CutoutState cutoutState, bool enableCustomization)
@@ -87,5 +89,7 @@ public class LockBuilder : MonoBehaviour
 
         TutorialSectionManager.Instance.EnableCustomization(enableCustomization);
     }
+
+
 
 }

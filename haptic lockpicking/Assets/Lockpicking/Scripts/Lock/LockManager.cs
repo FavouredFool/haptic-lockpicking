@@ -36,7 +36,7 @@ public class LockManager : MonoBehaviour
 
         _notNulledPinOrder = _information.PinOrder ?? PinManager.Instance.GetRandomPinOrder(_information.PinCount);
 
-        _lockBuilder.SetParameters(_information.PinCount, _notNulledPinOrder, _information.RespectOrder, _information.HasPick, _information.HasTension, _information.ColorCodePins, _information.ShowTensionIndicator, _information.ShowPinPositionIndicator, _information.CutoutState, _information.EnableCustomization);
+        _lockBuilder.SetParameters(_information.PinCount, _notNulledPinOrder, _information.RespectOrder, _information.HasPick, _information.HasTension, _information.ColorCodePins, _information.ShowTensionIndicator, _information.ShowPinPositionIndicator, _information.CutoutState, _information.EnableCustomization, _information.KeyAnimation);
 
         CalibrationManager.Instance.SetIsCalibrated(false);
     }
