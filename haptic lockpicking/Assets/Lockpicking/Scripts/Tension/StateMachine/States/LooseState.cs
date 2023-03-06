@@ -13,11 +13,13 @@ public class LooseState : State
     {
         Debug.Log("entered LooseState");
 
-        StaticTensionState = TensionState.LOOSE;
+        
     }
 
     public override void UpdateState()
     {
+        StaticTensionState = TensionState.LOOSE;
+
         if (LockManager.Lock.GetCoreController().GetLockFinished())
         {
             _tensionManager.SetState(new FinishedState(_tensionManager));

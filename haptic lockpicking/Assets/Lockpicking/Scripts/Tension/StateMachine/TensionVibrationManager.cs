@@ -46,6 +46,11 @@ public class TensionVibrationManager : MonoBehaviour
 
     private void Update()
     {
+        if (!TensionForceManager.Instance.GetHasTension())
+        {
+            return;
+        }
+
         if (Time.time - _setStopStart < _setStopDuration)
         {
             return;

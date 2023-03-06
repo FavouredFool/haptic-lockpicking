@@ -63,8 +63,9 @@ public class LockBuilder : MonoBehaviour
 
     void SetTools(bool hasPick, bool hasTension)
     {
-        Debug.Log("has Pick: " + hasPick);
-        Debug.Log("has tension: " + hasTension);
+        PickManager.Instance.SetHasPick(hasPick);
+
+        TensionForceManager.Instance.SetHasTension(hasTension);
     }
 
     void SetHelp(bool colorCodePins, bool showTensionIndicator, bool showPinPositionIndicator, CutoutState cutoutState, bool enableCustomization)
@@ -83,9 +84,6 @@ public class LockBuilder : MonoBehaviour
             SupportElementManager.Instance.TogglePickIndicator(showPinPositionIndicator);
             SupportElementManager.Instance.SetCutout((int)cutoutState);
         }
-
-
-
 
         TutorialSectionManager.Instance.EnableCustomization(enableCustomization);
     }

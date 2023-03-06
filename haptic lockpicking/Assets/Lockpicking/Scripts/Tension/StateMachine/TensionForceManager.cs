@@ -64,6 +64,8 @@ public class TensionForceManager : StateMachine
 
     private SG_HandPose _latestPose;
 
+    bool _hasTension = false;
+
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -86,6 +88,12 @@ public class TensionForceManager : StateMachine
     {
         if (LockManager.Lock == null)
         {
+            return;
+        }
+
+        if (!_hasTension)
+        {
+            StaticTensionState = TensionState.MOVABLE;
             return;
         }
 
@@ -253,6 +261,16 @@ public class TensionForceManager : StateMachine
     public void SetTensionToolActive(bool active)
     {
         LockManager.Lock.GetCoreController().GetTensionTool().gameObject.SetActive(active);
+    }
+
+    public void SetHasTension(bool hasTension)
+    {
+        _hasTension = hasTension;
+    }
+
+    public bool GetHasTension()
+    {
+        return _hasTension;
     }
 
 }

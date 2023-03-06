@@ -62,10 +62,6 @@ public class PinController : MonoBehaviour
     {
         switch(StaticTensionState)
         {
-            case TensionState.LOOSE:
-                AnimatePinActive(_keyPin);
-                AnimatePinActive(_driverPin);
-                break;
             case TensionState.MOVABLE:
                 if (_pinState == PinState.SET)
                 {
@@ -81,6 +77,10 @@ public class PinController : MonoBehaviour
             case TensionState.LOCKED:
                 AnimatePinStatic(_keyPin);
                 AnimatePinStatic(_driverPin);
+                break;
+            default:
+                AnimatePinActive(_keyPin);
+                AnimatePinActive(_driverPin);
                 break;
         }
     }

@@ -16,11 +16,14 @@ public class LockState : State
     {
         Debug.Log("entered LockState");
 
-        StaticTensionState = TensionState.LOCKED;
+        
     }
 
     public override void UpdateState()
     {
+
+        StaticTensionState = TensionState.LOCKED;
+
         if (LockManager.Lock.GetCoreController().GetLockFinished())
         {
             _tensionManager.SetState(new FinishedState(_tensionManager));

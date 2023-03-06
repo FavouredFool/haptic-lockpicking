@@ -13,11 +13,13 @@ public class MovableState : State
     {
         Debug.Log("entered TensionState");
 
-        StaticTensionState = TensionState.MOVABLE;
+        
     }
 
     public override void UpdateState()
     {
+
+        StaticTensionState = TensionState.MOVABLE;
 
         if (LockManager.Lock.GetCoreController().GetLockFinished())
         {

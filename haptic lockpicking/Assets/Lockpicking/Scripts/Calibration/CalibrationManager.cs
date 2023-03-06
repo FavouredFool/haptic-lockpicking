@@ -39,16 +39,14 @@ public class CalibrationManager : MonoBehaviour
 
     private void Start()
     {
-        _leftHandModel.SetActive(false);
-        _rightHandModel.SetActive(false);
+        _leftHandModel.SetActive(true);
+        _rightHandModel.SetActive(true);
     }
 
     void Update()
     {
         if (LockManager.Lock == null)
         {
-            _leftHandModel.SetActive(false);
-            _rightHandModel.SetActive(false);
             return;
         }
 
@@ -72,16 +70,11 @@ public class CalibrationManager : MonoBehaviour
         {
             TensionForceManager.Instance.GetTensionTool().gameObject.SetActive(_isCalibrated);
             PickManager.Instance.GetPickController().gameObject.SetActive(false);
-            _leftHandModel.SetActive(false);
-            _rightHandModel.SetActive(false);
-
         }
         else
         {
-            TensionForceManager.Instance.GetTensionTool().gameObject.SetActive(_isCalibrated);
-            PickManager.Instance.GetPickController().gameObject.SetActive(_isCalibrated);
-            _leftHandModel.SetActive(_isCalibrated);
-            _rightHandModel.SetActive(_isCalibrated);
+            TensionForceManager.Instance.GetTensionTool().gameObject.SetActive(_isCalibrated && TensionForceManager.Instance.GetHasTension());
+            PickManager.Instance.GetPickController().gameObject.SetActive(_isCalibrated && PickManager.Instance.GetHasPick());
         }
     }
 

@@ -7,6 +7,8 @@ public class PickManager : MonoBehaviour
     [SerializeField]
     Transform _pickDriver;
 
+    bool _hasPick = false;
+
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -42,5 +44,15 @@ public class PickManager : MonoBehaviour
     public Transform GetPickDriver()
     {
         return _pickDriver;
+    }
+
+    public void SetHasPick(bool hasPick)
+    {
+        _hasPick = hasPick;
+    }
+
+    public bool GetHasPick()
+    {
+        return _hasPick;
     }
 }
