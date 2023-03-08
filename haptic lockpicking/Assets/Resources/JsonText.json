@@ -2,7 +2,7 @@
     "TutorialSectionInformationList":
     [
         {
-            "info": "Um ein \"Pin-Tumbler\"-Schloss zu öffnen, muss der \"Core\" (Innenteil des Schlosses) frei beweglich sein. Dies wird von \"Pins\" (Stiften) verhindert, welche in 2er-Paaren frei beweglich in das Schloss eingesetzt sind. Der Pin nahe am Schloss ist der \"Keypin\", der Pin nahe an der Feder ist der \"Driverpin\". Keypin und Driverpin sind an ihren Kanten leicht abgerundet. Wenn alle Pin-Paare in der exakt korrekten vertikalen Position, auf der \"Sheerline\", sind, kann der Core sich drehen, da weder Keypin noch Driverpin ihn aufhalten. Ein Schlüssel ist so konstruiert, dass er alle Pin-Paare gleichzeitig auf die korrekte Position hebt.",
+            "info":"<b><size=120%>Trivia</size></b>\n\nUm ein <color=#f7e7ce>\"Pin-Tumbler\"-Schloss</color> zu öffnen, muss der <color=#f1c232>Core</color> frei beweglich sein. Dies wird von den <color=#6fa8dc>Pin-Paaren</color> verhindert, welche in das <color=#f7e7ce>Schloss</color> eingesetzt und mit einer <color=#eafffb>Feder</color> in Position gehalten werden. Ein <color=#6fa8dc>Pin-Paar</color> besteht aus zwei <color=#6fa8dc>Pins</color>: Der <color=#9fc5e8>Key-Pin</color> liegt näher am <color=#f7e7ce>Schloss</color> und wird von den Zähnen des Schlüssels berührt. Der <color=#3d85c6>Driver-Pin</color> berührt hingegen die <color=#eafffb>Feder</color> und sitzt im ruhenden Zustand auf der <color=#f6b26b>Sheerline</color>, wodurch er die Bewegung des <color=#f1c232>Cores</color> verhindert.\n\nZum Öffnen des <color=#f7e7ce>Schlosses</color> müssen alle <color=#6fa8dc>Pin-Paare</color> auf die korrekte vertikale Position bewegt werden, sodass der Berührungspunkt der beiden <color=#6fa8dc>Pins</color> jedes Paares auf der <color=#f6b26b>Sheerline</color> liegt und der <color=#f1c232>Core</color> somit drehbar ist.",
             "label": "Schloss-Mechanismus",
             "pinCount": 5,
             "pinOrder": null,
@@ -17,7 +17,7 @@
             "keyAnimation": true
         },
         {
-            "info": "Zum Lockpicken muss ein \"Pick\" (Dietrich) in das Schlüsselloch bewegt werden und manuell die Pin-Paare in die korrekte Position bewegen. Wenn ein Pin-Paar in der richtigen Position feststeckt, nennt man das Pin-Paar \"SET\". Warum die Pins nicht immer von der Feder nach unten geschoben werden, wird in der nächsten Sektion klarer.",
+            "info": "",
             "label": "Dietrich-Bewegung",
             "pinCount": 3,
             "pinOrder": null,
