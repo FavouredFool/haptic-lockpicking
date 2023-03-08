@@ -3672,7 +3672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lock: {fileID: 3252769561771166651}
-  _rotateSpeed: 2
+  _rotateSpeed: 0.75
   _pick: {fileID: 6160485231507365677}
   _tensionTool: {fileID: 5977624503150204529}
   _touchPoint: {fileID: 6160485232492214131}

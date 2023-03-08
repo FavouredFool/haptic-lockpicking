@@ -560,7 +560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _goalZ: 1.63
-  _speed: 0.75
+  _speed: 1.5
 --- !u!1 &29611013
 GameObject:
   m_ObjectHideFlags: 0
@@ -2887,7 +2887,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 745, y: -435}
+  m_AnchoredPosition: {x: 751, y: -440}
   m_SizeDelta: {x: 280.19, y: 84.4682}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &227141885
@@ -23402,7 +23402,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 744, y: -274}
+  m_AnchoredPosition: {x: 750, y: -293}
   m_SizeDelta: {x: 280.1879, y: 86.6429}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2051695603
