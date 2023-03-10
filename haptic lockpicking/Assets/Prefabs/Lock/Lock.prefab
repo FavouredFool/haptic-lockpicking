@@ -1000,7 +1000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gravityForce: 9.81
-  _springForce: 23.5
+  _springForce: 30
 --- !u!54 &6160485230861981461
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1078,7 +1078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gravityForce: 9.81
-  _springForce: 23.5
+  _springForce: 30
 --- !u!54 &6160485230913622529
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1201,7 +1201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gravityForce: 9.81
-  _springForce: 23.5
+  _springForce: 30
 --- !u!54 &6160485230976062953
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2332,7 +2332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gravityForce: 9.81
-  _springForce: 23.5
+  _springForce: 30
 --- !u!54 &6160485231477623130
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3993,7 +3993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gravityForce: 9.81
-  _springForce: 23.5
+  _springForce: 30
 --- !u!54 &6160485232449204527
 Rigidbody:
   m_ObjectHideFlags: 0
