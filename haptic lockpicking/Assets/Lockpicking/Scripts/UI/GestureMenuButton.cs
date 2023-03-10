@@ -7,6 +7,8 @@ public class GestureMenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
 {
     public enum UseCase { START, NEXT, EXIT, RESET };
 
+    public enum Hand { RIGHT, LEFT, BOTH };
+
 
     [SerializeField]
     SG_BasicGesture _leftGesture;
@@ -22,6 +24,9 @@ public class GestureMenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     [SerializeField]
     UseCase _useCase;
+
+    [SerializeField]
+    Hand _hand;
 
     float _pressStartTime = float.PositiveInfinity;
 
@@ -68,6 +73,38 @@ public class GestureMenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
     }
 
     public void UpdateGestures()
+    {
+        if (_hand == Hand.BOTH)
+        {
+            BothHandsGesture();
+            return;
+        }
+
+        OneHandGesture(_hand);
+
+    }
+
+    public void OneHandGesture(Hand hand)
+    {
+        SG_BasicGesture handGesture = (hand == Hand.LEFT) ? _leftGesture : _rightGesture;
+
+        if (!handGesture)
+        {
+            return;
+        }
+
+        if (handGesture.GestureMade)
+        {
+            _pressStartTime = Time.time;
+
+        }
+        if (handGesture.GestureStopped)
+        {
+            _pressStartTime = float.PositiveInfinity;
+        }
+    }
+
+    public void BothHandsGesture()
     {
         if (!(_leftGesture != null && _rightGesture != null))
         {
