@@ -42,7 +42,6 @@ public class KeyPin : Pin
         
         if (_pickLayer == (_pickLayer | (1<<other.gameObject.layer)))
         {
-            AudioManager.Instance.Play("Pick_Hits_Pin");
             _isBeingTouched = true;
         }
 

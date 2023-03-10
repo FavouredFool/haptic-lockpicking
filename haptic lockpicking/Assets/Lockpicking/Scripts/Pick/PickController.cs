@@ -106,6 +106,7 @@ public class PickController : MonoBehaviour
 
         if (_collideAmount > 0)
         {
+            // TODO: Das bringt relativ wenig wenn der Pin sich sehr rapide bewegt. Dann hat er schon zwei Pins durchstochen und bleibt erst dann stehen.
             _pickPosition.z = Mathf.Max(_pickPosition.z, keepZ);
         }
 
@@ -185,6 +186,7 @@ public class PickController : MonoBehaviour
     {
         if (_borderLayer == (_borderLayer | (1 << collider.gameObject.layer)))
         {
+            AudioManager.Instance.Play("Pick_Hits_Pin");
             _collideAmount += 1;
         }
 
