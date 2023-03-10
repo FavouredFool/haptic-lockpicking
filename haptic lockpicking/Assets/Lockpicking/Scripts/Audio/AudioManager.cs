@@ -33,4 +33,12 @@ public class AudioManager : MonoBehaviour
         if (s == null) throw new Exception();
         s.GetSource().Play();
     }
+
+    public void PlayWithVolume(string name, float volume)
+    {
+        Sound s = Array.Find(sounds, sound => sound.GetName() == name);
+        if (s == null) throw new Exception();
+        s.GetSource().volume = volume;
+        s.GetSource().Play();
+    } 
 }

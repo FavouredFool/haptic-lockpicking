@@ -31,6 +31,10 @@ public class CoreController : MonoBehaviour
 
             _pick.SetActive(false);
 
+            AudioManager.Instance.Play("Set_Last_Pin");
+
+            AudioManager.Instance.Play("Core_After_Open");
+
             StartCoroutine(Finish());
         }
     }

@@ -560,7 +560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _goalZ: 1.63
-  _speed: 2
+  _speed: 1.5
 --- !u!1 &29611013
 GameObject:
   m_ObjectHideFlags: 0
@@ -11590,7 +11590,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cace1bf872273d4ca8eed0127d707d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - _name: Set_Pin
+    _clip: {fileID: 8300000, guid: 86f12be34c8d15741913b821bb6b6421, type: 3}
+    _volume: 1
+    _pitch: 1
+  - _name: Set_Last_Pin
+    _clip: {fileID: 8300000, guid: 51724b54e060bc8408a00b6c5255ccec, type: 3}
+    _volume: 0.75
+    _pitch: 1
+  - _name: Core_After_Open
+    _clip: {fileID: 8300000, guid: 8e13b681e4134af45908804304a100b7, type: 3}
+    _volume: 1
+    _pitch: 1
+  - _name: Pick_Hits_Pin
+    _clip: {fileID: 8300000, guid: 32b492b9c97035e4c8a032bea4824201, type: 3}
+    _volume: 0.5
+    _pitch: 1
+  - _name: Pin_Goes_Up
+    _clip: {fileID: 8300000, guid: 46bd04ae74c27ce40a669de293bced07, type: 3}
+    _volume: 1
+    _pitch: 1
 --- !u!1 &998906776
 GameObject:
   m_ObjectHideFlags: 0
@@ -20101,7 +20121,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1773323790
 BoxCollider:
   m_ObjectHideFlags: 0

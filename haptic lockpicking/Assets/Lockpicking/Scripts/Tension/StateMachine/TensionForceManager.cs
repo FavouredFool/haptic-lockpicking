@@ -231,10 +231,11 @@ public class TensionForceManager : StateMachine
         return _stateTransitionOverflowLockToTension;
     }
 
-    public void PinHasBeenSet()
+    public void PinHasJustBeenSet()
     {
         SkipTensionFramesAfterSet();
         TensionVibrationManager.Instance.SkipVibrationAfterSet();
+        AudioManager.Instance.Play("Set_Pin");        
     }
 
     public void SkipTensionFramesAfterSet()

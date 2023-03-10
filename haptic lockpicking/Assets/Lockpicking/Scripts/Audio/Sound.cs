@@ -14,7 +14,7 @@ public class Sound
     [SerializeField]
     private float _volume;
 
-    [Range(0.1f, 3f)]
+    [Range(0, 3f)]
     [SerializeField]
     private float _pitch;
 

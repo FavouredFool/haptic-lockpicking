@@ -108,7 +108,12 @@ public class PinController : MonoBehaviour
 
         if (_pinState == PinState.SET && _pinState != previousState)
         {
-            TensionForceManager.Instance.PinHasBeenSet();
+            if (LockManager.Lock.GetCoreController().GetLockFinished())
+            {
+                return;
+            }
+
+            TensionForceManager.Instance.PinHasJustBeenSet();
         }
 
         
