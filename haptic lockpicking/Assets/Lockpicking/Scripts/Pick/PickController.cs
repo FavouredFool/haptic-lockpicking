@@ -129,18 +129,33 @@ public class PickController : MonoBehaviour
         foreach (KeyPin pin in _touchedKeyPins)
         {
             int additionalIntensity = 0;
+
+
+  
             switch (pin.GetPinController().GetPinState())
             {
                 case PinController.PinState.SPRINGY:
                     additionalIntensity = 10;
                     break;
                 case PinController.PinState.BINDING:
-                    additionalIntensity = 40;
+
+                    if (PinManager.Instance.GetRespectOrder())
+                    {
+                        additionalIntensity = 40;
+                    }
+                    else
+                    {
+                        additionalIntensity = 10;
+                    }
+
                     break;
                 case PinController.PinState.SET:
                     additionalIntensity = 110;
                     break;
             }
+            
+
+
 
             vibrationIntensity += additionalIntensity;
             
