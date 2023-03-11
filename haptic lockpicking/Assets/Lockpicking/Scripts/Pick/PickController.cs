@@ -128,42 +128,32 @@ public class PickController : MonoBehaviour
 
         foreach (KeyPin pin in _touchedKeyPins)
         {
-            int additionalIntensity = 0;
-
-
-  
             switch (pin.GetPinController().GetPinState())
             {
                 case PinController.PinState.SPRINGY:
-                    additionalIntensity = 10;
+                    vibrationIntensity += 10;
                     break;
                 case PinController.PinState.BINDING:
 
                     if (PinManager.Instance.GetRespectOrder())
                     {
-                        additionalIntensity = 40;
+                        vibrationIntensity += 40;
                     }
                     else
                     {
-                        additionalIntensity = 10;
+                        vibrationIntensity += 10;
                     }
 
                     break;
                 case PinController.PinState.SET:
-                    additionalIntensity = 110;
+                    vibrationIntensity += 110;
                     break;
-            }
-            
-
-
-
-            vibrationIntensity += additionalIntensity;
-            
+            } 
         }
 
         if (touchingSet)
         {
-            if (_frameCountForThumperBuzz >= _frameAmountUntilThumb)
+            if (_frameCountForThumperBuzz >= _frameAmountUntilThumb || TensionForceManager.StaticTensionState == TensionForceManager.TensionState.LOCKED)
             {
                 PickVibrationManager.Instance.SetInsidePinVibration();
             }
