@@ -49,12 +49,6 @@ public class TensionForceManager : StateMachine
     [SerializeField, Range(0, 1)]
     private float _stateTransitionOverflowLockToTension = 0.1f;
 
-    [Header("TensionWrench Visual")]
-    [SerializeField]
-    private Transform _touchPoint;
-
-
-
     public static TensionState StaticTensionState = TensionState.LOOSE;
 
     private Vector3 _fingerPosition = Vector3.zero;
