@@ -33,6 +33,11 @@ public abstract class Pin : MonoBehaviour
         _rigidbody.AddForce(forceGlobalSpace, ForceMode.Force);
     }
 
+    public PinController GetPinController()
+    {
+        return transform.parent.GetComponent<PinController>();
+    }
+
     public Rigidbody GetRigidbody()
     {
         return _rigidbody;

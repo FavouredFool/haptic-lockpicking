@@ -1,9 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PickController : MonoBehaviour
 {
+    [Header("KeyCollisionStuff")]
+    [SerializeField]
+    LayerMask _keyPinLayer;
+
+    [SerializeField]
+    float _velocityThreshold = 0.125f;
+
+    [SerializeField]
+    int _frameAmountUntilThumb = 20;
+
+    [Header("Other Stuff")]
     [SerializeField]
     LockController _lock;
 
@@ -49,6 +61,8 @@ public class PickController : MonoBehaviour
     [SerializeField, Range(0, 20)]
     private float _rotationAngleThreshold;
 
+    List<KeyPin> _touchedKeyPins = new();
+
     Vector3 _startPosition;
 
     Vector3 _positionOffset = Vector3.zero;
@@ -64,6 +78,8 @@ public class PickController : MonoBehaviour
 
     Vector3 _pickPosition = Vector3.zero;
     Quaternion _pickRotation = Quaternion.identity;
+
+    int _frameCountForThumperBuzz = 0;
 
     public void Awake()
     {
@@ -85,6 +101,65 @@ public class PickController : MonoBehaviour
 
         transform.position = _pickPosition;
         transform.rotation = _pickRotation;
+    }
+
+    void Vibrate()
+    {
+        if (LockManager.Lock == null)
+        {
+            return;
+        }
+
+
+        // 1. Get all active collisions with keypins
+        // 2. Only take pins into account who's Velocity is higher than the threshold.
+        // 3. For each, add a set amount of intensity. Loose: 10, Binding: 40
+
+        int vibrationIntensity = 0;
+        bool touchingSet = _touchedKeyPins.Any(e => e.GetPinController().GetPinState() == PinController.PinState.SET);
+        if (touchingSet)
+        {
+            _frameCountForThumperBuzz += 1;
+        }
+        else
+        {
+            _frameCountForThumperBuzz = 0;
+        }
+
+        foreach (KeyPin pin in _touchedKeyPins)
+        {
+            int additionalIntensity = 0;
+            switch (pin.GetPinController().GetPinState())
+            {
+                case PinController.PinState.SPRINGY:
+                    additionalIntensity = 10;
+                    break;
+                case PinController.PinState.BINDING:
+                    additionalIntensity = 40;
+                    break;
+                case PinController.PinState.SET:
+                    additionalIntensity = 110;
+                    break;
+            }
+
+            vibrationIntensity += additionalIntensity;
+            
+        }
+
+        if (touchingSet)
+        {
+            if (_frameCountForThumperBuzz >= _frameAmountUntilThumb)
+            {
+                PickVibrationManager.Instance.SetInsidePinVibration();
+            }
+        }
+        else
+        {
+            PickVibrationManager.Instance.SetVibrationThisFrame(vibrationIntensity);
+        }
+        
+
+        
     }
 
     public void FixedUpdate()
@@ -111,7 +186,11 @@ public class PickController : MonoBehaviour
         }
 
         _rigidBody.MovePosition(_pickPosition);
-        _rigidBody.MoveRotation(_pickRotation);    
+        _rigidBody.MoveRotation(_pickRotation);
+
+
+        Vibrate();
+
     }
 
     public void Recalibrate()
@@ -204,6 +283,24 @@ public class PickController : MonoBehaviour
     public GameObject GetPickIndicatorCanvas()
     {
         return _pickIndicatorCanvas;
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (_keyPinLayer == (_keyPinLayer | (1 << other.gameObject.layer)))
+        {
+            Debug.Log("ENTER");
+            _touchedKeyPins.Add(other.gameObject.GetComponent<KeyPin>());
+        }
+    }
+
+    void OnCollisionExit(Collision other)
+    {
+        if (_keyPinLayer == (_keyPinLayer | (1 << other.gameObject.layer)))
+        {
+            Debug.Log("EXIT");
+            _touchedKeyPins.Remove(other.gameObject.GetComponent<KeyPin>());
+        }
     }
 
 

@@ -40,7 +40,7 @@ public class CalibrationManager : MonoBehaviour
     private void Start()
     {
         _leftHandModel.SetActive(true);
-        _rightHandModel.SetActive(true);
+        _rightHandModel.SetActive(false);
     }
 
     void Update()

@@ -1,8 +1,11 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PickManager : MonoBehaviour
 {
     public static PickManager Instance { get; private set; }
+
+    public enum PickState { NOPIN, LOOSEPIN, BINDINGPIN, INSIDEPIN }
 
     [SerializeField]
     Transform _pickDriver;
@@ -20,6 +23,10 @@ public class PickManager : MonoBehaviour
             Instance = this;
         }
     }
+
+
+
+
 
     public PickController GetPickController()
     {
@@ -55,4 +62,6 @@ public class PickManager : MonoBehaviour
     {
         return _hasPick;
     }
+
+
 }
