@@ -14855,7 +14855,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1270378241}
   m_Layer: 0
-  m_Name: ---StaticManagers---------
+  m_Name: ---Managers---------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17216,7 +17216,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pickGlove: {fileID: 1919887892}
-  _intensity: 50
+  _springyIntensity: 15
+  _bindingIntensity: 30
+  _thumperIntensity: 20
 --- !u!1 &1504608163
 GameObject:
   m_ObjectHideFlags: 0

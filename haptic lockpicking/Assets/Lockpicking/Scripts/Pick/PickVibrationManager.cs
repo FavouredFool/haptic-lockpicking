@@ -13,7 +13,13 @@ public class PickVibrationManager : MonoBehaviour
     SG_HapticGlove _pickGlove;
 
     [SerializeField]
-    int _intensity;
+    int _springyIntensity = 15;
+
+    [SerializeField]
+    int _bindingIntensity = 40;
+
+    [SerializeField]
+    int _thumperIntensity = 20;
 
     public void Awake()
     {
@@ -40,10 +46,19 @@ public class PickVibrationManager : MonoBehaviour
         SG_TimedBuzzCmd timedBuzzCmd = new(buzzCmd, Time.fixedDeltaTime * 4, 0.1f);
         _pickGlove.SendCmd(timedBuzzCmd);
 
-        TimedThumpCmd thumperCmd = new(40, Time.fixedDeltaTime * 4);
+        TimedThumpCmd thumperCmd = new(_thumperIntensity, Time.fixedDeltaTime * 4);
         _pickGlove.SendCmd(thumperCmd);
     }
 
+    public int GetSpringyIntensity()
+    {
+        return _springyIntensity;
+    }
+
+    public int GetBindingIntensity()
+    {
+        return _bindingIntensity;
+    }
 
 
 }

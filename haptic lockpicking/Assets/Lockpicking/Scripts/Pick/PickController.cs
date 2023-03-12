@@ -129,17 +129,17 @@ public class PickController : MonoBehaviour
         switch(_touchedKeyPin.GetPinController().GetPinState())
         {
             case PinController.PinState.SPRINGY:
-                vibrationIntensity = 25;
+                vibrationIntensity = PickVibrationManager.Instance.GetSpringyIntensity();
                 break;
             case PinController.PinState.BINDING:
 
                 if (PinManager.Instance.GetRespectOrder())
                 {
-                    vibrationIntensity = 50;
+                    vibrationIntensity = PickVibrationManager.Instance.GetBindingIntensity();
                 }
                 else
                 {
-                    vibrationIntensity = 25;
+                    vibrationIntensity = PickVibrationManager.Instance.GetSpringyIntensity();
                 }
 
                 break;
