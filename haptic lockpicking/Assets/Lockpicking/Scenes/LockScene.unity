@@ -10211,8 +10211,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f593bb600c362ef4ba0d6488e83dcfba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxVelocityForSet: 0.4
-  _setThreshold: 0.1
+  _maxVelocityForSet: 0.5
+  _setThreshold: 0.05
+  _velocityThresholdForPushupSound: 4
 --- !u!1 &861010923
 GameObject:
   m_ObjectHideFlags: 0

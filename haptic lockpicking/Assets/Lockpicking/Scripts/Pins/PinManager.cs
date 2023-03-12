@@ -14,6 +14,9 @@ public class PinManager : MonoBehaviour
     [SerializeField, Range(0, 1)]
     private float _setThreshold = 0.25f;
 
+    [SerializeField, Range(2, 10)]
+    private float _velocityThresholdForPushupSound = 4;
+
     List<int> _pinOrder;
     private static readonly System.Random random = new();
 
@@ -143,5 +146,10 @@ public class PinManager : MonoBehaviour
     public bool GetRespectOrder()
     {
         return _respectOrder;
+    }
+
+    public float GetVelocityThresholdForPushupSound()
+    {
+        return _velocityThresholdForPushupSound;
     }
 }

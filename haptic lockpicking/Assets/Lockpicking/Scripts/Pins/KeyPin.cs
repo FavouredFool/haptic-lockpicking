@@ -47,7 +47,7 @@ public class KeyPin : Pin
 
         if (_KeyPinBlockadeLayer == (_KeyPinBlockadeLayer | (1 << other.gameObject.layer)))
         {
-            if (_maxVelocity > 6f)
+            if (_maxVelocity >= PinManager.Instance.GetVelocityThresholdForPushupSound())
             {
                 AudioManager.Instance.PlayWithVolume("Pin_Goes_Up", MathLib.Remap(_maxVelocity, 0, 15, 0, 1));
             }
