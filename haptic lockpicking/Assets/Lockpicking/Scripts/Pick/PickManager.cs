@@ -25,9 +25,6 @@ public class PickManager : MonoBehaviour
     }
 
 
-
-
-
     public PickController GetPickController()
     {
         if (LockManager.Lock == null)

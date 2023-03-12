@@ -27,15 +27,6 @@ public class PickVibrationManager : MonoBehaviour
         }
     }
 
-
-
-    void CalculateAndSendVibration()
-    {
-
-
-        
-    }
-
     public void SetVibrationThisFrame(int intensity)
     {
             SG_BuzzCmd buzzCmd = new(new[] { true, true, false, false, false }, intensity);
@@ -49,7 +40,7 @@ public class PickVibrationManager : MonoBehaviour
         SG_TimedBuzzCmd timedBuzzCmd = new(buzzCmd, Time.fixedDeltaTime * 4, 0.1f);
         _pickGlove.SendCmd(timedBuzzCmd);
 
-        TimedThumpCmd thumperCmd = new(10, Time.fixedDeltaTime * 4);
+        TimedThumpCmd thumperCmd = new(40, Time.fixedDeltaTime * 4);
         _pickGlove.SendCmd(thumperCmd);
     }
 

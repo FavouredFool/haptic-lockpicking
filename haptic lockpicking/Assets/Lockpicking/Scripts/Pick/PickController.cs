@@ -6,8 +6,7 @@ using System.Linq;
 public class PickController : MonoBehaviour
 {
     [Header("KeyCollisionStuff")]
-    [SerializeField]
-    LayerMask _keyPinLayer;
+
 
     [SerializeField]
     float _velocityThreshold = 0.125f;
@@ -61,7 +60,7 @@ public class PickController : MonoBehaviour
     [SerializeField, Range(0, 20)]
     private float _rotationAngleThreshold;
 
-    List<KeyPin> _touchedKeyPins = new();
+    KeyPin _touchedKeyPin;
 
     Vector3 _startPosition;
 
@@ -80,6 +79,8 @@ public class PickController : MonoBehaviour
     Quaternion _pickRotation = Quaternion.identity;
 
     int _frameCountForThumperBuzz = 0;
+
+    bool _isInsidePin = false;
 
     public void Awake()
     {
@@ -111,60 +112,43 @@ public class PickController : MonoBehaviour
         }
 
 
-        // 1. Get all active collisions with keypins
-        // 2. Only take pins into account who's Velocity is higher than the threshold.
-        // 3. For each, add a set amount of intensity. Loose: 10, Binding: 40
-
-        int vibrationIntensity = 0;
-        bool touchingSet = _touchedKeyPins.Any(e => e.GetPinController().GetPinState() == PinController.PinState.SET);
-        if (touchingSet)
+        if (_isInsidePin)
         {
-            _frameCountForThumperBuzz += 1;
-        }
-        else
-        {
-            _frameCountForThumperBuzz = 0;
+            PickVibrationManager.Instance.SetInsidePinVibration();
+            return;
         }
 
-        foreach (KeyPin pin in _touchedKeyPins)
+        if (_touchedKeyPin == null)
         {
-            switch (pin.GetPinController().GetPinState())
-            {
-                case PinController.PinState.SPRINGY:
-                    vibrationIntensity += 10;
-                    break;
-                case PinController.PinState.BINDING:
-
-                    if (PinManager.Instance.GetRespectOrder())
-                    {
-                        vibrationIntensity += 40;
-                    }
-                    else
-                    {
-                        vibrationIntensity += 10;
-                    }
-
-                    break;
-                case PinController.PinState.SET:
-                    vibrationIntensity += 110;
-                    break;
-            } 
+            return;
         }
 
-        if (touchingSet)
-        {
-            if (_frameCountForThumperBuzz >= _frameAmountUntilThumb || TensionForceManager.StaticTensionState == TensionForceManager.TensionState.LOCKED)
-            {
-                PickVibrationManager.Instance.SetInsidePinVibration();
-            }
-        }
-        else
-        {
-            PickVibrationManager.Instance.SetVibrationThisFrame(vibrationIntensity);
-        }
-        
 
-        
+        int vibrationIntensity;
+
+        switch(_touchedKeyPin.GetPinController().GetPinState())
+        {
+            case PinController.PinState.SPRINGY:
+                vibrationIntensity = 25;
+                break;
+            case PinController.PinState.BINDING:
+
+                if (PinManager.Instance.GetRespectOrder())
+                {
+                    vibrationIntensity = 50;
+                }
+                else
+                {
+                    vibrationIntensity = 25;
+                }
+
+                break;
+            default:
+                vibrationIntensity = 0;
+                break;
+        }
+
+        PickVibrationManager.Instance.SetVibrationThisFrame(vibrationIntensity);
     }
 
     public void FixedUpdate()
@@ -273,8 +257,6 @@ public class PickController : MonoBehaviour
             AudioManager.Instance.Play("Pick_Hits_Pin");
             _collideAmount += 1;
         }
-
-        
     }
 
     private void OnTriggerExit(Collider collider)
@@ -290,23 +272,13 @@ public class PickController : MonoBehaviour
         return _pickIndicatorCanvas;
     }
 
-    void OnCollisionEnter(Collision other)
+    public void SetTouchedPin(KeyPin pin)
     {
-        if (_keyPinLayer == (_keyPinLayer | (1 << other.gameObject.layer)))
-        {
-            Debug.Log("ENTER");
-            _touchedKeyPins.Add(other.gameObject.GetComponent<KeyPin>());
-        }
+        _touchedKeyPin = pin;
     }
 
-    void OnCollisionExit(Collision other)
+    public void SetIsInsidePin(bool isInsidePin)
     {
-        if (_keyPinLayer == (_keyPinLayer | (1 << other.gameObject.layer)))
-        {
-            Debug.Log("EXIT");
-            _touchedKeyPins.Remove(other.gameObject.GetComponent<KeyPin>());
-        }
+        _isInsidePin = isInsidePin;
     }
-
-
 }
