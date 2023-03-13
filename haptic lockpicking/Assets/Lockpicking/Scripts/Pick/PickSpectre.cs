@@ -3,31 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class PickController : MonoBehaviour
+public class PickSpectre : MonoBehaviour
 {
     readonly float CIRCLERADIUSFOROFFSET = 1.7f;
 
     [SerializeField]
-    PickSpectre _pickSpectre;
-
-    [Header("Other Stuff")]
-    [SerializeField]
-    Transform _trackerAttachPoint;
+    PickController _pick;
 
     [SerializeField]
-    LockController _lock;
-
-    [SerializeField]
-    private MeshRenderer _meshRenderer;
-
-    [SerializeField]
-    private MeshCollider _meshCollider;
-
-    [SerializeField]
-    private GameObject _pickIndicatorCanvas;
-
-    [SerializeField]
-    private LayerMask _borderLayer;
+    GameObject _spectreVisual;
 
     [SerializeField]
     private float _physicsMoveSpeed = 1;
@@ -59,8 +43,6 @@ public class PickController : MonoBehaviour
     [SerializeField, Range(0, 20)]
     private float _rotationAngleThreshold;
 
-    KeyPin _touchedKeyPin;
-
     Vector3 _startPosition;
 
     Vector3 _positionOffset = Vector3.zero;
@@ -72,13 +54,15 @@ public class PickController : MonoBehaviour
 
     Rigidbody _rigidBody;
 
-    int _collideAmount = 0;
-
     Vector3 _pickPosition = Vector3.zero;
     Quaternion _pickRotation = Quaternion.identity;
 
-    bool _isInsidePin = false;
+    bool _isOOB = false;
 
+    bool _isInitialized = false;
+
+    bool _rotationOOB = false;
+    bool _positionOOB = false;
 
     public void Awake()
     {
@@ -89,8 +73,11 @@ public class PickController : MonoBehaviour
         _viewRotation = CameraManager.Instance.GetCamera().transform.rotation * Quaternion.Euler(new Vector3(180, 0, 180));
 
         _rigidBody = GetComponent<Rigidbody>();
+    }
 
-        _pickSpectre.gameObject.SetActive(true);
+    public void Start()
+    {
+        _spectreVisual.SetActive(false);
     }
 
     public void OnEnable()
@@ -102,67 +89,20 @@ public class PickController : MonoBehaviour
         transform.rotation = _pickRotation;
     }
 
-    void Vibrate()
+    public void Update()
     {
-        if (LockManager.Lock == null)
-        {
-            return;
-        }
-
-
-        if (_isInsidePin)
-        {
-            PickVibrationManager.Instance.SetInsidePinVibration();
-            return;
-        }
-
-        if (_touchedKeyPin == null)
-        {
-            return;
-        }
-
-
-        int vibrationIntensity;
-
-        switch(_touchedKeyPin.GetPinController().GetPinState())
-        {
-            case PinController.PinState.SPRINGY:
-                vibrationIntensity = PickVibrationManager.Instance.GetSpringyIntensity();
-                break;
-            case PinController.PinState.BINDING:
-
-                if (PinManager.Instance.GetRespectOrder())
-                {
-                    vibrationIntensity = PickVibrationManager.Instance.GetBindingIntensity();
-                }
-                else
-                {
-                    vibrationIntensity = PickVibrationManager.Instance.GetSpringyIntensity();
-                }
-
-                break;
-            default:
-                vibrationIntensity = 0;
-                break;
-        }
-
-        PickVibrationManager.Instance.SetVibrationThisFrame(vibrationIntensity);
+        _spectreVisual.SetActive(_isOOB && _isInitialized);
     }
 
     public void FixedUpdate()
     {
         MovePick();
-        Vibrate();
     }
-
 
     public void MovePick()
     {
         Quaternion goalRotation = CalculateRotation();
         Vector3 goalPosition = CalculatePosition(goalRotation);
-        
-        
-        float keepZ = _pickPosition.z;
 
         if (Vector3.Distance(_pickPosition, goalPosition) > _deltaMoveThreshold)
         {
@@ -174,16 +114,10 @@ public class PickController : MonoBehaviour
             _pickRotation = Quaternion.RotateTowards(_pickRotation, goalRotation, _physicsRotateSpeed);
         }
 
-        if (_collideAmount > 0)
-        {
-            // TODO: Das bringt relativ wenig wenn der Pin sich sehr rapide bewegt. Dann hat er schon zwei Pins durchstochen und bleibt erst dann stehen.
-            _pickPosition.z = Mathf.Max(_pickPosition.z, keepZ);
-        }
-        
-
-
         _rigidBody.MovePosition(_pickPosition);
         _rigidBody.MoveRotation(_pickRotation);
+
+        _isOOB = _positionOOB || _rotationOOB || _pick.GetCollideAmount() > 0;
     }
 
 
@@ -194,14 +128,19 @@ public class PickController : MonoBehaviour
 
         _rotationOffset = Quaternion.Inverse(PickManager.Instance.GetPickDriver().transform.rotation) * _startRotation;
 
-        _pickSpectre.Recalibrate();
+        _isInitialized = true;
     }
 
     public Quaternion CalculateRotation()
     {
         Quaternion absoluteRotation = PickManager.Instance.GetPickDriver().rotation * _rotationOffset;
         Swing_Twist_Decomposition(absoluteRotation, Vector3.right, out Quaternion swing, out Quaternion twist);
-        return Quaternion.RotateTowards(_startRotation, twist, _rotationAngleThreshold);
+
+        float angle = Quaternion.Angle(_startRotation, twist);
+
+        _rotationOOB = angle > _rotationAngleThreshold;
+
+        return Quaternion.RotateTowards(_startRotation, twist, float.PositiveInfinity);
     }
 
     public Vector3 CalculatePosition(Quaternion goalRotation)
@@ -225,16 +164,15 @@ public class PickController : MonoBehaviour
 
         Vector3 offsettedPosition = new Vector3(0, absolutePosition.y - verticalOffset, absolutePosition.z + horizontalOffset);
 
+
         float positionUp = Vector3.Dot(Vector3.up, offsettedPosition);
         float positionForward = Vector3.Dot(Vector3.forward, offsettedPosition);
 
-        float _clampedUp = Mathf.Clamp(positionUp, _startPosition.y - _downBoundsThreshold, _startPosition.y + _upBoundsThreshold);
-        float _clampedForward = Mathf.Clamp(positionForward, _startPosition.z - _backBoundsThreshold, _startPosition.z + _forwardBoundsThreshold);
+        _positionOOB = (positionUp < _startPosition.y - _downBoundsThreshold || positionUp > _startPosition.y + _upBoundsThreshold || positionForward < _startPosition.z - _backBoundsThreshold || positionForward > _startPosition.z + _forwardBoundsThreshold);
 
-        Vector3 offsettedAndClampedPosition = new Vector3(0, _clampedUp, _clampedForward);
+        Vector3 offSettedAndClampedPosition = new Vector3(0, positionUp, positionForward);
 
-        return offsettedAndClampedPosition;
-
+        return offSettedAndClampedPosition;
     }
 
     Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Quaternion rotation)
@@ -286,46 +224,4 @@ void Swing_Twist_Decomposition(Quaternion rotation, Vector3 direction, out Quate
 
     }
 
-    private void OnTriggerEnter(Collider collider)
-    {
-        if (_borderLayer == (_borderLayer | (1 << collider.gameObject.layer)))
-        {
-            AudioManager.Instance.Play("Pick_Hits_Pin");
-            _collideAmount += 1;
-        }
-    }
-
-    private void OnTriggerExit(Collider collider)
-    {
-        if (_borderLayer == (_borderLayer | (1 << collider.gameObject.layer)))
-        {
-            _collideAmount -= 1;
-        }
-    }
-
-    public GameObject GetPickIndicatorCanvas()
-    {
-        return _pickIndicatorCanvas;
-    }
-
-    public void SetTouchedPin(KeyPin pin)
-    {
-        _touchedKeyPin = pin;
-    }
-
-    public void SetIsInsidePin(bool isInsidePin)
-    {
-        _isInsidePin = isInsidePin;
-    }
-
-    public void TurnPickOff()
-    {
-        _pickSpectre.gameObject.SetActive(false);
-        gameObject.SetActive(false);
-    }
-
-    public int GetCollideAmount()
-    {
-        return _collideAmount;
-    }
 }

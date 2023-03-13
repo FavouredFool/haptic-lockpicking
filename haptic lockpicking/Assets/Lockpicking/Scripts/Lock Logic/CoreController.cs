@@ -13,7 +13,7 @@ public class CoreController : MonoBehaviour
     private float _rotateSpeed = 1f;
 
     [SerializeField]
-    GameObject _pick;
+    PickController _pick;
 
     [SerializeField]
     Transform _tensionTool;
@@ -29,7 +29,8 @@ public class CoreController : MonoBehaviour
         {
             _lockFinished = true;
 
-            _pick.SetActive(false);
+
+            _pick.TurnPickOff();
 
             AudioManager.Instance.Play("Set_Last_Pin");
 

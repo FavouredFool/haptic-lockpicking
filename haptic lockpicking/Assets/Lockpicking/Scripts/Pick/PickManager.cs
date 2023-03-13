@@ -35,6 +35,16 @@ public class PickManager : MonoBehaviour
         return LockManager.Lock.GetPickController();
     }
 
+    public PickSpectre GetPickSpectre()
+    {
+        if (LockManager.Lock == null)
+        {
+            return null;
+        }
+
+        return LockManager.Lock.GetPickSpectre();
+    }
+
     public GameObject GetPickIndicatorCanvas()
     {
         if (LockManager.Lock == null)

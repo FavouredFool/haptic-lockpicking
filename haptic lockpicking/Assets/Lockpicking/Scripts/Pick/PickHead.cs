@@ -31,7 +31,6 @@ public class PickHead : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other);
         if (_keyPinLayer == (_keyPinLayer | (1 << other.gameObject.layer)))
         {
             _pickController.SetTouchedPin(other.gameObject.GetComponent<KeyPin>());

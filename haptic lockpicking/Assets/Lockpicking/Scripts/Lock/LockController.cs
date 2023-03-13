@@ -10,6 +10,9 @@ public class LockController : MonoBehaviour
     PickController _pickController;
 
     [SerializeField]
+    PickSpectre _pickSpectre;
+
+    [SerializeField]
     CoreController _coreController;
 
     [SerializeField]
@@ -33,6 +36,11 @@ public class LockController : MonoBehaviour
     public PickController GetPickController()
     {
         return _pickController;
+    }
+
+    public PickSpectre GetPickSpectre()
+    {
+        return _pickSpectre;
     }
 
     public CoreController GetCoreController()

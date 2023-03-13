@@ -45,6 +45,8 @@ public class CalibrationManager : MonoBehaviour
 
     void Update()
     {
+        _rightHandModel.SetActive(false);
+
         if (LockManager.Lock == null)
         {
             return;
@@ -75,6 +77,7 @@ public class CalibrationManager : MonoBehaviour
         {
             TensionForceManager.Instance.GetTensionTool().gameObject.SetActive(_isCalibrated && TensionForceManager.Instance.GetHasTension());
             PickManager.Instance.GetPickController().gameObject.SetActive(_isCalibrated && PickManager.Instance.GetHasPick());
+            PickManager.Instance.GetPickSpectre().gameObject.SetActive(_isCalibrated && PickManager.Instance.GetHasPick());
         }
     }
 
