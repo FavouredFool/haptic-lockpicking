@@ -17,7 +17,6 @@ public class PickHead : MonoBehaviour
     {
         if (_keyPinBorder == (_keyPinBorder | (1 << other.gameObject.layer)))
         {
-            Debug.Log("ENTER Border");
             _pickController.SetIsInsidePin(true);
         }
     }
@@ -26,7 +25,6 @@ public class PickHead : MonoBehaviour
     {
         if (_keyPinBorder == (_keyPinBorder | (1 << other.gameObject.layer)))
         {
-            Debug.Log("EXIT Border");
             _pickController.SetIsInsidePin(false);
         }
     }
@@ -36,7 +34,6 @@ public class PickHead : MonoBehaviour
         Debug.Log(other);
         if (_keyPinLayer == (_keyPinLayer | (1 << other.gameObject.layer)))
         {
-            Debug.Log("ENTER Pin");
             _pickController.SetTouchedPin(other.gameObject.GetComponent<KeyPin>());
         }
     }
@@ -45,7 +42,6 @@ public class PickHead : MonoBehaviour
     {
         if (_keyPinLayer == (_keyPinLayer | (1 << other.gameObject.layer)))
         {
-            Debug.Log("EXIT Pin");
             _pickController.SetTouchedPin(null);
         }
     }

@@ -12,9 +12,6 @@ public class PickController : MonoBehaviour
     [SerializeField]
     float _velocityThreshold = 0.125f;
 
-    [SerializeField]
-    int _frameAmountUntilThumb = 20;
-
     [Header("Other Stuff")]
     [SerializeField]
     Transform _trackerAttachPoint;
@@ -166,7 +163,7 @@ public class PickController : MonoBehaviour
         Quaternion goalRotation = CalculateRotation();
         Vector3 goalPosition = CalculatePosition(goalRotation);
         
-        /*
+        
         float keepZ = _pickPosition.z;
 
         if (Vector3.Distance(_pickPosition, goalPosition) > _deltaMoveThreshold)
@@ -184,11 +181,11 @@ public class PickController : MonoBehaviour
             // TODO: Das bringt relativ wenig wenn der Pin sich sehr rapide bewegt. Dann hat er schon zwei Pins durchstochen und bleibt erst dann stehen.
             _pickPosition.z = Mathf.Max(_pickPosition.z, keepZ);
         }
-        */
+        
 
 
-        _rigidBody.MovePosition(goalPosition);
-        _rigidBody.MoveRotation(goalRotation);
+        _rigidBody.MovePosition(_pickPosition);
+        _rigidBody.MoveRotation(_pickRotation);
     }
 
 
@@ -204,7 +201,7 @@ public class PickController : MonoBehaviour
     {
         Quaternion absoluteRotation = PickManager.Instance.GetPickDriver().rotation * _rotationOffset;
         Swing_Twist_Decomposition(absoluteRotation, Vector3.right, out Quaternion swing, out Quaternion twist);
-        return Quaternion.RotateTowards(_startRotation, twist, float.PositiveInfinity);
+        return Quaternion.RotateTowards(_startRotation, twist, _rotationAngleThreshold);
     }
 
     public Vector3 CalculatePosition(Quaternion goalRotation)
@@ -214,7 +211,10 @@ public class PickController : MonoBehaviour
         float positionUp = Vector3.Dot(Vector3.up, threeD_Position);
         float positionForward = Vector3.Dot(Vector3.forward, threeD_Position);
 
-        _absolutePosition = new Vector3(0, positionUp, positionForward);
+        float _clampedUp = Mathf.Clamp(positionUp, _startPosition.y - _downBoundsThreshold, _startPosition.y + _upBoundsThreshold);
+        float _clampedForward = Mathf.Clamp(positionForward, _startPosition.z - _backBoundsThreshold, _startPosition.z + _forwardBoundsThreshold);
+
+        _absolutePosition = new Vector3(0, _clampedUp, _clampedForward);
 
 
         // hier muss die Rotation eingerechnet werden, da durch den Offset zwischen Pivot und Tracker Rotation des Pivots zu Bewegungsänderung des Trackers führt
@@ -235,21 +235,12 @@ public class PickController : MonoBehaviour
         Vector3 offsettedPosition = new Vector3(0, _absolutePosition.y - verticalOffset, _absolutePosition.z + horizontalOffset);
 
         return offsettedPosition;
-        
-        float _clampedUp = Mathf.Clamp(positionUp, _startPosition.y - _downBoundsThreshold, _startPosition.y + _upBoundsThreshold);
-        float _clampedForward = Mathf.Clamp(positionForward, _startPosition.z - _backBoundsThreshold, _startPosition.z + _forwardBoundsThreshold);
+
+        //float _clampedUp = Mathf.Clamp(positionUp, _startPosition.y - _downBoundsThreshold, _startPosition.y + _upBoundsThreshold);
+        //float _clampedForward = Mathf.Clamp(positionForward, _startPosition.z - _backBoundsThreshold, _startPosition.z + _forwardBoundsThreshold);
 
         //return new(0, _clampedUp, _clampedForward);
-        
-    }
 
-    Vector3 RotatePointAroundPivot2D(Vector2 point, Vector2 pivot, Quaternion rotation)
-    {
-        // https://answers.unity.com/questions/532297/rotate-a-vector-around-a-certain-point.html
-        Vector2 dir = point - pivot; // get point direction relative to pivot
-        dir = rotation * dir; // rotate it
-        point = dir + pivot; // calculate rotated point
-        return point; // return it
     }
 
     Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Quaternion rotation)

@@ -2572,9 +2572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63bb29136f48a7544923f80fbc229377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _circleRadius: 1.7
   _velocityThreshold: 0
-  _frameAmountUntilThumb: 20
   _trackerAttachPoint: {fileID: 45256804018338629}
   _lock: {fileID: 3252769561771166651}
   _meshRenderer: {fileID: 4861187880178637852}
@@ -2587,12 +2585,12 @@ MonoBehaviour:
   _physicsRotateSpeed: 45
   _deltaMoveThreshold: 0.005
   _deltaRotateThreshold: 0.0000001
-  _distanceMultiplicator: 30
+  _distanceMultiplicator: 45
   _upBoundsThreshold: 0.35
   _downBoundsThreshold: 0.35
   _forwardBoundsThreshold: 0.5
   _backBoundsThreshold: 3
-  _rotationAngleThreshold: 10
+  _rotationAngleThreshold: 7
 --- !u!1 &6160485231561184795
 GameObject:
   m_ObjectHideFlags: 0
