@@ -5,8 +5,9 @@ using System.Linq;
 
 public class PickController : MonoBehaviour
 {
-    [Header("KeyCollisionStuff")]
+    readonly float CIRCLERADIUSFOROFFSET = 1.7f;
 
+    [Header("KeyCollisionStuff")]
 
     [SerializeField]
     float _velocityThreshold = 0.125f;
@@ -15,6 +16,9 @@ public class PickController : MonoBehaviour
     int _frameAmountUntilThumb = 20;
 
     [Header("Other Stuff")]
+    [SerializeField]
+    Transform _trackerAttachPoint;
+
     [SerializeField]
     LockController _lock;
 
@@ -78,9 +82,11 @@ public class PickController : MonoBehaviour
     Vector3 _pickPosition = Vector3.zero;
     Quaternion _pickRotation = Quaternion.identity;
 
-    int _frameCountForThumperBuzz = 0;
-
     bool _isInsidePin = false;
+
+    Vector3 _rotatedTrackerPosition = Vector3.zero;
+
+    Vector3 _absolutePosition = Vector3.zero;
 
     public void Awake()
     {
@@ -91,15 +97,13 @@ public class PickController : MonoBehaviour
         _viewRotation = CameraManager.Instance.GetCamera().transform.rotation * Quaternion.Euler(new Vector3(180, 0, 180));
 
         _rigidBody = GetComponent<Rigidbody>();
-
-        
     }
 
     public void OnEnable()
     {
-        _pickPosition = CalculatePosition();
         _pickRotation = CalculateRotation();
-
+        _pickPosition = CalculatePosition(_pickRotation);
+        
         transform.position = _pickPosition;
         transform.rotation = _pickRotation;
     }
@@ -153,9 +157,16 @@ public class PickController : MonoBehaviour
 
     public void FixedUpdate()
     {
-        Vector3 goalPosition = CalculatePosition();
-        Quaternion goalRotation = CalculateRotation();
+        MovePick();
+        Vibrate();
+    }
 
+    public void MovePick()
+    {
+        Quaternion goalRotation = CalculateRotation();
+        Vector3 goalPosition = CalculatePosition(goalRotation);
+        
+        /*
         float keepZ = _pickPosition.z;
 
         if (Vector3.Distance(_pickPosition, goalPosition) > _deltaMoveThreshold)
@@ -173,14 +184,14 @@ public class PickController : MonoBehaviour
             // TODO: Das bringt relativ wenig wenn der Pin sich sehr rapide bewegt. Dann hat er schon zwei Pins durchstochen und bleibt erst dann stehen.
             _pickPosition.z = Mathf.Max(_pickPosition.z, keepZ);
         }
-
-        _rigidBody.MovePosition(_pickPosition);
-        _rigidBody.MoveRotation(_pickRotation);
+        */
 
 
-        Vibrate();
-
+        _rigidBody.MovePosition(goalPosition);
+        _rigidBody.MoveRotation(goalRotation);
     }
+
+
 
     public void Recalibrate()
     {
@@ -193,38 +204,78 @@ public class PickController : MonoBehaviour
     {
         Quaternion absoluteRotation = PickManager.Instance.GetPickDriver().rotation * _rotationOffset;
         Swing_Twist_Decomposition(absoluteRotation, Vector3.right, out Quaternion swing, out Quaternion twist);
-        return Quaternion.RotateTowards(_startRotation, twist, _rotationAngleThreshold);
+        return Quaternion.RotateTowards(_startRotation, twist, float.PositiveInfinity);
     }
 
-    public Vector3 CalculatePosition()
+    public Vector3 CalculatePosition(Quaternion goalRotation)
     {
-        Vector3 absolutePosition = ((_viewRotation * PickManager.Instance.GetPickDriver().position) * _distanceMultiplicator) - _positionOffset;
+        Vector3 threeD_Position = ((_viewRotation * PickManager.Instance.GetPickDriver().position) * _distanceMultiplicator) - _positionOffset;
+
+        float positionUp = Vector3.Dot(Vector3.up, threeD_Position);
+        float positionForward = Vector3.Dot(Vector3.forward, threeD_Position);
+
+        _absolutePosition = new Vector3(0, positionUp, positionForward);
 
 
-        float positionUp = Vector3.Dot(Vector3.up, absolutePosition);
+        // hier muss die Rotation eingerechnet werden, da durch den Offset zwischen Pivot und Tracker Rotation des Pivots zu Bewegungsänderung des Trackers führt
+
+        Vector3 baseTrackerPosition = _absolutePosition + new Vector3(0, 0, CIRCLERADIUSFOROFFSET);
+        _rotatedTrackerPosition = RotatePointAroundPivot(baseTrackerPosition, _absolutePosition, goalRotation);
+
+        Vector3 direction = _rotatedTrackerPosition - _absolutePosition;
+
+        float angle = Vector3.SignedAngle(Vector3.forward, direction, Vector3.left);
+
+        float a = Mathf.Sin(Mathf.Deg2Rad * angle) * CIRCLERADIUSFOROFFSET;
+        float b = Mathf.Cos(Mathf.Deg2Rad * angle) * CIRCLERADIUSFOROFFSET;
+
+        float verticalOffset = a;
+        float horizontalOffset = CIRCLERADIUSFOROFFSET - b;
+
+        Vector3 offsettedPosition = new Vector3(0, _absolutePosition.y - verticalOffset, _absolutePosition.z + horizontalOffset);
+
+        return offsettedPosition;
+        
         float _clampedUp = Mathf.Clamp(positionUp, _startPosition.y - _downBoundsThreshold, _startPosition.y + _upBoundsThreshold);
-
-        float positionForward = Vector3.Dot(Vector3.forward, absolutePosition);
         float _clampedForward = Mathf.Clamp(positionForward, _startPosition.z - _backBoundsThreshold, _startPosition.z + _forwardBoundsThreshold);
 
-        return new(0, _clampedUp, _clampedForward);
+        //return new(0, _clampedUp, _clampedForward);
+        
+    }
+
+    Vector3 RotatePointAroundPivot2D(Vector2 point, Vector2 pivot, Quaternion rotation)
+    {
+        // https://answers.unity.com/questions/532297/rotate-a-vector-around-a-certain-point.html
+        Vector2 dir = point - pivot; // get point direction relative to pivot
+        dir = rotation * dir; // rotate it
+        point = dir + pivot; // calculate rotated point
+        return point; // return it
+    }
+
+    Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Quaternion rotation)
+    {
+        // https://answers.unity.com/questions/532297/rotate-a-vector-around-a-certain-point.html
+        Vector3 dir = point - pivot; // get point direction relative to pivot
+        dir = rotation * dir; // rotate it
+        point = dir + pivot; // calculate rotated point
+        return point; // return it
     }
 
 
-    /**
-     * https://stackoverflow.com/questions/3684269/component-of-a-quaternion-rotation-around-an-axis
-   Decompose the rotation on to 2 parts.
-   1. Twist - rotation around the "direction" vector
-   2. Swing - rotation around axis that is perpendicular to "direction" vector
-   The rotation can be composed back by 
-   rotation = swing * twist
+/**
+ * https://stackoverflow.com/questions/3684269/component-of-a-quaternion-rotation-around-an-axis
+Decompose the rotation on to 2 parts.
+1. Twist - rotation around the "direction" vector
+2. Swing - rotation around axis that is perpendicular to "direction" vector
+The rotation can be composed back by 
+rotation = swing * twist
 
-   has singularity in case of swing_rotation close to 180 degrees rotation.
-   if the input quaternion is of non-unit length, the outputs are non-unit as well
-   otherwise, outputs are both unit
-    */
+has singularity in case of swing_rotation close to 180 degrees rotation.
+if the input quaternion is of non-unit length, the outputs are non-unit as well
+otherwise, outputs are both unit
+*/
 
-    void Swing_Twist_Decomposition(Quaternion rotation, Vector3 direction, out Quaternion swing, out Quaternion twist)
+void Swing_Twist_Decomposition(Quaternion rotation, Vector3 direction, out Quaternion swing, out Quaternion twist)
     {
         Vector3 rotationVector = new(rotation.x, rotation.y, rotation.z);
         Vector3 p = Vector3.Project(rotationVector, direction);
@@ -280,5 +331,14 @@ public class PickController : MonoBehaviour
     public void SetIsInsidePin(bool isInsidePin)
     {
         _isInsidePin = isInsidePin;
+    }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(_absolutePosition, 1);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 1);
+        //Gizmos.DrawWireSphere(_rotatedTrackerPosition, 1);
     }
 }
