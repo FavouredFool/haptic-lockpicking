@@ -46,11 +46,21 @@ public class KeyAnimationManager : MonoBehaviour
         {
             yield return null;
 
+            if (_key == null)
+            {
+                break;
+            }
+
             Vector3 movePosition = _key.transform.position;
 
             movePosition.z = Mathf.MoveTowards(_key.transform.position.z, _goalZ, _speed * Time.deltaTime);
 
             _key.MovePosition(movePosition);
+
+            if (_key.transform.position.z == _goalZ)
+            {
+                break;
+            }
 
         }
         

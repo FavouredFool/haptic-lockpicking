@@ -8,7 +8,7 @@ public class SupportElementManager : MonoBehaviour
     public static SupportElementManager Instance { get; private set; }
 
     [SerializeField]
-    GameObject _forceIndicatorCanvas;
+    GameObject _forceIndicatorSlider;
 
     [SerializeField]
     GestureMenuToggle _pinColorToggle;
@@ -41,12 +41,16 @@ public class SupportElementManager : MonoBehaviour
 
     public void ToggleForceIndicator(bool active)
     {
-        _forceIndicatorCanvas.SetActive(active);
+        _forceIndicatorSlider.SetActive(active);
     }
 
     public void TogglePickIndicator(bool active)
     {
-        PickManager.Instance.GetPickIndicatorCanvas().SetActive(active);
+        if (PickManager.Instance.GetPickIndicatorCanvas() != null)
+        {
+            PickManager.Instance.GetPickIndicatorCanvas().SetActive(active);
+        }
+        
     }
 
     public void SetCutout(int cutoutInt)

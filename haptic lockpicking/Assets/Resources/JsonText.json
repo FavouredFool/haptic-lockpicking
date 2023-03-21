@@ -107,6 +107,21 @@
             "keyAnimation": false
         },
         {
+            "info": "Platzhalter - hier sollte sowohl ein Video als auch ein Text stehen, der genauer darauf eingeht wie man mit Audio und einfachen Tricks sich im Schoss zurecht findet.",
+            "label": "Hilfe durch Audio",
+            "pinCount": 4,
+            "pinOrder": [1, 4, 2, 3],
+            "respectOrder": true,
+            "hasPick": true,
+            "hasTension": true,
+            "colorCodePins": false,
+            "showTensionIndicator":false,
+            "showPinPositionIndicator":false,
+            "cutoutState": "Partial",
+            "enableCustomization": false,
+            "keyAnimation": false
+        },
+        {
             "info": "<voffset=0.25em><b><size=120%>Trivia</size></b></voffset>\nAuditives Feedback hilft dabei, sich im Schloss zu orientieren. Das <color=#AFD095>Setten</color> eines <color=#E0F5FF>Pins</color> macht oftmals ein metallisches Schnack-Geräusch, da das <color=#E0F5FF>Pin-Paar</color> auseinander gedrückt wird. Ebenso macht ein <color=#AFD095>nicht-gesettetes</color> <color=#E0F5FF>Pin-Paar</color> ein Geräusch, wenn es von der Feder rapide in die Ausgangsposition gedrückt wird nachdem ein <color=#FFB3D4>Pick</color> das <color=#E0F5FF>Pin-Paar</color> heruntergedrückt hat.\n\n<voffset=0.25em><b><size=120%>Software</size></b></voffset>\nDie 4 vordersten <color=#E0F5FF>Pins</color> müssen in dieser Sektion gesetzt werden. Die Markierungen helfen, um sich im Schloss zu orientieren.\n\n<voffset=0.25em><b><size=120%>Tipps</size></b></voffset>\n> Tippe mit dem <color=#FFB3D4>Pick</color> vor den ersten <color=#E0F5FF>Key-Pin</color> und bewege dich von dieser Position aus nach oben und greife den <color=#E0F5FF>Pin</color> mit der Spitze des <color=#FFB3D4>Picks</color>. Wiederhole dies für jeden <color=#E0F5FF>Pin</color> und du weißt immer exakt wo du dich im Schloss befindest.\n\n> Wenn du nicht weißt auf welchen <color=#E0F5FF>Pin</color> du dich mit der <color=#FFB3D4>Pick</color> befindest, kannst du in einem langsamen, gleichmäßigen Tempo den <color=#FFB3D4>Pick</color> zurück in Richtung des Schlüssellochs führen und hören wie jedes <color=#E0F5FF>Pin-Paar</color> von der Feder an die Ausgangsposition befördert wird. Damit kannst du die <color=#E0F5FF>Pin-Anzahl</color> zählen und außerdem hören welche <color=#E0F5FF>Pins</color> <color=#AFD095>gesettet</color> sind, da sie keinen Sound machen - sich also nicht zurückbewegen.",
             "label": "Keine Sichtbarkeit",
             "pinCount": 4,

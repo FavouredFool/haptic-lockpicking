@@ -7,6 +7,8 @@ public class TutorialSectionManager : MonoBehaviour
 {
     public static TutorialSectionManager Instance { get; private set; }
 
+    [SerializeField]
+    GameObject _forceIndicatorCanvas;
 
     [SerializeField]
     TutorialUI _tutorialUI;
@@ -55,10 +57,7 @@ public class TutorialSectionManager : MonoBehaviour
     {
         _tutorialSection = JsonConvert.DeserializeObject<TutorialSections>(_jsonText.text);
 
-        _playCanvas.SetActive(false);
-        _startButton.SetActive(true);
-        _nextButton.SetActive(false);
-        _resetButton.SetActive(false);
+        GoToTutorialSection(0);
     }
 
     void Update()
@@ -82,6 +81,9 @@ public class TutorialSectionManager : MonoBehaviour
 
     void SetSectionUI(TutorialSectionInformation information)
     {
+        // Read from lock-JSON
+        LockBuilder.Instance.SetUI(information.ColorCodePins, information.ShowTensionIndicator, information.ShowPinPositionIndicator, information.CutoutState, information.EnableCustomization);
+
         _tutorialUI.SetSectionLabel(_activeTutorialSectionNr, information.Label);
         _tutorialUI.SetSectionText(information.Info);
 
@@ -89,13 +91,48 @@ public class TutorialSectionManager : MonoBehaviour
         _resetButton.SetActive(true);
 
         _nextButton.SetActive(_activeTutorialSectionNr < _tutorialSection.TutorialSectionInformationList.Count - 1);
+
+        EnableForceIndicatorCanvas(true);
+    }
+
+    public void DeleteLock()
+    {
+        if(LockManager.Lock != null)
+        {
+            Destroy(LockManager.Lock.gameObject);
+        }
+        
+    }
+
+    public void SetCalibrationUI()
+    {
+        // reset UI to standard -> Problem, you still want to keep the infos
+
+        DeleteLock();
+
+        _playCanvas.SetActive(false);
+
+        _tutorialUI.SetSectionText("");
+        _tutorialUI.SetSectionLabel(_activeTutorialSectionNr, _tutorialSection.TutorialSectionInformationList[_activeTutorialSectionNr].Label);
+
+        _startButton.SetActive(true);
+
+        _resetButton.SetActive(false);
+        _nextButton.SetActive(false);
+
+        EnableForceIndicatorCanvas(false);
     }
 
     public void GoToTutorialSection(int sectionNr)
     {
         _activeTutorialSectionNr = sectionNr;
+        SetCalibrationUI();
+    }
 
-        SetSectionUI(_tutorialSection.TutorialSectionInformationList[sectionNr]);
+
+    public void SetSectionUIAfterCalibration()
+    {
+        SetSectionUI(_tutorialSection.TutorialSectionInformationList[_activeTutorialSectionNr]);
         ReloadLock();
     }
 
@@ -108,6 +145,11 @@ public class TutorialSectionManager : MonoBehaviour
     public void EnableCustomization(bool enableCustomization)
     {
         _playCanvas.SetActive(enableCustomization);
+    }
+
+    public void EnableForceIndicatorCanvas(bool active)
+    {
+        _forceIndicatorCanvas.SetActive(active);
     }
 
     int GetSectionNrFromKeyPressed()
@@ -160,7 +202,7 @@ public class TutorialSectionManager : MonoBehaviour
 
     public void StartPressed()
     {
-        GoToTutorialSection(0);
+        SetSectionUIAfterCalibration();
     }
 
     public void NextPressed()

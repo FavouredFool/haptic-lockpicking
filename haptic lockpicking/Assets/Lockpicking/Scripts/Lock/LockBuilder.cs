@@ -4,12 +4,25 @@ using static CutoutManager;
 
 public class LockBuilder : MonoBehaviour
 {
+    public static LockBuilder Instance { get; private set; }
+
     [SerializeField]
     Transform _lockParent;
 
     [SerializeField]
     LockController _lockPrefab;
 
+    public void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            throw new System.Exception();
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     public LockController BuildLock()
     {
@@ -39,7 +52,6 @@ public class LockBuilder : MonoBehaviour
     {
         SetPinFundamentals(pinAmount, pinOrder, respectOrder);
         SetTools(hasPick, hasTension, keyAnimation);
-        SetHelp(colorCodePins, showTensionIndicator, showPinPositionIndicator, cutoutState, enableCustomization);
     }
 
     void SetPinFundamentals(int pinAmount, List<int> pinOrder, bool respectOrder)
@@ -70,7 +82,7 @@ public class LockBuilder : MonoBehaviour
         KeyAnimationManager.Instance.SetKey(keyAnimation);
     }
 
-    void SetHelp(bool colorCodePins, bool showTensionIndicator, bool showPinPositionIndicator, CutoutState cutoutState, bool enableCustomization)
+    public void SetUI(bool colorCodePins, bool showTensionIndicator, bool showPinPositionIndicator, CutoutState cutoutState, bool enableCustomization)
     {
         if (enableCustomization)
         {
