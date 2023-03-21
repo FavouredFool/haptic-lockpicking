@@ -8,6 +8,9 @@ public class TutorialSectionManager : MonoBehaviour
     public static TutorialSectionManager Instance { get; private set; }
 
     [SerializeField]
+    GameObject _videoCanvas;
+
+    [SerializeField]
     GameObject _forceIndicatorCanvas;
 
     [SerializeField]
@@ -72,8 +75,6 @@ public class TutorialSectionManager : MonoBehaviour
         GoToTutorialSection(keyPressed);
     }
 
-
-
     void ReloadLock()
     {
         LockManager.Instance.CreateNewLock(_tutorialSection.TutorialSectionInformationList[_activeTutorialSectionNr]);
@@ -93,6 +94,8 @@ public class TutorialSectionManager : MonoBehaviour
         _nextButton.SetActive(_activeTutorialSectionNr < _tutorialSection.TutorialSectionInformationList.Count - 1);
 
         EnableForceIndicatorCanvas(true);
+
+        _videoCanvas.SetActive(false);
     }
 
     public void DeleteLock()
@@ -106,8 +109,6 @@ public class TutorialSectionManager : MonoBehaviour
 
     public void SetCalibrationUI()
     {
-        // reset UI to standard -> Problem, you still want to keep the infos
-
         DeleteLock();
 
         _playCanvas.SetActive(false);
@@ -121,6 +122,19 @@ public class TutorialSectionManager : MonoBehaviour
         _nextButton.SetActive(false);
 
         EnableForceIndicatorCanvas(false);
+
+
+        // if applicable, display video
+
+        if (VideoManager.Instance.SectionHasVideo(_activeTutorialSectionNr))
+        {
+            _videoCanvas.SetActive(true);
+            VideoManager.Instance.PlayVideo(_activeTutorialSectionNr);
+        }
+        else
+        {
+            _videoCanvas.SetActive(false);
+        }
     }
 
     public void GoToTutorialSection(int sectionNr)
