@@ -52,6 +52,7 @@ public class LockBuilder : MonoBehaviour
     {
         SetPinFundamentals(pinAmount, pinOrder, respectOrder);
         SetTools(hasPick, hasTension, keyAnimation);
+        SetUI(colorCodePins, showTensionIndicator, showPinPositionIndicator, cutoutState, enableCustomization);
     }
 
     void SetPinFundamentals(int pinAmount, List<int> pinOrder, bool respectOrder)

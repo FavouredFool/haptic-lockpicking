@@ -8,6 +8,9 @@ public class TutorialSectionManager : MonoBehaviour
     public static TutorialSectionManager Instance { get; private set; }
 
     [SerializeField]
+    GameObject _calibrateButton;
+
+    [SerializeField]
     GameObject _videoCanvas;
 
     [SerializeField]
@@ -85,11 +88,11 @@ public class TutorialSectionManager : MonoBehaviour
         // Read from lock-JSON
         LockBuilder.Instance.SetUI(information.ColorCodePins, information.ShowTensionIndicator, information.ShowPinPositionIndicator, information.CutoutState, information.EnableCustomization);
 
-        _tutorialUI.SetSectionLabel(_activeTutorialSectionNr, information.Label);
-        _tutorialUI.SetSectionText(information.Info);
+
 
         _startButton.SetActive(false);
         _resetButton.SetActive(true);
+        _calibrateButton.SetActive(true);
 
         _nextButton.SetActive(_activeTutorialSectionNr < _tutorialSection.TutorialSectionInformationList.Count - 1);
 
@@ -113,13 +116,14 @@ public class TutorialSectionManager : MonoBehaviour
 
         _playCanvas.SetActive(false);
 
-        _tutorialUI.SetSectionText("");
         _tutorialUI.SetSectionLabel(_activeTutorialSectionNr, _tutorialSection.TutorialSectionInformationList[_activeTutorialSectionNr].Label);
+        _tutorialUI.SetSectionText(_tutorialSection.TutorialSectionInformationList[_activeTutorialSectionNr].Info);
 
         _startButton.SetActive(true);
 
         _resetButton.SetActive(false);
         _nextButton.SetActive(false);
+        _calibrateButton.SetActive(false);
 
         EnableForceIndicatorCanvas(false);
 
@@ -217,6 +221,7 @@ public class TutorialSectionManager : MonoBehaviour
     public void StartPressed()
     {
         SetSectionUIAfterCalibration();
+        CalibrationManager.Instance.InitialCalibration();
     }
 
     public void NextPressed()
@@ -227,6 +232,11 @@ public class TutorialSectionManager : MonoBehaviour
     public void ResetPressed()
     {
           GoToTutorialSection(TutorialSectionManager.Instance.GetActiveTutorialSectionNr());
+    }
+
+    public void CalibratePressed()
+    {
+        CalibrationManager.Instance.PickCalibration();
     }
 
     public void ExitPressed()

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class GestureMenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    public enum UseCase { START, NEXT, EXIT, RESET };
+    public enum UseCase { START, NEXT, EXIT, RESET, CALIBRATE };
 
     public enum Hand { RIGHT, LEFT, BOTH };
 
@@ -67,6 +67,9 @@ public class GestureMenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
                 break;
             case UseCase.RESET:
                 TutorialSectionManager.Instance.ResetPressed();
+                break;
+            case UseCase.CALIBRATE:
+                TutorialSectionManager.Instance.CalibratePressed();
                 break;
         }
 

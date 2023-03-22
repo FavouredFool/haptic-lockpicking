@@ -54,15 +54,23 @@ public class CalibrationManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-
-            TensionForceManager.Instance.SetState(new LooseState(TensionForceManager.Instance));
-            PickManager.Instance.GetPickController().Recalibrate();
-
-            _isCalibrated = true;
+            InitialCalibration();
         }
 
         UpdateToolsVisual();
         
+    }
+
+    public void InitialCalibration()
+    {
+        TensionForceManager.Instance.SetState(new LooseState(TensionForceManager.Instance));
+        PickCalibration();
+        _isCalibrated = true;
+    }
+
+    public void PickCalibration()
+    {
+        PickManager.Instance.GetPickController().Recalibrate();
     }
 
 

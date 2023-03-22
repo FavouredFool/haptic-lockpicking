@@ -5,7 +5,8 @@ using System.Linq;
 
 public class PickController : MonoBehaviour
 {
-    readonly float CIRCLERADIUSFOROFFSET = 1.7f;
+    [SerializeField]
+    float CIRCLERADIUSFOROFFSET = 1.7f;
 
     [SerializeField]
     PickSpectre _pickSpectre;
