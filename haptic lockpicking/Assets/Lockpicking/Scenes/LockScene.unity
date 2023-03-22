@@ -4880,8 +4880,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 269, y: 0}
-  m_SizeDelta: {x: -769.78906, y: -433.0063}
+  m_AnchoredPosition: {x: 318.57, y: 13.708008}
+  m_SizeDelta: {x: -637.1373, y: -277.7056}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &401344578
 MonoBehaviour:
@@ -8622,6 +8622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebfbf572e331f5a46a0cbe1b01a25fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _leftHand: {fileID: 563567959}
   _calibrateButton: {fileID: 1236721716}
   _videoCanvas: {fileID: 604933481}
   _forceIndicatorCanvas: {fileID: 1661743807}
@@ -12753,8 +12754,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _renderTexture: {fileID: 8400000, guid: d964bf21195110241817eb163b076e44, type: 2}
   _videoClips:
-  - {fileID: 0}
-  - {fileID: 32900000, guid: ba58ecaf85380e04a952aeb2f6ca6746, type: 3}
+  - {fileID: 32900000, guid: 20d8c4dfe2479914384882929b5ceef1, type: 3}
+  - {fileID: 32900000, guid: 20d8c4dfe2479914384882929b5ceef1, type: 3}
   - {fileID: 32900000, guid: cee0a3f0e95f3594386ec2359033db45, type: 3}
   - {fileID: 32900000, guid: 79683ed7fdc104b49b572b1fe3700cf2, type: 3}
   - {fileID: 0}

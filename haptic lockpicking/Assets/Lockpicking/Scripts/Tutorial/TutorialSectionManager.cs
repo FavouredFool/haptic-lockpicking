@@ -8,6 +8,9 @@ public class TutorialSectionManager : MonoBehaviour
     public static TutorialSectionManager Instance { get; private set; }
 
     [SerializeField]
+    GameObject _leftHand;
+
+    [SerializeField]
     GameObject _calibrateButton;
 
     [SerializeField]
@@ -93,6 +96,7 @@ public class TutorialSectionManager : MonoBehaviour
         _startButton.SetActive(false);
         _resetButton.SetActive(true);
         _calibrateButton.SetActive(true);
+        _leftHand.SetActive(true);
 
         _nextButton.SetActive(_activeTutorialSectionNr < _tutorialSection.TutorialSectionInformationList.Count - 1);
 
@@ -120,6 +124,8 @@ public class TutorialSectionManager : MonoBehaviour
         _tutorialUI.SetSectionText(_tutorialSection.TutorialSectionInformationList[_activeTutorialSectionNr].Info);
 
         _startButton.SetActive(true);
+
+        _leftHand.SetActive(false);
 
         _resetButton.SetActive(false);
         _nextButton.SetActive(false);

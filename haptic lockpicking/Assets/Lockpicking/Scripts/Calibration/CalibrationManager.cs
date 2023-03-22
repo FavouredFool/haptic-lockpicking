@@ -39,14 +39,11 @@ public class CalibrationManager : MonoBehaviour
 
     private void Start()
     {
-        _leftHandModel.SetActive(true);
         _rightHandModel.SetActive(false);
     }
 
     void Update()
     {
-        _rightHandModel.SetActive(false);
-
         if (LockManager.Lock == null)
         {
             return;
