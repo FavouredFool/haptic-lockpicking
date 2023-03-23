@@ -44,6 +44,9 @@ public class CalibrationManager : MonoBehaviour
 
     void Update()
     {
+        _rightHandModel.SetActive(false);
+
+
         if (LockManager.Lock == null)
         {
             return;

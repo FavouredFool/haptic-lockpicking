@@ -42,9 +42,9 @@ public class PickVibrationManager : MonoBehaviour
 
     public void SetInsidePinVibration()
     {
-        SG_BuzzCmd buzzCmd = new(new[] { true, true, false, false, false }, 100);
-        SG_TimedBuzzCmd timedBuzzCmd = new(buzzCmd, Time.fixedDeltaTime * 4, 0.1f);
-        _pickGlove.SendCmd(timedBuzzCmd);
+        //SG_BuzzCmd buzzCmd = new(new[] { true, true, false, false, false }, 100);
+        //SG_TimedBuzzCmd timedBuzzCmd = new(buzzCmd, Time.fixedDeltaTime * 4, 0.1f);
+        //_pickGlove.SendCmd(timedBuzzCmd);
 
         TimedThumpCmd thumperCmd = new(_thumperIntensity, Time.fixedDeltaTime * 4);
         _pickGlove.SendCmd(thumperCmd);

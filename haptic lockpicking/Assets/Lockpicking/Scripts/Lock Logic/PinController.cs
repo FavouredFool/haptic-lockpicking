@@ -113,6 +113,7 @@ public class PinController : MonoBehaviour
                 return;
             }
 
+            Debug.Log("set");
             TensionForceManager.Instance.PinHasJustBeenSet();
         }
 

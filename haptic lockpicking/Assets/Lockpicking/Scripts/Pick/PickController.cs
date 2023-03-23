@@ -180,8 +180,9 @@ public class PickController : MonoBehaviour
             // TODO: Das bringt relativ wenig wenn der Pin sich sehr rapide bewegt. Dann hat er schon zwei Pins durchstochen und bleibt erst dann stehen.
             _pickPosition.z = Mathf.Max(_pickPosition.z, keepZ);
         }
-        
 
+        Debug.Log("Goal: " + goalPosition);
+        Debug.Log("Position: " + _pickPosition);
 
         _rigidBody.MovePosition(_pickPosition);
         _rigidBody.MoveRotation(_pickRotation);

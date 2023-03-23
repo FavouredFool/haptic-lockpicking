@@ -1281,8 +1281,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.3509731, y: 1.8865392, z: 0.35097307}
-  m_Center: {x: -0.00348939, y: -0.4081329, z: 0.003489405}
+  m_Size: {x: 0.3509731, y: 1.8146752, z: 0.35097307}
+  m_Center: {x: -0.00348939, y: -0.44406492, z: 0.003489405}
 --- !u!1 &6160485230976062964
 GameObject:
   m_ObjectHideFlags: 0
@@ -2037,8 +2037,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.36493078, y: 2.2460246, z: 0.3602782}
-  m_Center: {x: -0.0034893006, y: -0.31755173, z: -0.003489405}
+  m_Size: {x: 0.36493078, y: 2.1861377, z: 0.3602782}
+  m_Center: {x: -0.0034893006, y: -0.34749502, z: -0.003489405}
 --- !u!1 &6160485231191163233
 GameObject:
   m_ObjectHideFlags: 0
@@ -2681,16 +2681,16 @@ MonoBehaviour:
   _borderLayer:
     serializedVersion: 2
     m_Bits: 2048
-  _physicsMoveSpeed: 0.5
-  _physicsRotateSpeed: 45
+  _physicsMoveSpeed: 0.2
+  _physicsRotateSpeed: 0.5
   _deltaMoveThreshold: 0.0075
   _deltaRotateThreshold: 0.000001
   _distanceMultiplicator: 60
-  _upBoundsThreshold: 0.3
-  _downBoundsThreshold: 0.3
+  _upBoundsThreshold: 0.5
+  _downBoundsThreshold: 0.5
   _forwardBoundsThreshold: 1
   _backBoundsThreshold: 3
-  _rotationAngleThreshold: 8
+  _rotationAngleThreshold: 12
 --- !u!1 &6160485231561184795
 GameObject:
   m_ObjectHideFlags: 0
@@ -2960,8 +2960,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.35373393, y: 2.2777047, z: 0.33182937}
-  m_Center: {x: -0.0029585212, y: -0.5412266, z: 0.004942447}
+  m_Size: {x: 0.35373393, y: 2.2098331, z: 0.33182937}
+  m_Center: {x: -0.0029585212, y: -0.5751624, z: 0.004942447}
 --- !u!1 &6160485231792434627
 GameObject:
   m_ObjectHideFlags: 0
@@ -3675,8 +3675,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.34864673, y: 1.9316237, z: 0.348647}
-  m_Center: {x: -0.002326265, y: -0.2692083, z: -0.00232625}
+  m_Size: {x: 0.34864673, y: 1.8677446, z: 0.348647}
+  m_Center: {x: -0.002326265, y: -0.30114788, z: -0.00232625}
 --- !u!1 &6160485232113019125
 GameObject:
   m_ObjectHideFlags: 0
@@ -4128,8 +4128,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.35329938, y: 1.7178969, z: 0.34525084}
-  m_Center: {x: -0.00697875, y: -0.24116564, z: -0.0013253689}
+  m_Size: {x: 0.35329938, y: 1.6540178, z: 0.34525084}
+  m_Center: {x: -0.00697875, y: -0.2731052, z: -0.0013253689}
 --- !u!1 &6160485232449204522
 GameObject:
   m_ObjectHideFlags: 0
@@ -4576,7 +4576,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6160485232492214128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.83, y: 6.65, z: 1.16}
+  m_LocalPosition: {x: 0.83, y: 6.46, z: 1.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6462,7 +6462,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6160485232881166832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.288, z: -1.57}
+  m_LocalPosition: {x: 0.023, y: 0.77, z: 1.62}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6581,16 +6581,16 @@ MonoBehaviour:
   CIRCLERADIUSFOROFFSET: 6
   _pick: {fileID: 6160485231507365664}
   _spectreVisual: {fileID: 6595333298106192518}
-  _physicsMoveSpeed: 0.5
-  _physicsRotateSpeed: 45
+  _physicsMoveSpeed: 0.15
+  _physicsRotateSpeed: 0.5
   _deltaMoveThreshold: 0.0075
   _deltaRotateThreshold: 0.000001
   _distanceMultiplicator: 45
-  _upBoundsThreshold: 0.3
-  _downBoundsThreshold: 0.3
+  _upBoundsThreshold: 0.5
+  _downBoundsThreshold: 0.5
   _forwardBoundsThreshold: 1
   _backBoundsThreshold: 3
-  _rotationAngleThreshold: 8
+  _rotationAngleThreshold: 12
 --- !u!1 &7285627969445861663
 GameObject:
   m_ObjectHideFlags: 0
@@ -9275,12 +9275,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 13622a76757732f4d93c8257df844319,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.05
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 13622a76757732f4d93c8257df844319,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -6.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 13622a76757732f4d93c8257df844319,
         type: 3}

@@ -110,7 +110,7 @@
             "info": "Platzhalter - hier sollte sowohl ein Video als auch ein Text stehen, der genauer darauf eingeht wie man mit Audio und einfachen Tricks sich im Schoss zurecht findet.",
             "label": "Hilfe durch Audio",
             "pinCount": 4,
-            "pinOrder": [1, 4, 2, 3],
+            "pinOrder": [0, 3, 1, 2],
             "respectOrder": true,
             "hasPick": true,
             "hasTension": true,

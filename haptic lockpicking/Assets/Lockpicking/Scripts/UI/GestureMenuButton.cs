@@ -50,6 +50,11 @@ public class GestureMenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
             ButtonActivated();
         }
+
+        if (_useCase == UseCase.START && Input.GetKeyDown(KeyCode.R))
+        {
+            ButtonActivated();
+        }
     }
 
     public void ButtonActivated()
