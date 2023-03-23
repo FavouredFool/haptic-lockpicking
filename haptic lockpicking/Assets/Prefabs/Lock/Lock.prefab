@@ -2671,7 +2671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63bb29136f48a7544923f80fbc229377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CIRCLERADIUSFOROFFSET: 3
+  CIRCLERADIUSFOROFFSET: 4.5
   _pickSpectre: {fileID: 3678610050505958504}
   _trackerAttachPoint: {fileID: 45256804018338629}
   _lock: {fileID: 3252769561771166651}
@@ -6578,7 +6578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464281b6de2b50d478ff02354a78d31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CIRCLERADIUSFOROFFSET: 3
+  CIRCLERADIUSFOROFFSET: 4.5
   _pick: {fileID: 6160485231507365664}
   _spectreVisual: {fileID: 6595333298106192518}
   _physicsMoveSpeed: 10000
