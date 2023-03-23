@@ -1281,8 +1281,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.3509731, y: 0.47891742, z: 0.35097307}
-  m_Center: {x: -0.00348939, y: 0.23960492, z: 0.003489405}
+  m_Size: {x: 0.3509731, y: 1.8865392, z: 0.35097307}
+  m_Center: {x: -0.00348939, y: -0.4081329, z: 0.003489405}
 --- !u!1 &6160485230976062964
 GameObject:
   m_ObjectHideFlags: 0
@@ -2037,8 +2037,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.36493078, y: 0.8557715, z: 0.3602782}
-  m_Center: {x: -0.0034893006, y: 0.31869808, z: -0.003489405}
+  m_Size: {x: 0.36493078, y: 2.2460246, z: 0.3602782}
+  m_Center: {x: -0.0034893006, y: -0.31755173, z: -0.003489405}
 --- !u!1 &6160485231191163233
 GameObject:
   m_ObjectHideFlags: 0
@@ -2631,7 +2631,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6160485231507365677}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.16, z: 5.056}
+  m_LocalPosition: {x: 0, y: -0.11, z: 5.056}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2686,11 +2686,11 @@ MonoBehaviour:
   _deltaMoveThreshold: 0.0075
   _deltaRotateThreshold: 0.000001
   _distanceMultiplicator: 45
-  _upBoundsThreshold: 0.35
-  _downBoundsThreshold: 0.35
+  _upBoundsThreshold: 0.3
+  _downBoundsThreshold: 0.3
   _forwardBoundsThreshold: 1
   _backBoundsThreshold: 3
-  _rotationAngleThreshold: 7
+  _rotationAngleThreshold: 10
 --- !u!1 &6160485231561184795
 GameObject:
   m_ObjectHideFlags: 0
@@ -2960,8 +2960,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.35373393, y: 0.54620844, z: 0.33182937}
-  m_Center: {x: -0.0029585212, y: 0.2740557, z: 0.004942447}
+  m_Size: {x: 0.35373393, y: 2.2777047, z: 0.33182937}
+  m_Center: {x: -0.0029585212, y: -0.5412266, z: 0.004942447}
 --- !u!1 &6160485231792434627
 GameObject:
   m_ObjectHideFlags: 0
@@ -3675,8 +3675,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.34864673, y: 0.63942885, z: 0.348647}
-  m_Center: {x: -0.002326265, y: 0.31520873, z: -0.00232625}
+  m_Size: {x: 0.34864673, y: 1.9316237, z: 0.348647}
+  m_Center: {x: -0.002326265, y: -0.2692083, z: -0.00232625}
 --- !u!1 &6160485232113019125
 GameObject:
   m_ObjectHideFlags: 0
@@ -4128,8 +4128,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.35329938, y: 0.57309014, z: 0.34525084}
-  m_Center: {x: -0.006978743, y: 0.28637937, z: -0.0013253689}
+  m_Size: {x: 0.35329938, y: 1.7178969, z: 0.34525084}
+  m_Center: {x: -0.00697875, y: -0.24116564, z: -0.0013253689}
 --- !u!1 &6160485232449204522
 GameObject:
   m_ObjectHideFlags: 0
@@ -6462,7 +6462,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6160485232881166832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.895, z: 1.991}
+  m_LocalPosition: {x: 0, y: 0.288, z: -1.57}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6542,7 +6542,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7095632108354872687}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.16, z: 5.056}
+  m_LocalPosition: {x: 0, y: -0.109999985, z: 5.056}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6586,11 +6586,11 @@ MonoBehaviour:
   _deltaMoveThreshold: 0.0075
   _deltaRotateThreshold: 0.000001
   _distanceMultiplicator: 45
-  _upBoundsThreshold: 0.35
-  _downBoundsThreshold: 0.35
+  _upBoundsThreshold: 0.3
+  _downBoundsThreshold: 0.3
   _forwardBoundsThreshold: 1
   _backBoundsThreshold: 3
-  _rotationAngleThreshold: 7
+  _rotationAngleThreshold: 10
 --- !u!1 &7285627969445861663
 GameObject:
   m_ObjectHideFlags: 0
@@ -9322,6 +9322,12 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e771fbc410364074d93e5daf733e754d, type: 2}
+    - target: {fileID: -6400281290468069383, guid: 13622a76757732f4d93c8257df844319,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -2432090755550338912, guid: 90efcdb1b3a01774b97c056b4c5f2556,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: 13622a76757732f4d93c8257df844319,
         type: 3}
       propertyPath: m_Name
