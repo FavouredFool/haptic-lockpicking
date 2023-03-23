@@ -2682,9 +2682,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   _physicsMoveSpeed: 0.2
-  _physicsRotateSpeed: 0.5
-  _deltaMoveThreshold: 0.0075
-  _deltaRotateThreshold: 0.000001
+  _physicsRotateSpeed: 2
+  _deltaMoveThreshold: 0.01
+  _deltaRotateThreshold: 0.00001
   _distanceMultiplicator: 60
   _upBoundsThreshold: 0.5
   _downBoundsThreshold: 0.5
@@ -6581,10 +6581,10 @@ MonoBehaviour:
   CIRCLERADIUSFOROFFSET: 6
   _pick: {fileID: 6160485231507365664}
   _spectreVisual: {fileID: 6595333298106192518}
-  _physicsMoveSpeed: 0.15
-  _physicsRotateSpeed: 0.5
-  _deltaMoveThreshold: 0.0075
-  _deltaRotateThreshold: 0.000001
+  _physicsMoveSpeed: 0.2
+  _physicsRotateSpeed: 2
+  _deltaMoveThreshold: 0.01
+  _deltaRotateThreshold: 0.00001
   _distanceMultiplicator: 45
   _upBoundsThreshold: 0.5
   _downBoundsThreshold: 0.5
