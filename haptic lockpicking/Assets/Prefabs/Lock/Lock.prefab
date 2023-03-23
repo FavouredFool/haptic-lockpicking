@@ -2671,7 +2671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63bb29136f48a7544923f80fbc229377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CIRCLERADIUSFOROFFSET: 6
+  CIRCLERADIUSFOROFFSET: 3
   _pickSpectre: {fileID: 3678610050505958504}
   _trackerAttachPoint: {fileID: 45256804018338629}
   _lock: {fileID: 3252769561771166651}
@@ -2686,8 +2686,8 @@ MonoBehaviour:
   _deltaMoveThreshold: 0.01
   _deltaRotateThreshold: 0.00001
   _distanceMultiplicator: 60
-  _upBoundsThreshold: 0.5
-  _downBoundsThreshold: 0.5
+  _upBoundsThreshold: 0.4
+  _downBoundsThreshold: 0.4
   _forwardBoundsThreshold: 1
   _backBoundsThreshold: 3
   _rotationAngleThreshold: 12
@@ -6578,16 +6578,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464281b6de2b50d478ff02354a78d31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CIRCLERADIUSFOROFFSET: 6
+  CIRCLERADIUSFOROFFSET: 3
   _pick: {fileID: 6160485231507365664}
   _spectreVisual: {fileID: 6595333298106192518}
-  _physicsMoveSpeed: 0.2
-  _physicsRotateSpeed: 2
+  _physicsMoveSpeed: 10000
+  _physicsRotateSpeed: 10000
   _deltaMoveThreshold: 0.01
   _deltaRotateThreshold: 0.00001
-  _distanceMultiplicator: 45
-  _upBoundsThreshold: 0.5
-  _downBoundsThreshold: 0.5
+  _distanceMultiplicator: 60
+  _upBoundsThreshold: 0.4
+  _downBoundsThreshold: 0.4
   _forwardBoundsThreshold: 1
   _backBoundsThreshold: 3
   _rotationAngleThreshold: 12
