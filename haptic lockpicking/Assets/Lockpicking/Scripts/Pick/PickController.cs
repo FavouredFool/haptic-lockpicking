@@ -36,12 +36,6 @@ public class PickController : MonoBehaviour
     [SerializeField]
     private float _physicsRotateSpeed = 1;
 
-    [SerializeField, Range(0, 1)]
-    private float _deltaMoveThreshold = 0.25f;
-
-    [SerializeField, Range(0, 1)]
-    private float _deltaRotateThreshold = 0.25f;
-
     [SerializeField, Range(1, 100)]
     private float _distanceMultiplicator;
 
@@ -159,30 +153,16 @@ public class PickController : MonoBehaviour
 
     public void MovePick()
     {
-        Quaternion goalRotation = CalculateRotation();
-        Vector3 goalPosition = CalculatePosition(goalRotation);
-        
+        _pickRotation = CalculateRotation();
+        _pickPosition = CalculatePosition(_pickRotation);
         
         float keepZ = _pickPosition.z;
-
-        if (Vector3.Distance(_pickPosition, goalPosition) > _deltaMoveThreshold)
-        {
-            _pickPosition = Vector3.MoveTowards(_pickPosition, goalPosition, _physicsMoveSpeed);
-        }
-
-        if (1 - Quaternion.Dot(_pickRotation, goalRotation) > _deltaRotateThreshold)
-        {
-            _pickRotation = Quaternion.RotateTowards(_pickRotation, goalRotation, _physicsRotateSpeed);
-        }
 
         if (_collideAmount > 0)
         {
             // TODO: Das bringt relativ wenig wenn der Pin sich sehr rapide bewegt. Dann hat er schon zwei Pins durchstochen und bleibt erst dann stehen.
             _pickPosition.z = Mathf.Max(_pickPosition.z, keepZ);
         }
-
-        Debug.Log("Goal: " + goalPosition);
-        Debug.Log("Position: " + _pickPosition);
 
         _rigidBody.MovePosition(_pickPosition);
         _rigidBody.MoveRotation(_pickRotation);

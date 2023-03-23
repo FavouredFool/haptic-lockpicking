@@ -20,12 +20,6 @@ public class PickSpectre : MonoBehaviour
     [SerializeField]
     private float _physicsRotateSpeed = 1;
 
-    [SerializeField, Range(0, 1)]
-    private float _deltaMoveThreshold = 0.25f;
-
-    [SerializeField, Range(0, 1)]
-    private float _deltaRotateThreshold = 0.25f;
-
     [SerializeField, Range(1, 100)]
     private float _distanceMultiplicator;
 
@@ -55,9 +49,6 @@ public class PickSpectre : MonoBehaviour
 
     Rigidbody _rigidBody;
 
-    Vector3 _pickPosition = Vector3.zero;
-    Quaternion _pickRotation = Quaternion.identity;
-
     bool _isOOB = false;
 
     bool _isInitialized = false;
@@ -83,11 +74,8 @@ public class PickSpectre : MonoBehaviour
 
     public void OnEnable()
     {
-        _pickRotation = CalculateRotation();
-        _pickPosition = CalculatePosition(_pickRotation);
-        
-        transform.position = _pickPosition;
-        transform.rotation = _pickRotation;
+        transform.rotation = CalculateRotation();
+        transform.position = CalculatePosition(transform.rotation);
     }
 
     public void Update()
@@ -105,18 +93,8 @@ public class PickSpectre : MonoBehaviour
         Quaternion goalRotation = CalculateRotation();
         Vector3 goalPosition = CalculatePosition(goalRotation);
 
-        if (Vector3.Distance(_pickPosition, goalPosition) > _deltaMoveThreshold)
-        {
-            _pickPosition = Vector3.MoveTowards(_pickPosition, goalPosition, _physicsMoveSpeed);
-        }
-
-        if (1 - Quaternion.Dot(_pickRotation, goalRotation) > _deltaRotateThreshold)
-        {
-            _pickRotation = Quaternion.RotateTowards(_pickRotation, goalRotation, _physicsRotateSpeed);
-        }
-
-        _rigidBody.MovePosition(_pickPosition);
-        _rigidBody.MoveRotation(_pickRotation);
+        _rigidBody.MovePosition(goalPosition);
+        _rigidBody.MoveRotation(goalRotation);
 
         _isOOB = _positionOOB || _rotationOOB || _pick.GetCollideAmount() > 0;
     }

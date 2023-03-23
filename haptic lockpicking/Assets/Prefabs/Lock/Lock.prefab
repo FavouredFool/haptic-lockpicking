@@ -2683,9 +2683,9 @@ MonoBehaviour:
     m_Bits: 2048
   _physicsMoveSpeed: 0.2
   _physicsRotateSpeed: 2
-  _deltaMoveThreshold: 0.01
-  _deltaRotateThreshold: 0.00001
-  _distanceMultiplicator: 60
+  _deltaMoveThreshold: 0
+  _deltaRotateThreshold: 0
+  _distanceMultiplicator: 50
   _upBoundsThreshold: 0.4
   _downBoundsThreshold: 0.4
   _forwardBoundsThreshold: 1
@@ -6583,9 +6583,9 @@ MonoBehaviour:
   _spectreVisual: {fileID: 6595333298106192518}
   _physicsMoveSpeed: 10000
   _physicsRotateSpeed: 10000
-  _deltaMoveThreshold: 0.01
-  _deltaRotateThreshold: 0.00001
-  _distanceMultiplicator: 60
+  _deltaMoveThreshold: 0
+  _deltaRotateThreshold: 0
+  _distanceMultiplicator: 50
   _upBoundsThreshold: 0.4
   _downBoundsThreshold: 0.4
   _forwardBoundsThreshold: 1
