@@ -66,7 +66,7 @@ public class VideoManager : MonoBehaviour
         _videoPlayerDict[sectionNr].Play();
     }
 
-    void StopAllVideos()
+    public void StopAllVideos()
     {
         foreach(VideoPlayer player in _videoPlayerDict.Values)
         {

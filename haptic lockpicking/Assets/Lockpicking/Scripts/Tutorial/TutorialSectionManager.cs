@@ -103,6 +103,7 @@ public class TutorialSectionManager : MonoBehaviour
         EnableForceIndicatorCanvas(true);
 
         _videoCanvas.SetActive(false);
+        VideoManager.Instance.StopAllVideos();
     }
 
     public void DeleteLock()
