@@ -54,6 +54,12 @@ public class PickController : MonoBehaviour
     [SerializeField, Range(0, 20)]
     private float _rotationAngleThreshold;
 
+    [SerializeField]
+    private int _movingAveragePositionK = 5;
+
+    [SerializeField]
+    private int _movingAverageRotationK = 5;
+
     KeyPin _touchedKeyPin;
 
     Vector3 _startPosition;
@@ -74,6 +80,9 @@ public class PickController : MonoBehaviour
 
     bool _isInsidePin = false;
 
+    SimpleMovingAveragePosition _positionAverage;
+    SimpleMovingAverageRotation _rotationAverage;
+
 
     public void Awake()
     {
@@ -86,6 +95,9 @@ public class PickController : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody>();
 
         _pickSpectre.gameObject.SetActive(true);
+
+        _positionAverage = new(_movingAveragePositionK);
+        _rotationAverage = new(_movingAverageRotationK);
     }
 
     public void OnEnable()
@@ -95,7 +107,18 @@ public class PickController : MonoBehaviour
         
         transform.position = _pickPosition;
         transform.rotation = _pickRotation;
+
+        _positionAverage.PopulateValues(_pickPosition);
+        _rotationAverage.PopulateValues(_pickRotation);
     }
+
+
+    public void FixedUpdate()
+    {
+        MovePick();
+        Vibrate();
+    }
+
 
     void Vibrate()
     {
@@ -144,23 +167,19 @@ public class PickController : MonoBehaviour
         PickVibrationManager.Instance.SetVibrationThisFrame(vibrationIntensity);
     }
 
-    public void FixedUpdate()
-    {
-        MovePick();
-        Vibrate();
-    }
-
 
     public void MovePick()
     {
-        _pickRotation = CalculateRotation();
-        _pickPosition = CalculatePosition(_pickRotation);
-        
+        Quaternion calculatedRotation = CalculateRotation();
+        _pickRotation = _rotationAverage.Step(calculatedRotation);
+
+        Vector3 calculatedPosition = CalculatePosition(_pickRotation);
+        _pickPosition = _positionAverage.Step(calculatedPosition);
+
         float keepZ = _pickPosition.z;
 
         if (_collideAmount > 0)
         {
-            // TODO: Das bringt relativ wenig wenn der Pin sich sehr rapide bewegt. Dann hat er schon zwei Pins durchstochen und bleibt erst dann stehen.
             _pickPosition.z = Mathf.Max(_pickPosition.z, keepZ);
         }
 
