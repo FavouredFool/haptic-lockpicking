@@ -29,4 +29,6 @@ public class TutorialSectionInformation
 
     public bool KeyAnimation { get; set; }
 
+    public bool HasOnlyVideo { get; set; }
+
 }

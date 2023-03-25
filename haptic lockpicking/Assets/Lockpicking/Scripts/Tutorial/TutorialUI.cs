@@ -19,7 +19,7 @@ public class TutorialUI : MonoBehaviour
 
     public void SetSectionLabel(int nr, string label)
     {
-        _sectionLabel.text = "Section " + (nr+1) + "/11: " + label;
+        _sectionLabel.text = "Section " + (nr+1) + "/12: " + label;
     }
 
     public void ClearTexts()

@@ -119,20 +119,21 @@ public class TutorialSectionManager : MonoBehaviour
     {
         DeleteLock();
 
+
+        TutorialSectionInformation information = _tutorialSection.TutorialSectionInformationList[_activeTutorialSectionNr];
+
+        _tutorialUI.SetSectionLabel(_activeTutorialSectionNr, information.Label);
+        _tutorialUI.SetSectionText(information.Info);
+
         _playCanvas.SetActive(false);
-
-        _tutorialUI.SetSectionLabel(_activeTutorialSectionNr, _tutorialSection.TutorialSectionInformationList[_activeTutorialSectionNr].Label);
-        _tutorialUI.SetSectionText(_tutorialSection.TutorialSectionInformationList[_activeTutorialSectionNr].Info);
-
-        _startButton.SetActive(true);
-
+        _startButton.SetActive(!information.HasOnlyVideo);
         _leftHand.SetActive(false);
-
         _resetButton.SetActive(false);
-        _nextButton.SetActive(false);
+        _nextButton.SetActive(information.HasOnlyVideo);
         _calibrateButton.SetActive(false);
 
         EnableForceIndicatorCanvas(false);
+
 
 
         // if applicable, display video
@@ -219,6 +220,10 @@ public class TutorialSectionManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             return 9;
+        }
+        else if (Input.GetKeyDown(KeyCode.P))
+        {
+            return 10;
         }
 
         return -1;

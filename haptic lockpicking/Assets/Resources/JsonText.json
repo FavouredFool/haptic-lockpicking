@@ -2,6 +2,22 @@
     "TutorialSectionInformationList":
     [
         {
+            "info":"many words, much wow",
+            "label": "Schloss-Terminologie",
+            "pinCount": 5,
+            "pinOrder": null,
+            "respectOrder": false,
+            "hasPick": false,
+            "hasTension": false,
+            "colorCodePins": false,
+            "showTensionIndicator":false,
+            "showPinPositionIndicator":false,
+            "cutoutState": "FULL",
+            "enableCustomization": false,
+            "keyAnimation": true,
+            "hasOnlyVideo": true
+        },
+        {
             "info":"<voffset=0.25em><b><size=120%>Trivia</size></b></voffset>\nUm ein Pin-Tumbler-Schloss zu öffnen, muss der <color=#FFEDB3>Core</color> frei beweglich sein. Dies wird von den <color=#E0F5FF>Pin-Paaren</color> verhindert, welche in das Schloss eingesetzt sind und mit einer Feder in Position gehalten werden. Ein <color=#E0F5FF>Pin-Paar</color> besteht aus zwei <color=#E0F5FF>Pins</color>: Der <color=#E0F5FF>Key-Pin</color> liegt näher am Schoss und wird von den Zähnen des Schlüssels berührt. Der <color=#E0F5FF>Driver-Pin</color> berührt hingegen die Feder. Die <color=#FFD5B3>Sheerline</color> beschreibt eine Linie entlang des unteren Endes des <color=#FFEDB3>Cores</color>. Solange der Körper eines <color=#E0F5FF>Pins</color> diese Linie blockiert, kann der <color=#FFEDB3>Core</color> nicht weit genug gedreht werden um das Schloss zu öffnen. Zum Öffnen des Schlosses müssen alle <color=#E0F5FF>Pin-Paare</color> auf die korrekte vertikale Position bewegt werden, sodass der Berührungspunkt der beiden <color=#E0F5FF>Pins</color> jedes Paares auf der <color=#FFD5B3>Sheerline</color> liegt. Wenn der <color=#FFEDB3>Core</color> daraufhin gedreht wird, trennt er die beiden <color=#E0F5FF>Pins</color> voneinander anstatt blockiert zu werden.",
             "label": "Schloss-Mechanismus",
             "pinCount": 5,
@@ -14,7 +30,8 @@
             "showPinPositionIndicator":false,
             "cutoutState": "FULL",
             "enableCustomization": false,
-            "keyAnimation": true
+            "keyAnimation": true,
+            "hasOnlyVideo": true
         },
         {
             "info": "<voffset=0.25em><b><size=120%>Trivia</size></b></voffset>\nEin <color=#FFB3D4>Pick</color> wird in das Schlüsselloch eingefügt, mit welchem die <color=#E0F5FF>Pin-Paare</color> manuell auf die gewünschte Position bewegt werden könnten. Wenn ein <color=#E0F5FF>Pin-Paar</color> in der richtigen Position sitzt und nicht von der Feder zurückgestoßen wird, nennt man den Status des Pin-Paares <color=#AFD095>\"Set\"</color>.\n\n<voffset=0.25em><b><size=120%>Software</size></b></voffset>\nDie <color=#E0F5FF>Key-Pins</color> müssen mit der <color=#FFB3D4>Pick</color> langsam in die korrekte Position bewegt werden, bis jedes <color=#E0F5FF>Pin-Paar</color> auf der <color=#FFD5B3>Sheerline</color> festsitzt.\n\n<voffset=0.25em><b><size=120%>Tipps</size></b></voffset>\n> Der Grund warum die <color=#E0F5FF>Pins</color> von der Feder nicht zurückgestoßen werden, wird in Sektion 3 genauer erklärt.\n\n> Oftmals ist das Innenleben eines Schlosses eng und nur sehr schwierig zu navigieren. Im realen Usertest sollte der <color=#FFB3D4>Pick</color> schräg angewinkelt werden um mit der gebogenen Spitze des <color=#FFB3D4>Picks</color> über die <color=#E0F5FF>Key-Pins</color> zu kommen.",
@@ -29,7 +46,8 @@
             "showPinPositionIndicator":false,
             "cutoutState": "FULL",
             "enableCustomization": false,
-            "keyAnimation": false
+            "keyAnimation": false,
+            "hasOnlyVideo": false
         },
         {
             "info": "<voffset=0.25em><b><size=120%>Trivia</size></b></voffset>\nDer Druck der Federn verhindert, dass die <color=#E0F5FF>Pin-Paare</color> auf der <color=#FFD5B3>Sheerline</color> bleiben. Um dies zu umgehen wird mit einem <color=#E6FFE6>Tension-Tool</color> ein Winkeldruck auf den <color=#FFEDB3>Core</color> übertragen. Sobald ein <color=#E0F5FF>Pin-Paar</color> an der korrekten vertikalen Position ist, kann der <color=#FFEDB3>Core</color> ein minimales Stück gedreht werden. Der Grund dafür wird in Sektion 5 erklärt. Diese Drehung wird auch auf den <color=#E0F5FF>Key-Pin</color> innerhalb des <color=#FFEDB3>Cores</color> übertragen, wodurch dieser nicht mehr geradewegs auf den <color=#E0F5FF>Driver-Pin</color> fallen kann. Der <color=#FFEDB3>Core</color> hat das <color=#E0F5FF>Pin-Paar</color> damit voneinander getrennt und das <color=#E0F5FF>Pin-Paar</color> ist damit <color=#AFD095>\"gesetted\"</color> worden.\n\n<voffset=0.25em><b><size=120%>Software</size></b></voffset>\nEin <color=#E6FFE6>Tension-Indikator</color> zeigt die derzeit genutzte Kraft auf das <color=#E6FFE6>Tension-Tool</color> an. Übermäßig viel <color=#E6FFE6>Tension</color> führt dazu, dass die <color=#E0F5FF>Pins</color> von dem <color=#FFEDB3>Core</color> festgesetzt werden ohne <color=#AFD095>gesetted</color> zu sein. Überhaupt keine <color=#E6FFE6>Tension</color> führt zu einer vollkommenen Befreiung aller bereits gesetteten <color=#E0F5FF>Pins</color>.\n\n<voffset=0.25em><b><size=120%>Tipps</size></b></voffset>\n> Es ist essenziell, einen adequaten Druck auf das <color=#E6FFE6>Tension-Tool</color> anzuwenden. Die Regel für Anfänger ist hierbei: Nutze so wenig Druck wie möglich!\n\n> Ein <color=#AFD095>gesetteter</color> <color=#E0F5FF>Driver-Pin</color> ist vollkommen unbeweglich, da er von der Feder an ein kleines herausschauendes Stück des <color=#FFEDB3>Cores</color> gedrückt wird. Der <color=#E0F5FF>Key-Pin</color> ist frei beweglich, wird jedoch von Gravitation auf den <color=#E0F5FF>Driver-Pin</color> gedrückt. Mit dem <color=#FFB3D4>Pick</color> spürt man nur ein festgesetztes <color=#E0F5FF>Pin-Paar</color>.",
@@ -44,7 +62,8 @@
             "showPinPositionIndicator":false,
             "cutoutState": "FULL",
             "enableCustomization": false,
-            "keyAnimation": false
+            "keyAnimation": false,
+            "hasOnlyVideo": false
         },
         {
             "info": "<voffset=0.25em><b><size=120%>Trivia</size></b></voffset>\nZu starke <color=#E6FFE6>Tension</color> setzt <color=#E0F5FF>Pins</color> fest und sollte deshalb vermieden werden. Besonders gefährlich sind dabei <color=#FF8080>Oversets</color>. Diese geschehen, wenn ein <color=#E0F5FF>Pin-Paar</color> über die <color=#FFD5B3>Sheerline</color> hinaus bewegt wird, während zu starke <color=#E6FFE6>Tension</color> auf den <color=#FFEDB3>Core</color> wirkt. Dabei werden die <color=#E0F5FF>Pins</color> in dieser inkorrekten Position festgesetzt, was oftmals schwierig zu erkennen ist. Teilweise kann eine Verringerung der <color=#E6FFE6>Tension</color> das Problem lösen da die Kraft der Feder überwiegt, manchmal muss der Lockpicking-Prozess jedoch von erneut beginnen.\n\n<voffset=0.25em><b><size=120%>Software</size></b></voffset>\nHaptisches Feedback bietet einen Einblick in die Stärke der angewandten <color=#E6FFE6>Tension</color> und in die <color=#AFD095>gesetteten</color> <color=#E0F5FF>Pins</color>. Ein <color=#AFD095>gesetteter</color> <color=#E0F5FF>Pin</color> ist oftmals spürbar in Form von einem kurzen Nachlass an Wiederstand. Wichtig ist weiterhin nur sehr wenig Druck anzuwenden.\n\n<voffset=0.25em><b><size=120%>Tipps</size></b></voffset>\n> Wenn ein Schloss sich nicht öffnen lässt und man keinen Fortschritt macht, verringere die <color=#E6FFE6>Tension</color> und spüre und höre ob <color=#E0F5FF>Pin-Paare</color> in die Ausgangspositions gestoßen werden. Falls das nicht funktioniert, lasse jegliche <color=#E6FFE6>Tension</color> los und wiggle mit dem <color=#E6FFE6>Tension Tool</color> das Schloss um sicherzustellen, dass es von jeglichen <color=#FF8080>Oversets</color> befreit ist. Nutze im darauf folgenden Versuch weniger Druck!",
@@ -59,7 +78,8 @@
             "showPinPositionIndicator":false,
             "cutoutState": "FULL",
             "enableCustomization": false,
-            "keyAnimation": false
+            "keyAnimation": false,
+            "hasOnlyVideo": false
         },
         {
             "info": "<voffset=0.25em><b><size=120%>Trivia</size></b></voffset>\nFalls der Winkeldruck auf alle <color=#E0F5FF>Pins</color> gleichstark angewandt werden würde, könnte kein <color=#E0F5FF>Pin</color> je <color=#AFD095>\"setten\"</color>, da der <color=#FFEDB3>Core</color> sich nicht bewegen könnte. Aufgrund von Ungenauigkeiten in der Schoss-Manufaktur wird die <color=#E6FFE6>Tension</color> auf den <color=#FFEDB3>Core</color> jedoch in einer per Schloss festgesetzten Reihenfolge auf die <color=#E0F5FF>Pins</color> angewandt. Der Status des <color=#E0F5FF>Pin-Paars</color>, welches den Hauptteil der <color=#E6FFE6>Tension</color> erfährt, wird als <color=#DFFFB3>\"Binding\"</color> beschrieben. Die nicht betroffenen <color=#E0F5FF>Pin-Paare</color> sind hierbei <color=#FCFFB3>\"Springy\"</color>. Sobald ein <color=#DFFFB3>binding</color> <color=#E0F5FF>Pin-Paar</color> <color=#AFD095>gesetted</color> wird, <color=#DFFFB3>bindet</color> ein neues <color=#E0F5FF>Pin-Paar</color>.\n\n<voffset=0.25em><b><size=120%>Software</size></b></voffset>\nDie Farbe der <color=#E0F5FF>Driver-Pins</color> zeigen, welche <color=#E0F5FF>Pin-Paare</color> <color=#DFFFB3>binden</color> und welche <color=#AFD095>gesetted</color> sind.\n\n<voffset=0.25em><b><size=120%>Tipps</size></b></voffset>\n> Ein Schloss hat immer dieselbe Reihenfolge von <color=#DFFFB3>Binding</color>-<color=#E0F5FF>Pins</color>. Wenn man ein Schloss nicht öffnen kann, lohnt es sich, sich die Reihenfolge zu erschließen. Wissen über ein Schloss zu erlangen ist ebenfalls Fortschritt!",
@@ -74,7 +94,8 @@
             "showPinPositionIndicator":false,
             "cutoutState": "FULL",
             "enableCustomization": false,
-            "keyAnimation": false
+            "keyAnimation": false,
+            "hasOnlyVideo": false
         },
         {
             "info": "<voffset=0.25em><b><size=120%>Trivia</size></b></voffset>\nEin <color=#DFFFB3>binding</color> <color=#E0F5FF>Pin-Paar</color> ist durch eine erhöhte Resistenz und Schwerfälligkeit in der Bewegung bemerkbar. Ein <color=#AFD095>gesettetes</color> <color=#E0F5FF>Pin-Paar</color> ist hingegen vollständig unbeweglich.\n\n<voffset=0.25em><b><size=120%>Software</size></b></voffset>\nDie Schwerfälligkeit der Bewegung ist in der Software durch Vibration dargestellt. Sollte versucht werden ein <color=#AFD095>gesettetes</color> <color=#E0F5FF>Pin-Paar</color> zu bewegen, wird sich der <color=#FFB3D4>Pick</color> in den <color=#E0F5FF>Key-Pin</color> hinein bewegen, was eine starke Vibration an der gesamten Hand verursacht.\n\n<voffset=0.25em><b><size=120%>Tipps</size></b></voffset>\n> Wenn kein <color=#E0F5FF>Pin</color> zu <color=#DFFFB3>binden</color> scheint und man keinen Fortschritt macht, könnte dies auf einen <color=#FF8080>Overset</color> hinweisen.\n\n> Oftmals <color=#AFD095>settet</color> man <color=#DFFFB3>binding</color> <color=#E0F5FF>Pins</color> ohne es zu bemerken. Besonders vordere <color=#E0F5FF>Pins</color> sind davon betroffen, da diese automatisch beim abtasten und <color=#AFD095>setten</color> hinterer <color=#E0F5FF>Pins</color> in einer Art Kettenreaktion <color=#AFD095>gesettet</color> werden können, wenn der <color=#FFB3D4>Pick-Hals</color> sie in eine passende Position gebracht hat.\n\n> Gehe die <color=#E0F5FF>Pins</color> von vorne nach hinten oder hinten nach vorne durch und teste sie auf <color=#DFFFB3>Binding</color>-<color=#E0F5FF>Pins</color>. Es ist wahrscheinlich, dass Anfänger Lockpicker <color=#DFFFB3>Binding</color>-<color=#E0F5FF>Pins</color> nicht gut von <color=#FCFFB3>Springy</color>-<color=#E0F5FF>Pins</color> unterscheiden können. Eine Trial-And-Error Methode, bei welcher ein Lockpicker versucht jedes <color=#E0F5FF>Pin-Paar</color> zu <color=#AFD095>setten</color>, funktioniert für simple Schlösser ebenso.",
@@ -89,7 +110,8 @@
             "showPinPositionIndicator":false,
             "cutoutState": "FULL",
             "enableCustomization": false,
-            "keyAnimation": false
+            "keyAnimation": false,
+            "hasOnlyVideo": false
         },
         {
             "info": "<voffset=0.25em><b><size=120%>Software</size></b></voffset>\nDie 4 vordersten <color=#E0F5FF>Pins</color> müssen in dieser Sektion <color=#AFD095>gesettet</color> werden. Der <color=#FFB3D4>Pick</color> hat 5 Markierungen, welche man an das Schlüsselloch ausrichten kann um die exakte Position jedes <color=#E0F5FF>Pins</color> herzuleiten. Die Bewegung der <color=#E0F5FF>Driver-Pins</color> hilft, um die <color=#FFB3D4>Pick</color>-Bewegung zu deuten.",
@@ -104,7 +126,8 @@
             "showPinPositionIndicator":true,
             "cutoutState": "Partial",
             "enableCustomization": false,
-            "keyAnimation": false
+            "keyAnimation": false,
+            "hasOnlyVideo": false
         },
         {
             "info": "Platzhalter - hier sollte sowohl ein Video als auch ein Text stehen, der genauer darauf eingeht wie man mit Audio und einfachen Tricks sich im Schoss zurecht findet.",
@@ -119,7 +142,8 @@
             "showPinPositionIndicator":false,
             "cutoutState": "Partial",
             "enableCustomization": false,
-            "keyAnimation": false
+            "keyAnimation": false,
+            "hasOnlyVideo": false
         },
         {
             "info": "<voffset=0.25em><b><size=120%>Trivia</size></b></voffset>\nAuditives Feedback hilft dabei, sich im Schloss zu orientieren. Das <color=#AFD095>Setten</color> eines <color=#E0F5FF>Pins</color> macht oftmals ein metallisches Schnack-Geräusch, da das <color=#E0F5FF>Pin-Paar</color> auseinander gedrückt wird. Ebenso macht ein <color=#AFD095>nicht-gesettetes</color> <color=#E0F5FF>Pin-Paar</color> ein Geräusch, wenn es von der Feder rapide in die Ausgangsposition gedrückt wird nachdem ein <color=#FFB3D4>Pick</color> das <color=#E0F5FF>Pin-Paar</color> heruntergedrückt hat.\n\n<voffset=0.25em><b><size=120%>Software</size></b></voffset>\nDie 4 vordersten <color=#E0F5FF>Pins</color> müssen in dieser Sektion gesetzt werden. Die Markierungen helfen, um sich im Schloss zu orientieren.\n\n<voffset=0.25em><b><size=120%>Tipps</size></b></voffset>\n> Tippe mit dem <color=#FFB3D4>Pick</color> vor den ersten <color=#E0F5FF>Key-Pin</color> und bewege dich von dieser Position aus nach oben und greife den <color=#E0F5FF>Pin</color> mit der Spitze des <color=#FFB3D4>Picks</color>. Wiederhole dies für jeden <color=#E0F5FF>Pin</color> und du weißt immer exakt wo du dich im Schloss befindest.\n\n> Wenn du nicht weißt auf welchen <color=#E0F5FF>Pin</color> du dich mit der <color=#FFB3D4>Pick</color> befindest, kannst du in einem langsamen, gleichmäßigen Tempo den <color=#FFB3D4>Pick</color> zurück in Richtung des Schlüssellochs führen und hören wie jedes <color=#E0F5FF>Pin-Paar</color> von der Feder an die Ausgangsposition befördert wird. Damit kannst du die <color=#E0F5FF>Pin-Anzahl</color> zählen und außerdem hören welche <color=#E0F5FF>Pins</color> <color=#AFD095>gesettet</color> sind, da sie keinen Sound machen - sich also nicht zurückbewegen.",
@@ -134,7 +158,8 @@
             "showPinPositionIndicator": true,
             "cutoutState": "NONE",
             "enableCustomization": false,
-            "keyAnimation": false
+            "keyAnimation": false,
+            "hasOnlyVideo": false
         },
         {
             "info": "<voffset=0.25em><b><size=120%>Software</size></b></voffset>\nHier kannst du nochmal mit allen Optionen herumspielen und dich mit dem System vertraut machen.\n\n<voffset=0.25em><b><size=120%>Die wichtigsten Tipps</size></b></voffset>\n> Oftmals ist das Innenleben eines Schlosses eng und nur sehr schwierig zu navigieren. Im realen Usertest sollte der <color=#FFB3D4>Pick</color> schräg angewinkelt werden um mit der gebogenen Spitze des <color=#FFB3D4>Picks</color> über die <color=#E0F5FF>Key-Pins</color> zu kommen.\n\n> Wenn ein Schloss sich nicht öffnen lässt und man keinen <color=#DFFFB3>Binding</color>-<color=#E0F5FF>Pin</color> mehr findet, verringere die <color=#E6FFE6>Tension</color> und spüre und höre ob <color=#E0F5FF>Pin-Paare</color> in die Ausgangspositions gestoßen werden. Falls das nicht funktioniert, lasse jegliche <color=#E6FFE6>Tension</color> los und wiggle mit dem <color=#E6FFE6>Tension-Tool</color> das Schloss um sicherzustellen, dass es von jeglichen <color=#FF8080>Oversets</color> befreit ist. Nutze im darauf folgenden Versuch weniger Druck!\n\n> Ein Schloss hat immer dieselbe Reihenfolge von <color=#DFFFB3>Binding</color>-<color=#E0F5FF>Pins</color>. Wenn man ein Schloss nicht öffnen kann, lohnt es sich, sich die Reihenfolge zu erschließen. Wissen über ein Schloss zu erlangen ist ebenfalls Fortschritt!",
@@ -149,7 +174,8 @@
             "showPinPositionIndicator":true,
             "cutoutState": "FULL",
             "enableCustomization": true,
-            "keyAnimation": false
+            "keyAnimation": false,
+            "hasOnlyVideo": false
         },
         {
             "info": "<voffset=0.25em><b><size=120%>Software</size></b></voffset>\nWenn du dieses 5-<color=#E0F5FF>Pin</color>-Schloss öffnest, bist du bereit für den Nutzertest!",
@@ -164,7 +190,8 @@
             "showPinPositionIndicator":false,
             "cutoutState": "NONE",
             "enableCustomization": false,
-            "keyAnimation": false
+            "keyAnimation": false,
+            "hasOnlyVideo": false
         }
     ]
 }
