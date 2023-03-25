@@ -215,17 +215,9 @@ public class PickController : MonoBehaviour
         Vector3 baseTrackerPosition = absolutePosition + new Vector3(0, 0, CIRCLERADIUSFOROFFSET);
         Vector3 rotatedTrackerPosition = RotatePointAroundPivot(baseTrackerPosition, absolutePosition, goalRotation);
 
-        Vector3 direction = rotatedTrackerPosition - absolutePosition;
+        Vector3 offset = baseTrackerPosition - rotatedTrackerPosition;
 
-        float angle = Vector3.SignedAngle(Vector3.forward, direction, Vector3.left);
-
-        float a = Mathf.Sin(Mathf.Deg2Rad * angle) * CIRCLERADIUSFOROFFSET;
-        float b = Mathf.Cos(Mathf.Deg2Rad * angle) * CIRCLERADIUSFOROFFSET;
-
-        float verticalOffset = a;
-        float horizontalOffset = CIRCLERADIUSFOROFFSET - b;
-
-        Vector3 offsettedPosition = new Vector3(0, absolutePosition.y - verticalOffset, absolutePosition.z + horizontalOffset);
+        Vector3 offsettedPosition = absolutePosition + offset;
 
         float positionUp = Vector3.Dot(Vector3.up, offsettedPosition);
         float positionForward = Vector3.Dot(Vector3.forward, offsettedPosition);
