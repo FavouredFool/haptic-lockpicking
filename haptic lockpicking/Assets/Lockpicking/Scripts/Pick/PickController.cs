@@ -173,7 +173,6 @@ public class PickController : MonoBehaviour
         float keepZ = _pickPosition.z;
 
         Quaternion calculatedRotation = CalculateRotation();
-        Debug.Log(calculatedRotation.eulerAngles);
         _pickRotation = _rotationAverage.Step(calculatedRotation);
 
         Vector3 calculatedPosition = CalculatePosition(_pickRotation);

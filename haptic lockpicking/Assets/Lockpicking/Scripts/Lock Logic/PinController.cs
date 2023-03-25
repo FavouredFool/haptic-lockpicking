@@ -75,13 +75,35 @@ public class PinController : MonoBehaviour
                 }
                 break;
             case TensionState.LOCKED:
-                AnimatePinStatic(_keyPin);
-                AnimatePinStatic(_driverPin);
+                if (_pinState == PinState.SET)
+                {
+                    AnimatePinStatic(_driverPin);
+                    AnimatePinStatic(_keyPin);
+                }
+                else
+                {
+                    AnimatePinOverset(_keyPin);
+                    AnimatePinOverset(_driverPin);
+                }
                 break;
             default:
                 AnimatePinActive(_keyPin);
                 AnimatePinActive(_driverPin);
                 break;
+        }
+    }
+
+    void AnimatePinOverset(Pin pin)
+    {
+        pin.ActivatePinMovement();
+        
+        if (pin is KeyPin keyPin)
+        {
+            keyPin.OversetUpdate();
+        }
+        else if (pin is DriverPin driverPin)
+        {
+            driverPin.OversetUpdate();
         }
     }
 
@@ -102,7 +124,9 @@ public class PinController : MonoBehaviour
 
         PinState previousState = _pinState;
 
-        _pinState = (tensionIsNotLoose && GetPinIsOnSheer() && GetPinIsSlow() && (_nonSetPinState == PinState.BINDING || !PinManager.Instance.GetRespectOrder())) ? PinState.SET : _nonSetPinState;
+        bool tensionIsNotLocked = (previousState == PinState.SET) || StaticTensionState != TensionState.LOCKED;
+
+        _pinState = (tensionIsNotLocked && tensionIsNotLoose && GetPinIsOnSheer() && GetPinIsSlow() && (_nonSetPinState == PinState.BINDING || !PinManager.Instance.GetRespectOrder())) ? PinState.SET : _nonSetPinState;
 
         DriverPinBlockadeActive(_pinState == PinState.SET || _lock.GetCoreController().GetLockFinished());
 

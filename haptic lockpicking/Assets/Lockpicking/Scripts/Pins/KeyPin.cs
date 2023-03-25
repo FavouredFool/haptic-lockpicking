@@ -27,6 +27,11 @@ public class KeyPin : Pin
         }
     }
 
+    public void OversetUpdate()
+    {
+        _rigidbody.velocity = Vector3.zero;
+    }
+
     public bool IsBelowSheer()
     {
         return transform.position.y < PinController.SHEERLINE_HEIGHT;
