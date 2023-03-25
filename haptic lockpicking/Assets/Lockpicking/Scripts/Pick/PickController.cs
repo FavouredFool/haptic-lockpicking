@@ -170,13 +170,14 @@ public class PickController : MonoBehaviour
 
     public void MovePick()
     {
+        float keepZ = _pickPosition.z;
+
         Quaternion calculatedRotation = CalculateRotation();
+        Debug.Log(calculatedRotation.eulerAngles);
         _pickRotation = _rotationAverage.Step(calculatedRotation);
 
         Vector3 calculatedPosition = CalculatePosition(_pickRotation);
         _pickPosition = _positionAverage.Step(calculatedPosition);
-
-        float keepZ = _pickPosition.z;
 
         if (_collideAmount > 0)
         {
