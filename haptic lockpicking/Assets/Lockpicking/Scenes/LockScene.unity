@@ -12756,14 +12756,14 @@ MonoBehaviour:
   _videoClips:
   - {fileID: 32900000, guid: 20d8c4dfe2479914384882929b5ceef1, type: 3}
   - {fileID: 32900000, guid: 20d8c4dfe2479914384882929b5ceef1, type: 3}
-  - {fileID: 32900000, guid: cee0a3f0e95f3594386ec2359033db45, type: 3}
-  - {fileID: 32900000, guid: 79683ed7fdc104b49b572b1fe3700cf2, type: 3}
-  - {fileID: 0}
-  - {fileID: 32900000, guid: 79683ed7fdc104b49b572b1fe3700cf2, type: 3}
-  - {fileID: 0}
-  - {fileID: 32900000, guid: 79683ed7fdc104b49b572b1fe3700cf2, type: 3}
-  - {fileID: 32900000, guid: 79683ed7fdc104b49b572b1fe3700cf2, type: 3}
-  - {fileID: 0}
+  - {fileID: 32900000, guid: 453bbb31c9fab644facda6f962601c72, type: 3}
+  - {fileID: 32900000, guid: 69b130d280bcded4b8df58cd571777f4, type: 3}
+  - {fileID: 32900000, guid: 734ef4e762d0eac42a304b9d801e55e3, type: 3}
+  - {fileID: 32900000, guid: 52910f8ed261ee84a925606b54ea5e94, type: 3}
+  - {fileID: 32900000, guid: dac5d842701f9c04e896366adbaed4b7, type: 3}
+  - {fileID: 32900000, guid: 3dbcb933bb999a245a9ee10dc949db4e, type: 3}
+  - {fileID: 32900000, guid: 747ed957779265d4cbae6e50943ae202, type: 3}
+  - {fileID: 32900000, guid: 992e66e9fa6d4834d82aa51ffd5f2317, type: 3}
   - {fileID: 0}
   - {fileID: 0}
 --- !u!1 &1040675025
@@ -17811,7 +17811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pickGlove: {fileID: 1919887892}
-  _springyIntensity: 15
+  _springyIntensity: 10
   _bindingIntensity: 35
   _thumperIntensity: 15
 --- !u!1 &1504608163

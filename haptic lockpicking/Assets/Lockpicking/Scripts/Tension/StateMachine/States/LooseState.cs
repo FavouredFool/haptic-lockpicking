@@ -11,7 +11,6 @@ public class LooseState : State
 
     public override void StartState()
     {
-        Debug.Log("entered LooseState");
 
         
     }
