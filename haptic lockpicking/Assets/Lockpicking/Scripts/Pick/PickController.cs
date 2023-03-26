@@ -103,7 +103,7 @@ public class PickController : MonoBehaviour
     public void OnEnable()
     {
         _pickRotation = CalculateRotation();
-        _pickPosition = CalculatePosition(_pickRotation);
+        _pickPosition = CalculatePosition();
         
         transform.position = _pickPosition;
         transform.rotation = _pickRotation;
@@ -175,7 +175,7 @@ public class PickController : MonoBehaviour
         Quaternion calculatedRotation = CalculateRotation();
         _pickRotation = _rotationAverage.Step(calculatedRotation);
 
-        Vector3 calculatedPosition = CalculatePosition(_pickRotation);
+        Vector3 calculatedPosition = CalculatePosition();
         _pickPosition = _positionAverage.Step(calculatedPosition);
 
         if (_collideAmount > 0)
@@ -205,18 +205,16 @@ public class PickController : MonoBehaviour
         return Quaternion.RotateTowards(_startRotation, twist, _rotationAngleThreshold);
     }
 
-    public Vector3 CalculatePosition(Quaternion goalRotation)
+    public Vector3 CalculatePosition()
     {
         Vector3 absolutePosition = ((_viewRotation * PickManager.Instance.GetPickDriver().position) * _distanceMultiplicator) - _positionOffset;
-
+        Quaternion absoluteRotation = PickManager.Instance.GetPickDriver().rotation * _rotationOffset;
         // hier muss die Rotation eingerechnet werden, da durch den Offset zwischen Pivot und Tracker Rotation des Pivots zu Bewegungsänderung des Trackers führt
 
         Vector3 baseTrackerPosition = absolutePosition + new Vector3(0, 0, CIRCLERADIUSFOROFFSET);
-        Vector3 rotatedTrackerPosition = RotatePointAroundPivot(baseTrackerPosition, absolutePosition, goalRotation);
-
+        Vector3 rotatedTrackerPosition = RotatePointAroundPivot(baseTrackerPosition, absolutePosition, absoluteRotation);
         Vector3 offset = baseTrackerPosition - rotatedTrackerPosition;
-
-        Vector3 offsettedPosition = absolutePosition + offset;
+        Vector3 offsettedPosition = absolutePosition + _viewRotation * offset;
 
         float positionUp = Vector3.Dot(Vector3.up, offsettedPosition);
         float positionForward = Vector3.Dot(Vector3.forward, offsettedPosition);

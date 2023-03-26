@@ -75,7 +75,7 @@ public class PickSpectre : MonoBehaviour
     public void OnEnable()
     {
         transform.rotation = CalculateRotation();
-        transform.position = CalculatePosition(transform.rotation);
+        transform.position = CalculatePosition();
     }
 
     public void Update()
@@ -91,7 +91,7 @@ public class PickSpectre : MonoBehaviour
     public void MovePick()
     {
         Quaternion goalRotation = CalculateRotation();
-        Vector3 goalPosition = CalculatePosition(goalRotation);
+        Vector3 goalPosition = CalculatePosition();
 
         _rigidBody.MovePosition(goalPosition);
         _rigidBody.MoveRotation(goalRotation);
@@ -122,26 +122,19 @@ public class PickSpectre : MonoBehaviour
         return Quaternion.RotateTowards(_startRotation, twist, float.PositiveInfinity);
     }
 
-    public Vector3 CalculatePosition(Quaternion goalRotation)
+    public Vector3 CalculatePosition()
     {
         Vector3 absolutePosition = ((_viewRotation * PickManager.Instance.GetPickDriver().position) * _distanceMultiplicator) - _positionOffset;
+        Quaternion absoluteRotation = PickManager.Instance.GetPickDriver().rotation * _rotationOffset;
 
         // hier muss die Rotation eingerechnet werden, da durch den Offset zwischen Pivot und Tracker Rotation des Pivots zu Bewegungsänderung des Trackers führt
 
+
+        // Rotate Back Siderotation
         Vector3 baseTrackerPosition = absolutePosition + new Vector3(0, 0, CIRCLERADIUSFOROFFSET);
-        Vector3 rotatedTrackerPosition = RotatePointAroundPivot(baseTrackerPosition, absolutePosition, goalRotation);
-
-        Vector3 direction = rotatedTrackerPosition - absolutePosition;
-
-        float angle = Vector3.SignedAngle(Vector3.forward, direction, Vector3.left);
-
-        float a = Mathf.Sin(Mathf.Deg2Rad * angle) * CIRCLERADIUSFOROFFSET;
-        float b = Mathf.Cos(Mathf.Deg2Rad * angle) * CIRCLERADIUSFOROFFSET;
-
-        float verticalOffset = a;
-        float horizontalOffset = CIRCLERADIUSFOROFFSET - b;
-
-        Vector3 offsettedPosition = new Vector3(0, absolutePosition.y - verticalOffset, absolutePosition.z + horizontalOffset);
+        Vector3 rotatedTrackerPosition = RotatePointAroundPivot(baseTrackerPosition, absolutePosition, absoluteRotation);
+        Vector3 offset = baseTrackerPosition - rotatedTrackerPosition;
+        Vector3 offsettedPosition = absolutePosition + _viewRotation * offset;
 
 
         float positionUp = Vector3.Dot(Vector3.up, offsettedPosition);

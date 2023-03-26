@@ -47,6 +47,11 @@ public class CoreController : MonoBehaviour
             return false;
         }
 
+        if (StaticTensionState == TensionState.LOCKED)
+        {
+            return false;
+        }
+
         foreach(PinController pinController in PinManager.Instance.GetPinControllers())
         {
             if (!pinController.GetPinIsInOpenPosition())
@@ -78,8 +83,6 @@ public class CoreController : MonoBehaviour
                 break;
             }
         }
-
-        Debug.Log("finished");
        
     }
 

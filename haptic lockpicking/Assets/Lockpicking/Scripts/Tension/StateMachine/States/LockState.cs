@@ -14,7 +14,6 @@ public class LockState : State
 
     public override void StartState()
     {
-        Debug.Log("entered LockState");
 
         
     }

@@ -2700,7 +2700,7 @@ MonoBehaviour:
   _downBoundsThreshold: 0.4
   _forwardBoundsThreshold: 1
   _backBoundsThreshold: 3
-  _rotationAngleThreshold: 12
+  _rotationAngleThreshold: 10
   _movingAveragePositionK: 4
   _movingAverageRotationK: 4
 --- !u!1 &6160485231561184795
@@ -6603,7 +6603,7 @@ MonoBehaviour:
   _downBoundsThreshold: 0.4
   _forwardBoundsThreshold: 1
   _backBoundsThreshold: 3
-  _rotationAngleThreshold: 12
+  _rotationAngleThreshold: 10
 --- !u!1 &7285627969445861663
 GameObject:
   m_ObjectHideFlags: 0
@@ -9283,17 +9283,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 13622a76757732f4d93c8257df844319,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 13622a76757732f4d93c8257df844319,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.05
+      value: 0.17
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 13622a76757732f4d93c8257df844319,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.7
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 13622a76757732f4d93c8257df844319,
         type: 3}
@@ -9339,7 +9339,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -2432090755550338912, guid: 90efcdb1b3a01774b97c056b4c5f2556,
+      objectReference: {fileID: -2432090755550338912, guid: 13622a76757732f4d93c8257df844319,
         type: 3}
     - target: {fileID: 919132149155446097, guid: 13622a76757732f4d93c8257df844319,
         type: 3}

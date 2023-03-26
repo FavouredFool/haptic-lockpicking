@@ -11,8 +11,6 @@ public class FinishedState : State
 
     public override void StartState()
     {
-        Debug.Log("entered FinishedState");
-
         StaticTensionState = TensionState.FINISHED;
     }
 

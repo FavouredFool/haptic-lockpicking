@@ -155,7 +155,7 @@
             "hasTension": true,
             "colorCodePins": false,
             "showTensionIndicator": false,
-            "showPinPositionIndicator": true,
+            "showPinPositionIndicator": false,
             "cutoutState": "NONE",
             "enableCustomization": false,
             "keyAnimation": false,

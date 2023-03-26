@@ -78,14 +78,13 @@ public class CalibrationManager : MonoBehaviour
     {
         if (LockManager.Lock.GetCoreController().GetLockFinished())
         {
-            TensionForceManager.Instance.GetTensionTool().gameObject.SetActive(_isCalibrated);
             PickManager.Instance.GetPickController().gameObject.SetActive(false);
         }
         else
         {
-            TensionForceManager.Instance.GetTensionTool().gameObject.SetActive(_isCalibrated && TensionForceManager.Instance.GetHasTension());
-            PickManager.Instance.GetPickController().gameObject.SetActive(_isCalibrated && PickManager.Instance.GetHasPick());
-            PickManager.Instance.GetPickSpectre().gameObject.SetActive(_isCalibrated && PickManager.Instance.GetHasPick());
+            TensionForceManager.Instance.GetTensionTool().gameObject.SetActive(TensionForceManager.Instance.GetHasTension());
+            PickManager.Instance.GetPickController().gameObject.SetActive(PickManager.Instance.GetHasPick());
+            PickManager.Instance.GetPickSpectre().gameObject.SetActive(PickManager.Instance.GetHasPick());
         }
     }
 

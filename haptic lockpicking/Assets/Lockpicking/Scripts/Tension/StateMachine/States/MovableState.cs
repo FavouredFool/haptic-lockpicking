@@ -11,7 +11,6 @@ public class MovableState : State
 
     public override void StartState()
     {
-        Debug.Log("entered TensionState");
 
         
     }
