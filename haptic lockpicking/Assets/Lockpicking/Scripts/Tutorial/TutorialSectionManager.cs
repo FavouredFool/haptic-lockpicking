@@ -134,6 +134,8 @@ public class TutorialSectionManager : MonoBehaviour
 
         EnableForceIndicatorCanvas(false);
 
+        
+
 
 
         // if applicable, display video
@@ -145,6 +147,7 @@ public class TutorialSectionManager : MonoBehaviour
         }
         else
         {
+            VideoManager.Instance.StopAllVideos();
             _videoCanvas.SetActive(false);
         }
     }
