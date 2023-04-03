@@ -178,7 +178,7 @@
             "hasOnlyVideo": false
         },
         {
-            "info": "<voffset=0.25em><b><size=120%>Software</size></b></voffset>\nWenn du dieses 5-<color=#E0F5FF>Pin</color>-Schloss öffnest, bist du bereit für den Nutzertest!",
+            "info": "<voffset=0.25em><b><size=120%>Software</size></b></voffset>\nWenn du dieses 5-<color=#E0F5FF>Pin</color>-Schloss öffnest, bist du bereit für die echten Schlösser",
             "label": "Finaler Test",
             "pinCount": 5,
             "pinOrder": [2, 3, 1, 4, 0],
