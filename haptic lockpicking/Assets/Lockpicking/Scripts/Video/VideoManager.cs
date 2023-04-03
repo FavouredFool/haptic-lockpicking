@@ -44,22 +44,6 @@ public class VideoManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            PlayVideo(0);
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            PlayVideo(1);
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            PlayVideo(2);
-        }
-    }
-
     public void PlayVideo(int sectionNr)
     {
         StopAllVideos();
