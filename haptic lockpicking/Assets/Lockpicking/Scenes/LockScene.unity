@@ -17811,7 +17811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pickGlove: {fileID: 1919887892}
-  _springyIntensity: 10
+  _springyIntensity: 17
   _bindingIntensity: 35
   _thumperIntensity: 15
 --- !u!1 &1504608163
