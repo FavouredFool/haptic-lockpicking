@@ -6400,14 +6400,14 @@ MonoBehaviour:
   _tensionGlove: {fileID: 271622097}
   _indexFingerLastJointTransform: {fileID: 1676640873}
   _indexFingerEndpointTransform: {fileID: 652894341}
-  _linePositionAlongX: 0.15
+  _linePositionAlongX: 0.25
   _lineOffsetNearer: 0.1
-  _lineOffsetFurtherBase: 0.1
+  _lineOffsetFurtherBase: 0.07
   _lineOffsetFurtherIncrease: 0.025
   _amountOfSkippedFrames: 1
   _stateTransitionOverflowTensionToLoose: 0.05
   _lockedResetTime: 0.2
-  _stateTransitionOverflowLockToTension: 0.125
+  _stateTransitionOverflowLockToTension: 0.1
   _touchPoint: {fileID: 0}
 --- !u!4 &549515374
 Transform:
