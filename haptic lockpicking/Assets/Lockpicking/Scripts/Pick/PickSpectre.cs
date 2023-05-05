@@ -149,11 +149,10 @@ public class PickSpectre : MonoBehaviour
 
     Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Quaternion rotation)
     {
-        // https://answers.unity.com/questions/532297/rotate-a-vector-around-a-certain-point.html
-        Vector3 dir = point - pivot; // get point direction relative to pivot
-        dir = rotation * dir; // rotate it
-        point = dir + pivot; // calculate rotated point
-        return point; // return it
+        Vector3 dir = point - pivot;
+        dir = rotation * dir;
+        point = dir + pivot;
+        return point;
     }
 
 

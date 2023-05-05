@@ -68,7 +68,6 @@ public class TensionVibrationManager : MonoBehaviour
     {
         int intensity = StaticTensionState switch
         {
-            TensionState.LOOSE => 0,
             TensionState.MOVABLE => CalculateMovableTension(),
             TensionState.LOCKED => _lockedIntensity,
             _ => 0,

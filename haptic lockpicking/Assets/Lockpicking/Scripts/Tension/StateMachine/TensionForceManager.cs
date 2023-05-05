@@ -158,12 +158,6 @@ public class TensionForceManager : StateMachine
         return 0;
     }
 
-    public float Remap(float value, float from1, float to1, float from2, float to2)
-    {
-        // https://forum.unity.com/threads/re-map-a-number-from-one-range-to-another.119437/
-        return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
-    }
-
     public void OnDrawGizmos()
     {
         Vector3 difference = _indexFingerEndpointTransform.position - _indexFingerLastJointTransform.position;
