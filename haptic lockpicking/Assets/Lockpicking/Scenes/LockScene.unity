@@ -6400,9 +6400,9 @@ MonoBehaviour:
   _tensionGlove: {fileID: 271622097}
   _indexFingerLastJointTransform: {fileID: 1676640873}
   _indexFingerEndpointTransform: {fileID: 652894341}
-  _linePositionAlongX: 0.05
+  _linePositionAlongX: 0.25
   _lineOffsetNearer: 0.1
-  _lineOffsetFurtherBase: 0
+  _lineOffsetFurtherBase: 0.05
   _lineOffsetFurtherIncrease: 0.025
   _amountOfSkippedFrames: 1
   _stateTransitionOverflowTensionToLoose: 0.05
@@ -17811,8 +17811,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pickGlove: {fileID: 1919887892}
-  _springyIntensity: 17
-  _bindingIntensity: 35
+  _springyIntensity: 10
+  _bindingIntensity: 30
   _thumperIntensity: 15
 --- !u!1 &1504608163
 GameObject:
