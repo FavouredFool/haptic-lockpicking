@@ -2695,7 +2695,7 @@ MonoBehaviour:
     m_Bits: 2048
   _physicsMoveSpeed: 0.2
   _physicsRotateSpeed: 2
-  _distanceMultiplicator: 50
+  _distanceMultiplicator: 40
   _upBoundsThreshold: 0.4
   _downBoundsThreshold: 0.4
   _forwardBoundsThreshold: 1
